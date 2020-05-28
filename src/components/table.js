@@ -36,7 +36,10 @@ export default function Table(props) {
     const [filter, setFilter] = useState("");
 
     // l'etat des donnees affichee
-    const [displayedData, setDisplayedData] = useState(props.data)
+    const [displayedData, setDisplayedData] = useState(props.data);
+
+    // l'etat de l'element du tableau selectione
+    const [selectedElement, setSelectedElement] = useState({});
 
     // initialisation des pages a l'affichage et a chaque fois que les donnees a afficher sont modifiees
     useEffect(() => {
@@ -72,11 +75,18 @@ export default function Table(props) {
         let rows = [];
         for (let i = 0; i < size; i++) {
             let element = pages[currentPageIndx][i];
-            rows.push(<tr key={"tr" + i}>
+            rows.push(<tr
+                    key={"tr" + i}
+                    onClick={() => {if (element) setSelectedElement(element);}}
+                    style={
+                        element === selectedElement ?
+                            {backgroundColor: "rgba(100,149,237,0.3)"} : {}
+                    }
+                >
                 {
                     /*
                     ** si le prop 'buttons' est défini, 2 boutons de modification et suppression sont affichés
-                    ** quand cette proprieté est définie, il faut définir aussi les props 'edit' et 'delete'
+                    ** si leur methode respective 'edit' et 'delete' sont aussi defini comme props
                     ** ces props prennent comme valeur des fonctions qui seront appelé lors de l'appui sur les boutons
                     ** ces methodes prennent comme argument l'objet à modifier ou supprimer du tableau
                     */
@@ -105,7 +115,8 @@ export default function Table(props) {
                 <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
-                    onChange={(e, child) => {props.handleAction(e.target.value)}}
+                    value={props.action}
+                    onChange={(e, child) => {props.handleAction(e.target.value, selectedElement)}}
                 >
                     <MenuItem value=""></MenuItem>
                     {

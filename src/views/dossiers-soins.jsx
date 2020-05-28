@@ -20,6 +20,9 @@ export default function DossierSoins(props) {
     // Etat des actions du tableau selon l'element du menu choisi
     const [actions, setActoins] = useState([]);
 
+    // Etat de l'action designee
+    const [action, setAction] = useState("");
+
     // Etat du menu
     const [menu, setMenu] = useState([]);
 
@@ -53,20 +56,22 @@ export default function DossierSoins(props) {
         })
     }, []);
 
-    function handleActions(action) {
+    function handleActions(action, dossier) {
+        setAction(action);
         switch (action) {
             case "nouveau":
-                console.log("Action nouveau");
+                console.log("Action nouveau " + dossier.imme);
                 break;
             case "modifier":
-                console.log("Action modifier");
+                console.log("Action modifier " + dossier.imme);
                 break;
             case "consulter":
-                console.log("Action consulter");
+                console.log("Action consulter " + dossier.imme);
                 break;
             default:
                 console.log("Action indisponible");
         }
+        setAction("");
     }
 
     return (<div style={{display: "flex"}}>
@@ -93,6 +98,7 @@ export default function DossierSoins(props) {
                         delete={() => {}}
                         columns={columns}
                         actions={actions}
+                        action={action}
                         handleAction={handleActions}
                     />
             }
