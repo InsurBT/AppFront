@@ -48,7 +48,7 @@ export default function DashboardRouter(props) {
                 <Switch>
                     <PrestationsContext.Provider value={value}>
                         <Route exact path={path}>
-                            <Home />
+                            <Home history={props.history} />
                         </Route>
                         <Route path={url + "/prestations"} >
                             <ListePrestations />

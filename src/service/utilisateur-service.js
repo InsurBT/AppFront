@@ -28,6 +28,16 @@ const utilisateurService = {
         
     },
 
+    getLoggedUser: function() {
+        return api.post("utilisateur/login", null, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                return res.text();
+            }
+        });
+    },
+
     add: function (utilisateur) {
         return api.post("utilisateur/inscription", utilisateur, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
@@ -39,6 +49,7 @@ const utilisateurService = {
     },
 
     edit: (utilisateur) => {
+
         return api.post("utilisateur/edit", utilisateur, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
                 return res.json();

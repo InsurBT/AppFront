@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const ConnectedUserContext = createContext({connectedUser: {}, setConnectedUser: () => {}});
+const ConnectedUserContext = createContext({connectedUser: null, setConnectedUser: () => {}});
 
 export default ConnectedUserContext;

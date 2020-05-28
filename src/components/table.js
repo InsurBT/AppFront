@@ -70,9 +70,8 @@ export default function Table(props) {
 
     function tableRows(size) {
         let rows = [];
-        let element = null;
-        for (var i = 0; i < size; i++) {
-            element = pages[currentPageIndx][i];
+        for (let i = 0; i < size; i++) {
+            let element = pages[currentPageIndx][i];
             rows.push(<tr key={"tr" + i}>
                 {
                     /*
