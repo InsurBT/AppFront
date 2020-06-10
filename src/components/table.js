@@ -4,10 +4,20 @@ import * as Styles from '../CSS/table.css';
 import IconButton from '../components/icon-button';
 import TextInput from '../components/text-input';
 
+import { makeStyles } from "@material-ui/core/styles";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+
+import styles from "../assets/jss/material-dashboard-react/components/tableStyle.js";
+
+const useStyle = makeStyles(styles);
 
 /*
 ** le Composant Table affiche les données d'un tableau d'objet dans une table
@@ -15,13 +25,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 ** le Composant Table prend un prop 'columns' qui est définit les collonnes de la table
 ** 'columns' est un tableau d'objets définis comme suivant:
 ** {
-**    title: <title for the header>, // propriété qui le titre à afficher dans l'element <th>
-**    property: <property of the data object> // le nom de la propriété de l'objet à afficher qui est liée à ce titre
+**    title: <title for the header>, // propriété qui le tiTableRowe à afficher dans l'element <th>
+**    property: <property of the data object> // le nom de la propriété de l'objet à afficher qui est liée à ce tiTableRowe
 ** } 
 ** donc 'columns' est une sorte de map pour lié les collonnes de la table au propriétés des objets à afficher
 */
 
-export default function Table(props) {
+export default function CustomTable(props) {
+    const classes = useStyle();
 
     // l'etat de l'index de la page actuelle
     const [currentPageIndx, setCurrentPageIndex] = useState(0);
@@ -32,11 +43,11 @@ export default function Table(props) {
     // l'etat du numero de la page choisi par l'utilisateur
     const [selectedPage, setSelectedPage] = useState(1);
 
-    // l'etat du filtre entre dans le champ de recherche
+    // l'etat du filTableRowe enTableRowe dans le champ de recherche
     const [filter, setFilter] = useState("");
 
     // l'etat des donnees affichee
-    const [displayedData, setDisplayedData] = useState(props.data);
+    const [displayedData, seTableCellisplayedData] = useState(props.data);
 
     // l'etat de l'element du tableau selectione
     const [selectedElement, setSelectedElement] = useState({});
@@ -57,26 +68,27 @@ export default function Table(props) {
         setPages(newPages);
     }, [displayedData, props.pageSize]);
 
-    // mise a jour des donnees affiche a chaque fois que le filtre est modifie
+    // mise a jour des donnees affiche a chaque fois que le filTableRowe est modifie
     useEffect(() => {
         const newData = props.data.filter((element) => {
             let match = false;
             props.columns.forEach(column => {
-                let stringValue = element[column.property].toString();
-                match = match || (stringValue.toLowerCase().search(filter.toLowerCase()) !== -1);
+                let sTableRowingValue = element[column.property].toString();
+                match = match || (sTableRowingValue.toLowerCase().search(filter.toLowerCase()) !== -1);
             });
             return match;
         });
 
-        setDisplayedData(newData);
+        seTableCellisplayedData(newData);
     }, [filter, props.data]);
 
     function tableRows(size) {
         let rows = [];
         for (let i = 0; i < size; i++) {
             let element = pages[currentPageIndx][i];
-            rows.push(<tr
-                    key={"tr" + i}
+            rows.push(<TableRow
+                    className={classes.tableBodyRow}
+                    key={i}
                     onClick={() => {if (element) setSelectedElement(element);}}
                     style={
                         element === selectedElement ?
@@ -90,19 +102,19 @@ export default function Table(props) {
                     ** ces props prennent comme valeur des fonctions qui seront appelé lors de l'appui sur les boutons
                     ** ces methodes prennent comme argument l'objet à modifier ou supprimer du tableau
                     */
-                    props.buttons && element ? <td key="table-buttons" style={Styles.tdStyle}>
+                    props.buttons && element ? <TableCell className={classes.tableCell} key="table-buttons" >
                         {props.edit ? <IconButton icon="edit" onClick={() => {props.edit(element)}} /> : ""}
                         {props.delete ? <IconButton icon="trash" onClick={() => { props.delete(element)}} /> : ""}
-                    </td> : (element ? "" : <td style={{...Styles.tdStyle, color: "white"}}>-</td>)
+                    </TableCell> : (element ? "" : <TableCell className={classes.tableCell} style={{ color: "white"}}>-</TableCell>)
                 }
                 {
                     props.columns.map((column, index) => {
                         return element ?
-                                <td key={"td" + index} style={Styles.tdStyle}>{element[column.property].toString()}</td> :
-                                <td style={{...Styles.tdStyle, color: "white"}}>-</td>
+                                <TableCell className={classes.tableCell} key={"TableCell" + index} >{element[column.property].toString()}</TableCell> :
+                                <TableCell className={classes.tableCell} style={{ color: "white"}}>-</TableCell>
                     })
                 }
-            </tr>);
+            </TableRow>);
         }
 
         return rows;
@@ -159,7 +171,7 @@ export default function Table(props) {
         }
     }
 
-    return (<div style={{backgroundColor: "white", width: "100%"}}>
+    return (<div className={classes.tableResponsive} style={{backgroundColor: "white", borderRadius: "1%"}}>
         <div style={{margin: "auto", maxWidth: "300px"}}>
             <TextInput
                 label="Recherche..."
@@ -168,26 +180,26 @@ export default function Table(props) {
                 onChange={(e) => {setFilter(e.target.value)}}
             />
         </div>
-        <div style={{...Styles.tableStyle, width: "100%", overflowX: "auto"}}>
-            <thead style={Styles.theadStyle}>
-                <tr>
+        <Table className={classes.table}>
+            <TableHead className={classes.greyTableHeader}>
+                <TableRow className={classes.tableHeadRow}>
                     {
                         props.buttons ? <th style={{...Styles.thStyle, minWidth: "80px"}}>
                             {actions()}
                         </th> : ""
                     }
                     {
-                        props.columns.map((column, index) => <th key={"th" + index} style={Styles.thStyle}>{column.title}</th>)
+                        props.columns.map((column, index) => <TableCell key={"th" + index} className={classes.tableCell + " " + classes.tableHeadCell}>{column.title}</TableCell>)
                     }
-                </tr>
-            </thead>
+                </TableRow>
+            </TableHead>
             
-            <tbody>
+            <TableBody>
                     {
                         tableRows(props.pageSize || 10)
                     }
-            </tbody>
-        </div>
+            </TableBody>
+        </Table>
         <div style={{display: "flex", flexDirection: "row-reverse"}}>
             <div style={{display: "flex", justifyContent: "space-around", width: "50%", alignSelf:"left"}}>
                 <IconButton onClick={() => {setCurrentPageIndex(0); setSelectedPage(1);}} icon="angle-double-left" />

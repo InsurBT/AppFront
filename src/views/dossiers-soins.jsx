@@ -7,6 +7,8 @@ import NavigationButton from '../components/navigation-button';
 import Table from '../components/table';
 import SmallHeader from '../components/small-header';
 
+import Grid from '@material-ui/core/Grid';
+
 export default function DossierSoins(props) {
     // L'etat des colonne a afficher dans le tableau
     const [columns, setColumns] = useState([]);
@@ -74,19 +76,21 @@ export default function DossierSoins(props) {
         setAction("");
     }
 
-    return (<div style={{display: "flex"}}>
-        <nav style={{display: "flex", flexDirection:"column"}}>
-            <SmallHeader>Dossiers de soins</SmallHeader>
-            <Button variant="contained" style={{margin: "5px"}} color="primary">Nouveau</Button>
-            {
-                menu.map((element, index) => {
-                    return (<NavigationButton selected={index === selected} onClick={() => {setSelected(index);}}>
-                        {element}
-                    </NavigationButton>)
-                })
-            }
-        </nav>
-        <div>
+    return (<Grid container wrap="nowrap">
+        <Grid item>
+            <nav style={{display: "flex", flexDirection:"column"}}>
+                <SmallHeader>Dossiers de soins</SmallHeader>
+                <Button variant="contained" style={{margin: "5px"}} color="primary">Nouveau</Button>
+                {
+                    menu.map((element, index) => {
+                        return (<NavigationButton selected={index === selected} onClick={() => {setSelected(index);}}>
+                            {element}
+                        </NavigationButton>)
+                    })
+                }
+            </nav>
+        </Grid>
+        <Grid item zeroMinWidth>
             {
                 loading ?
                     <span>Chargement...</span> :
@@ -102,6 +106,6 @@ export default function DossierSoins(props) {
                         handleAction={handleActions}
                     />
             }
-        </div>
-    </div>)
+        </Grid>
+    </Grid>)
 }

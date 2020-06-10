@@ -18,13 +18,17 @@ export default function Login(props) {
         e.preventDefault();
         if (valid()) {
             utilisateurService.connect(credentials).then(res => {
+                console.log(res);
                 if (typeof res === "string") {
                     setInvalidMessage(res);
                 } else {
                     setConnectedUser(res);
                     props.history.push("/home");
                 }
-            }).catch(err => {setInvalidMessage("impossible de se connecter au serveur")});
+            }).catch(err => {
+                setInvalidMessage("impossible de se connecter au serveur");
+                console.log(err);
+            });
         } else
             setInvalidMessage("Vous devez remplire des 2 champs pour vous connecter");
     }

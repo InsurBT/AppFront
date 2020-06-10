@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import Table from '../components/table';
 import SmallHeader from '../components/small-header';
@@ -6,14 +6,12 @@ import FormPopup from '../components/form-popup';
 import TextInput from '../components/text-input';
 import FormButton from '../components/form-button';
 
-import PrestationsContext from '../context/PrestationsContext';
-
 import prestationService from '../service/prestation-service';
 import { useEffect } from 'react';
 
 export default function ListePrestations(props) {
     
-    const {prestations, setPrestations} = useContext(PrestationsContext);
+    const [prestations, setPrestations] = useState([]);
 
     // l'etat de chargement des donnees
     const [loading, setLoading] = useState(true);
