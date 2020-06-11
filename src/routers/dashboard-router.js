@@ -5,6 +5,7 @@ import Home from '../views/home';
 import ListePrestations from '../views/liste-prestations';
 import ListeUtilisateurs from '../views/list-utlisateurs';
 import DossierSoins from '../views/dossiers-soins';
+import DirectionReg  from '../views/referentiel/listeDirectionReg'
 
 import SideNav from '../components/side-nav';
 import PageHeader from '../components/page-header';
@@ -22,7 +23,8 @@ export default function DashboardRouter(props) {
         { name: "Accueil", path: "/home" },
         { name: "Listes des prestations", path: url + "/prestations"},
         { name: "Listes des utilisateurs", path: url + "/utilisateurs"},
-        { name: "Listes des dossiers de soins", path: url + "/dossiers"}
+        { name: "Listes des dossiers de soins", path: url + "/dossiers"},
+        { name: "Listes des directions regionales", path: url + "/directionRegionale"}
     ];
 
     const [prestations, setPrestations] = useState([]);
@@ -59,6 +61,10 @@ export default function DashboardRouter(props) {
                         <Route path={url + "/dossiers"} >
                             <DossierSoins />
                         </Route>
+                        <Route path={url + "/directionRegionale"} >
+                            <DirectionReg/>
+                        </Route>
+                        
                     </PrestationsContext.Provider>
                 </Switch>
             </SideNav>
