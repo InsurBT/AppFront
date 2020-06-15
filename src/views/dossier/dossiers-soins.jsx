@@ -8,16 +8,18 @@ import Table from '../../components/table';
 import SmallHeader from '../../components/small-header';
 
 import Grid from '@material-ui/core/Grid';
+import { useParams } from 'react-router-dom';
+import { ButtonGroup } from '@material-ui/core';
 
 export default function DossierSoins(props) {
+    // categorie de dossier chosie selon l'url
+    const { category } = useParams();
+
     // L'etat des colonne a afficher dans le tableau
     const [columns, setColumns] = useState([]);
 
     // Etat des donnees affichees dans le taleau
     const [data, setData] = useState([]);
-
-    // Etat de l'element du menu choisi
-    const [selected, setSelected] = useState(0);
 
     // Etat des actions du tableau selon l'element du menu choisi
     const [actions, setActoins] = useState([]);
@@ -26,15 +28,16 @@ export default function DossierSoins(props) {
     const [action, setAction] = useState("");
 
     // Etat du menu
-    const [menu, setMenu] = useState([]);
+    // const [menu, setMenu] = useState([]);
 
     // Etat de chargement des donnees
     const [loading, setLoading] = useState(true);
 
     // chargement des dossiers selons la categorie choisie
     useEffect(() => {
+        console.log(category);
         setLoading(true);
-        dossierService.getDossiersEnInstance(menu[selected]).then(res => {
+        dossierService.getDossiersEnInstance(category).then(res => {
             let newColumns = [];
             for (var attribute in res.dossiers[0]) {
                 newColumns.push({
@@ -49,14 +52,14 @@ export default function DossierSoins(props) {
         }).catch((err) => {
             console.log(err);
         });
-    }, [selected]);
+    }, [category]);
 
     // chargement du menu des categories disponible 
-    useEffect(() => {
-        dossierService.getMenu().then(res => {
-            setMenu(res);
-        })
-    }, []);
+    // useEffect(() => {
+    //     dossierService.getMenu().then(res => {
+    //         setMenu(res);
+    //     })
+    // }, []);
 
     function handleActions(action, dossier) {
         setAction(action);
@@ -76,21 +79,11 @@ export default function DossierSoins(props) {
         setAction("");
     }
 
-    return (<Grid container wrap="nowrap">
-        <Grid item>
-            <nav style={{display: "flex", flexDirection:"column"}}>
-                <SmallHeader>Dossiers de soins</SmallHeader>
-                <Button variant="contained" style={{margin: "5px"}} color="primary">Nouveau</Button>
-                {
-                    menu.map((element, index) => {
-                        return (<NavigationButton selected={index === selected} onClick={() => {setSelected(index);}}>
-                            {element}
-                        </NavigationButton>)
-                    })
-                }
-            </nav>
-        </Grid>
-        <Grid item zeroMinWidth>
+    return (<div>
+            <ButtonGroup color="primary">
+                <Button>Nouveau</Button>
+                <Button>Filtrer</Button>
+            </ButtonGroup>
             {
                 loading ?
                     <span>Chargement...</span> :
@@ -105,7 +98,6 @@ export default function DossierSoins(props) {
                         action={action}
                         handleAction={handleActions}
                     />
-            }
-        </Grid>
-    </Grid>)
+            } 
+        </div>)
 }

@@ -49,9 +49,18 @@ const dossierSevice = {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve([
-                    "En instance",
-                    "Retourne",
-                    "Blocage TP"
+                    {
+                        name: "En instance",
+                        path: "/en_instance"
+                    },
+                    {
+                        name: "Retourne",
+                        path: "/retourne"
+                    },
+                    {
+                        name: "Blocage TP",
+                        path: "/blocage_TP"
+                    }
                 ]);
             }, 1500);
         })

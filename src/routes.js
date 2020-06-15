@@ -39,9 +39,11 @@ const routes = [
     {
         name: "Listes des dossiers de soins",
         path: "/dossiers",
+        param: "category",
         component: DossiersRouter,
         icon: LibraryBooks,
-        layout: "/home"
+        layout: "/home",
+        subMenu: []
     },
     
     {
