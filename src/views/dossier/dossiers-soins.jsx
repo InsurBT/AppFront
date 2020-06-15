@@ -6,6 +6,10 @@ import Button from '@material-ui/core/Button';
 import NavigationButton from '../../components/navigation-button';
 import Table from '../../components/table';
 import SmallHeader from '../../components/small-header';
+import FormPopup from '../../components/form-popup';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import FiltreDossier from './FiltreDossier';
+
 
 import Grid from '@material-ui/core/Grid';
 
@@ -30,6 +34,8 @@ export default function DossierSoins(props) {
 
     // Etat de chargement des donnees
     const [loading, setLoading] = useState(true);
+      // l'etat des booleans d'affichage des formulaire pop-up
+      const [formOpen, setFormOpen] = useState(false);
 
     // chargement des dossiers selons la categorie choisie
     useEffect(() => {
@@ -76,10 +82,25 @@ export default function DossierSoins(props) {
         setAction("");
     }
 
+
+    function closeForm() {
+        setFormOpen(false);
+    }
+
     return (<Grid container wrap="nowrap">
         <Grid item>
+                <FormPopup
+                    open={formOpen}
+                    onClose={closeForm}
+                    button='Filtrer'
+                    icon='none'>
+                <FiltreDossier/>
+                </FormPopup>   
             <nav style={{display: "flex", flexDirection:"column"}}>
-                <SmallHeader>Dossiers de soins</SmallHeader>
+                <SmallHeader>Dossiers de soins
+                <FilterListIcon onClick={() => {setFormOpen(true)}} />
+
+                </SmallHeader>
                 <Button variant="contained" style={{margin: "5px"}} color="primary">Nouveau</Button>
                 {
                     menu.map((element, index) => {
