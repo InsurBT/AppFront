@@ -6,6 +6,10 @@ import Button from '@material-ui/core/Button';
 import NavigationButton from '../../components/navigation-button';
 import Table from '../../components/table';
 import SmallHeader from '../../components/small-header';
+import FormPopup from '../../components/form-popup';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import FiltreDossier from './FiltreDossier';
+
 
 import Grid from '@material-ui/core/Grid';
 import { useParams } from 'react-router-dom';
@@ -32,6 +36,8 @@ export default function DossierSoins(props) {
 
     // Etat de chargement des donnees
     const [loading, setLoading] = useState(true);
+      // l'etat des booleans d'affichage des formulaire pop-up
+      const [formOpen, setFormOpen] = useState(false);
 
     // chargement des dossiers selons la categorie choisie
     useEffect(() => {
@@ -81,7 +87,7 @@ export default function DossierSoins(props) {
 
     return (<div>
             <ButtonGroup color="primary">
-                <Button>Nouveau</Button>
+                <Button onClick={() => {props.history.push("/home/dossiers/ajouter")}}>Nouveau</Button>
                 <Button>Filtrer</Button>
             </ButtonGroup>
             {
@@ -98,6 +104,13 @@ export default function DossierSoins(props) {
                         action={action}
                         handleAction={handleActions}
                     />
-            } 
+            }
+            <FormPopup
+                    open={formOpen}
+                    onClose={() => {setFormOpen(false)}}
+                    button='Filtrer'
+                    icon='none'>
+                <FiltreDossier/>
+                </FormPopup>
         </div>)
 }

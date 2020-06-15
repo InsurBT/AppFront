@@ -11,7 +11,7 @@ export default function DossiersRouter(props) {
     return (
         <Switch>
             <Route path={path + "/ajouter"} component={AjouterDossier} />
-            <Route path={path + "/"} component={DossierSoins} />
+            <Route path={path + "/:category"} component={DossierSoins} />
             
         </Switch>
     )

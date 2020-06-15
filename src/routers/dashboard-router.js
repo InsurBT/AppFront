@@ -29,7 +29,7 @@ let ps;
 
 const useStyles = makeStyles(styles);
 
-export default function DashboardRouter({ props, ...rest }) { 
+export default function DashboardRouter(props) { 
   const { path, url } = useRouteMatch();
   // styles
   const classes = useStyles();
@@ -42,14 +42,15 @@ export default function DashboardRouter({ props, ...rest }) {
             routes.map((route, key) => {
               return (
                   <Route
-                      path={route.layout + route.path + (route.param ? "/:" + route.param : "")}
-                      component={route.component}
+                      path={route.layout + route.path}
                       key={key}
-                  />
+                  >
+                    <route.component history={props.history} />
+                  </Route>
               )
             })
         }
-        <Redirect from="/home/dossiers/" to="/home/dossiers/en_instance" />
+        <Redirect from="/home/dossiers" to="/home/dossiers/en_instance" />
         <Redirect from="/home" to="/home/accueil" />
       </Switch>
   )
@@ -116,13 +117,11 @@ export default function DashboardRouter({ props, ...rest }) {
       handleDrawerToggle={handleDrawerToggle}
       open={mobileOpen}
       color={blue}
-      {...rest}
     />
     <div className={classes.mainPanel} ref={mainPanel}>
       <Navbar
         routes={routes}
         handleDrawerToggle={handleDrawerToggle}
-        {...rest}
       />
       {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
       {getRoute() ? (
