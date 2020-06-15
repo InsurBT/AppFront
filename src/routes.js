@@ -2,6 +2,9 @@ import Home from './views/home';
 import ListePrestations from './views/referentiel/liste-prestations';
 import ListeUtilisateurs from './views/list-utlisateurs';
 import DirectionReg  from './views/referentiel/listeDirectionReg';
+import ListeCaisseEtrangeres from './views/caisseEtrangere/caisseEtrangere';
+import ListeCaisseMeres from './views/caisseMere/caisseMere';
+
 
 import DossiersRouter from './routers/dossiers/dossiers-router'
 
@@ -12,6 +15,7 @@ import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
+import ViewListIcon from '@material-ui/icons/ViewList';
 import Language from "@material-ui/icons/Language";
 
 const routes = [
@@ -51,6 +55,20 @@ const routes = [
         icon: LibraryBooks,
         layout: "/home"
     },
+    {
+        name: "Listes des caisses mére",
+        path: "/caissemere",
+        component: ListeCaisseMeres,
+        icon: LibraryBooks,
+        layout: "/home"
+    },
+    {
+        name: "Listes des caisses étrangere",
+        path: "/caisseetrangere",
+        component: ListeCaisseEtrangeres,
+        icon: LibraryBooks,
+        layout: "/home"
+    }
 ];
 
 export default routes;
