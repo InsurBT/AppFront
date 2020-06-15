@@ -1,10 +1,9 @@
 import Home from './views/home';
-import DossiersSoins from './views/dossiers-soins';
+import ListePrestations from './views/referentiel/liste-prestations';
+import ListeUtilisateurs from './views/list-utlisateurs';
+import DirectionReg  from './views/referentiel/listeDirectionReg';
 
-
-import ListePrestations from '../src/views/liste-prestations';
-import ListeUtilisateurs from '../src/views/list-utlisateurs';
-import DirectionReg  from '../src/views/referentiel/listeDirectionReg'
+import DossiersRouter from './routers/dossiers/dossiers-router'
 
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
@@ -40,7 +39,7 @@ const routes = [
     {
         name: "Listes des dossiers de soins",
         path: "/dossiers",
-        component: DossiersSoins,
+        component: DossiersRouter,
         icon: LibraryBooks,
         layout: "/home"
     },

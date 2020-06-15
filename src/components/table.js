@@ -180,7 +180,7 @@ export default function CustomTable(props) {
                 onChange={(e) => {setFilter(e.target.value)}}
             />
         </div>
-        <Table className={classes.table}>
+        <Table className={classes.table} >
             <TableHead className={classes.greyTableHeader}>
                 <TableRow className={classes.tableHeadRow}>
                     {

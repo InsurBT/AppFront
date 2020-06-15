@@ -5,11 +5,10 @@ import FormPopup from '../../components/form-popup';
 import TextInput from '../../components/text-input';
 import FormButton from '../../components/form-button';
 import DirectionRegService from '../../service/directionReg-service';
-import DirectionRegContext from '../../context/directionRegContext';
 
 export default function DirectionReg (props) {
 
-     const {directionReg, setDirectionReg } = useContext(DirectionRegContext);
+     const [directionReg, setDirectionReg] = useState([]);
 
      // l'etat de chargement des donnees
      const [loading, setLoading] = useState(true);
@@ -47,6 +46,7 @@ export default function DirectionReg (props) {
 
     useEffect(() => {
         DirectionRegService.getAll().then(res => {
+            console.log(res);
             setDirectionReg(res);
             setLoading(false);
         });
@@ -173,7 +173,7 @@ export default function DirectionReg (props) {
         return (
             !isNaN(parseInt(inputDirectionReg.code)) &&
             inputDirectionReg.designation !== "" &&
-            inputDirectionReg.ville !== "" &&
+            !isNaN(parseInt(inputDirectionReg.ville)) &&
             inputDirectionReg.adresse !== ""
             
         ) 
@@ -211,7 +211,9 @@ export default function DirectionReg (props) {
                     data={directionReg}
                     buttons
                     delete={openDeleteForm}
-                    edit={openEditForm} />
+                    edit={openEditForm} 
+                    pageSize="5"
+                    />
         }
 
         {/* Formulaire d'ajout ou de modification */}

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import dossierService from '../service/dossier-service';
+import dossierService from '../../service/dossier-service';
 
 import Button from '@material-ui/core/Button';
-import NavigationButton from '../components/navigation-button';
-import Table from '../components/table';
-import SmallHeader from '../components/small-header';
+import NavigationButton from '../../components/navigation-button';
+import Table from '../../components/table';
+import SmallHeader from '../../components/small-header';
 
 import Grid from '@material-ui/core/Grid';
 

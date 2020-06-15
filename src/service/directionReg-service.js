@@ -2,7 +2,7 @@ import api from '../environement/api';
 
 const DirectionRegService = {
     getAll: function(code) {
-        return api.get("directionreg/getAll", {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+        return api.get("DirectionRegional/getAll", {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
                 return res.json();
             } else {
@@ -13,7 +13,7 @@ const DirectionRegService = {
     },
 
     add: function (directionreg) {
-        return api.post("directionreg/add", directionreg, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+        return api.post("DirectionRegional/add", directionreg, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
                 return res.json();
             } else {
@@ -23,7 +23,7 @@ const DirectionRegService = {
     },
 
     delete: (id) => {
-        return api.post("directionreg/delete", id, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+        return api.post("DirectionRegional/delete", id, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
                 return res.json();
             } else {
@@ -33,7 +33,7 @@ const DirectionRegService = {
     },
 
     edit: (directionreg) => {
-        return api.post("directionreg/edit", directionreg, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+        return api.post("DirectionRegional/edit", directionreg, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
                 return res.json();
             } else {
