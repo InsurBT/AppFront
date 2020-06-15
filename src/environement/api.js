@@ -1,4 +1,4 @@
-const url = "http://10.10.210.23:4000/";
+const url = "http://localhost:4000/";
 
 const api = {
     post: function (path, body = null, headers = null) {
