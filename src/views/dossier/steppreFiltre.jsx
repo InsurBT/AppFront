@@ -82,7 +82,7 @@ export default function VerticalLinearStepper() {
                         onClick={handleBack}
                         className={classes.button}
                       >
-                        Back
+                        Retour
                       </Button>
                       <Button
                         variant="contained"
@@ -90,7 +90,7 @@ export default function VerticalLinearStepper() {
                         onClick={handleNext}
                         className={classes.button}
                       >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                        {activeStep === steps.length - 1 ? 'Terminer' : 'Suivant'}
                       </Button>
                     </div>
                   </div>
@@ -102,7 +102,7 @@ export default function VerticalLinearStepper() {
             <Paper square elevation={0} className={classes.resetContainer}>
               <Typography>All steps completed - you&apos;re finished</Typography>
               <Button onClick={handleReset} className={classes.button}>
-                Reset
+                Recommencer
               </Button>
             </Paper>
           )}

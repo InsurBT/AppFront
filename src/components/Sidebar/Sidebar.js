@@ -48,12 +48,7 @@ export default function Sidebar(props) {
           [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path)
         });
         return (
-          <NavLink
-            to={prop.layout + prop.path}
-            className={activePro + classes.item}
-            activeClassName="active"
-            key={key}
-          >
+          
             <ListItem button className={classes.itemLink + listItemClasses}>
               
               
@@ -108,8 +103,13 @@ export default function Sidebar(props) {
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
                 ) :
-                [
-                  (typeof prop.icon === "string") ? (
+                <NavLink
+                  to={prop.layout + prop.path}
+                  className={activePro + classes.item}
+                  activeClassName="active"
+                  key={key}
+                >
+                  {(typeof prop.icon === "string") ? (
                     <Icon
                       className={classNames(classes.itemIcon, whiteFontClasses, {
                         [classes.itemIconRTL]: props.rtlActive
@@ -123,7 +123,7 @@ export default function Sidebar(props) {
                         [classes.itemIconRTL]: props.rtlActive
                       })}
                     />
-                  ),
+                  )}
                   <ListItemText
                     primary={props.rtlActive ? prop.rtlName : prop.name}
                     className={classNames(classes.itemText, whiteFontClasses, {
@@ -131,11 +131,10 @@ export default function Sidebar(props) {
                     })}
                     disableTypography={true}
                   />
-                ]
+                </NavLink>
                 
               }
             </ListItem>
-          </NavLink>
         );
       })}
     </List>
