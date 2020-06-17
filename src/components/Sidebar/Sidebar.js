@@ -11,6 +11,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 // core components
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.js";
 import RTLNavbarLinks from "../Navbars/RTLNavbarLinks.js";
@@ -45,37 +48,93 @@ export default function Sidebar(props) {
           [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path)
         });
         return (
-          <NavLink
-            to={prop.layout + prop.path}
-            className={activePro + classes.item}
-            activeClassName="active"
-            key={key}
-          >
+          
             <ListItem button className={classes.itemLink + listItemClasses}>
-              {typeof prop.icon === "string" ? (
-                <Icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive
-                  })}
+              
+              
+              {
+                prop.subMenu ? (
+                  <ExpansionPanel className={classNames(classes.itemText, whiteFontClasses, {
+                    [classes.itemTextRTL]: props.rtlActive
+                  })} style={{background: "none"}}>
+                    <ExpansionPanelSummary>
+                    {typeof prop.icon === "string" ? (
+                      <Icon
+                        className={classNames(classes.itemIcon, whiteFontClasses, {
+                          [classes.itemIconRTL]: props.rtlActive
+                        })}
+                      >
+                        {prop.icon}
+                      </Icon>
+                      ) : (
+                        <prop.icon
+                          className={classNames(classes.itemIcon, whiteFontClasses, {
+                            [classes.itemIconRTL]: props.rtlActive
+                          })}
+                        />
+                      )}
+                      {prop.name}
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <List>
+                        {
+                          prop.subMenu.map(menu => {
+                            return (
+                              <NavLink
+                                to={prop.layout + prop.path + menu.path}
+                                className={activePro + classes.item}
+                                activeClassName="active"
+                                key={key}
+                              >
+                                <ListItem>
+                                  <ListItemText
+                                    primary={menu.name}
+                                    className={classNames(classes.itemText, whiteFontClasses, {
+                                      [classes.itemTextRTL]: props.rtlActive
+                                    })}
+                                    disableTypography={true}
+                                  />
+                                </ListItem>
+                              </NavLink>
+                            )
+                          })
+                        }
+                      </List>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                ) :
+                <NavLink
+                  to={prop.layout + prop.path}
+                  className={activePro + classes.item}
+                  activeClassName="active"
+                  key={key}
                 >
-                  {prop.icon}
-                </Icon>
-              ) : (
-                <prop.icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive
-                  })}
-                />
-              )}
-              <ListItemText
-                primary={props.rtlActive ? prop.rtlName : prop.name}
-                className={classNames(classes.itemText, whiteFontClasses, {
-                  [classes.itemTextRTL]: props.rtlActive
-                })}
-                disableTypography={true}
-              />
+                  {(typeof prop.icon === "string") ? (
+                    <Icon
+                      className={classNames(classes.itemIcon, whiteFontClasses, {
+                        [classes.itemIconRTL]: props.rtlActive
+                      })}
+                    >
+                      {prop.icon}
+                    </Icon>
+                  ) : (
+                    <prop.icon
+                      className={classNames(classes.itemIcon, whiteFontClasses, {
+                        [classes.itemIconRTL]: props.rtlActive
+                      })}
+                    />
+                  )}
+                  <ListItemText
+                    primary={props.rtlActive ? prop.rtlName : prop.name}
+                    className={classNames(classes.itemText, whiteFontClasses, {
+                      [classes.itemTextRTL]: props.rtlActive
+                    })}
+                    disableTypography={true}
+                  />
+                </NavLink>
+                
+              }
             </ListItem>
-          </NavLink>
         );
       })}
     </List>

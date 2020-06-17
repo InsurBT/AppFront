@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import FormPrestation from './formPrestation'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,6 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import Popup from 'reactjs-popup';
+
+
 
 const useStyles = makeStyles({
   table: {
@@ -23,17 +27,18 @@ function createData(action, prestation, cotation, nbrActes, mtEngage, mtAregle, 
     createData('', '','','','','','',''),
   ];
 export default function Prestation() {
-   
+    const [open, setOpen] = useState(false);
+      
 
-const classes = useStyles();
+    const classes = useStyles();
 
-return (
+return (<div>
         <TableContainer component={Paper}>
             <Table className={classes.table} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
                             
-                            <TableCell align="right"> <Button variant="contained" color="primary"> Nouveau</Button></TableCell>
+                            <TableCell align="right"> <Button variant="contained" color="primary"  onClick={() => setOpen(true) }> Nouveau</Button></TableCell>
                             <TableCell align="right">prestation</TableCell>
                             <TableCell align="right">cotation</TableCell>
                             <TableCell align="right">bbrActes</TableCell>
@@ -47,9 +52,7 @@ return (
                 <TableBody>
                     {rows.map((row) => (
                             <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                {row.name}
-                                </TableCell>
+                                <TableCell component="th" scope="row">{row.name}</TableCell>
                                 <TableCell align="right">{row.action}</TableCell>
                                 <TableCell align="right">{row.prestation}</TableCell>
                                 <TableCell align="right">{row.cotation}</TableCell>
@@ -64,6 +67,8 @@ return (
                 </TableBody>
             </Table>
         </TableContainer>
+        <Popup open={open}> <FormPrestation/> </Popup>
+      </div>  
 );
       
 }

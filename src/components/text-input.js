@@ -22,8 +22,9 @@ export default function TextInput(props) {
         <div style={{...containerStyle, ...props.style}}  onFocus={toggleFocus} onBlur={toggleFocus} > 
             {props.type === "select" ? 
                 [
-                    <label>{props.label}</label>,
-                    <select style={inputStyle} {...props}>
+                    <select onChange={props.onChange} style={inputStyle} {...props}>
+                        
+                         <option  selected disabled hidden>{props.currentValue||props.label}</option>
                         {props.options.map(option => {
                             return <option key={option.value} value={option.value}>{option.label}</option>
                         })}

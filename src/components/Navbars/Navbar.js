@@ -22,9 +22,9 @@ export default function Header(props) {
   const classes = useStyles();
   function makeBrand() {
     var name;
-    props.routes.map(prop => {
-      if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-        name = props.rtlActive ? prop.rtlName : prop.name;
+    props.routes.map(route => {
+      if (window.location.href.indexOf(route.layout + route.path) !== -1) {
+        name = props.rtlActive ? route.rtlName : route.name;
       }
       return null;
     });
