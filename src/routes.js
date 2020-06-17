@@ -41,7 +41,7 @@ const routes = [
         layout: "/home"
     },
     {
-        name: "Listes des dossiers de soins",
+        name: "Gestion des dossiers",
         path: "/dossiers",
         param: "category",
         component: DossiersRouter,

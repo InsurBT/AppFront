@@ -75,7 +75,7 @@ export default function DashboardRouter(props) {
 
   useEffect(() => {
     dossierService.getMenu().then((res) => {
-      routes.find(route => route.name === "Listes des dossiers de soins").subMenu = res;
+      routes.find(route => route.name === "Gestion des dossiers").subMenu = res;
       setLoading(false);
     })
   }, [])

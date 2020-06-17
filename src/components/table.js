@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import * as Styles from '../CSS/table.css';
-import IconButton from '../components/icon-button';
-import TextInput from '../components/text-input';
 
+// @matrial-ui components
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -13,7 +12,19 @@ import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
+import TextField from "@material-ui/core/TextField";
 import TableCell from "@material-ui/core/TableCell";
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+
+// @matrial-ui icons
+import SearchIcon from "@material-ui/icons/Search";
+import Delete from "@material-ui/icons/Delete";
+import Edit from "@material-ui/icons/Edit";
+import Back from "@material-ui/icons/NavigateBefore";
+import Next from "@material-ui/icons/NavigateNext";
+import FirstPage from "@material-ui/icons/FirstPage";
+import LastPage from "@material-ui/icons/LastPage";
 
 import styles from "../assets/jss/material-dashboard-react/components/tableStyle.js";
 
@@ -103,8 +114,8 @@ export default function CustomTable(props) {
                     ** ces methodes prennent comme argument l'objet à modifier ou supprimer du tableau
                     */
                     props.buttons && element ? <TableCell className={classes.tableCell} key="table-buttons" >
-                        {props.edit ? <IconButton icon="edit" onClick={() => {props.edit(element)}} /> : ""}
-                        {props.delete ? <IconButton icon="trash" onClick={() => { props.delete(element)}} /> : ""}
+                        {props.edit ? <IconButton onClick={() => {props.edit(element)}}><Edit /></IconButton> : ""}
+                        {props.delete ? <IconButton onClick={() => { props.delete(element)}}><Delete /></IconButton> : ""}
                     </TableCell> : (element ? "" : <TableCell className={classes.tableCell} style={{ color: "white"}}>-</TableCell>)
                 }
                 {
@@ -172,16 +183,19 @@ export default function CustomTable(props) {
     }
 
     return (<div className={classes.tableResponsive} style={{backgroundColor: "white", borderRadius: "1%"}}>
-        <div style={{margin: "auto", maxWidth: "300px"}}>
-            <TextInput
-                label="Recherche..."
+        <div style={{margin: "auto", maxWidth: "300px", display: "flex"}}>
+            <TextField
+                label="Recherche"
                 value={filter}
-                icon="search"
                 onChange={(e) => {setFilter(e.target.value)}}
+                style={{padding: "0", margin:"0", width: "100%"}}
             />
+            <IconButton>
+                <SearchIcon />
+            </IconButton>
         </div>
         <Table className={classes.table} >
-            <TableHead className={classes.greyTableHeader}>
+            <TableHead className={classes.blueTableHeader}>
                 <TableRow className={classes.tableHeadRow}>
                     {
                         props.buttons ? <th style={{...Styles.thStyle, minWidth: "80px"}}>
@@ -201,22 +215,28 @@ export default function CustomTable(props) {
             </TableBody>
         </Table>
         <div style={{display: "flex", flexDirection: "row-reverse"}}>
-            <div style={{display: "flex", justifyContent: "space-around", width: "50%", alignSelf:"left"}}>
-                <IconButton onClick={() => {setCurrentPageIndex(0); setSelectedPage(1);}} icon="angle-double-left" />
-                <IconButton onClick={goPreviousPage} icon="angle-left" />
-                <TextInput
+            <div style={{display: "flex", justifyContent: "space-around", width: "50%", maxWidth: "300px", alignSelf:"left"}}>
+                <IconButton onClick={() => {setCurrentPageIndex(0); setSelectedPage(1);}}>
+                    <FirstPage />
+                </IconButton>
+                <IconButton onClick={goPreviousPage}>
+                    <Back />
+                </IconButton>
+                <Input
                     type="number"
-                    min="1"
-                    max={pages.length}
-                    icon="none"
-                    style={{width: "50px", height: "25px", padding: "0", margin: "2px"}}
+                    style={{width: "50px"}}
                     align="center"
                     value={selectedPage}
                     onChange={(e) => {setSelectedPage(parseInt(e.target.value));}}
                     onKeyPress={submitSelectedPage}
+                    inputProps={{min: 1, max: pages.length}}
                 />
-                <IconButton onClick={goNextPage} icon="angle-right" />
-                <IconButton onClick={() => {setCurrentPageIndex(pages.length -1); setSelectedPage(pages.length);}} icon="angle-double-right" />
+                <IconButton onClick={goNextPage}>
+                    <Next />
+                </IconButton>
+                <IconButton onClick={() => {setCurrentPageIndex(pages.length -1); setSelectedPage(pages.length);}}>
+                    <LastPage />
+                </IconButton>
             </div>
             </div>
     </div>

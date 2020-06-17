@@ -31,6 +31,9 @@ const tableStyle = theme => ({
   grayTableHeader: {
     color: grayColor[0]
   },
+  blueTableHeader: {
+    color: "#3F51B5"
+  },
   table: {
     marginBottom: "0",
     width: "100%",
