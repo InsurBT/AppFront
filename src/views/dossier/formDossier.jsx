@@ -51,7 +51,6 @@ export default function FormFiltre() {
                     <KeyboardDatePicker
                         
                         margin="normal"
-                        id="date-picker-dialog"
                         label="Date reception"
                         format="MM/dd/yyyy"
                         value={selectedDate}
@@ -68,7 +67,6 @@ export default function FormFiltre() {
               
                     <KeyboardDatePicker
                         
-                        id="date-picker-dialog"
                         label="Date debut de soins"
                         format="MM/dd/yyyy"
                         value={selectedDate}
@@ -80,7 +78,6 @@ export default function FormFiltre() {
                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                     <KeyboardDatePicker
                         margin="normal"
-                        id="date-picker-dialog"
                         label="Date fin de soins"
                         format="MM/dd/yyyy"
                         value={selectedDate}
@@ -95,7 +92,6 @@ export default function FormFiltre() {
                
                     <KeyboardDatePicker
                         margin="normal"
-                        id="date-picker-dialog"
                         label="Date début de soins"
                         format="MM/dd/yyyy"
                         value={selectedDate}
@@ -108,7 +104,7 @@ export default function FormFiltre() {
                      &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
 
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-label">Medecin traitant</InputLabel>
+                        <InputLabel>Medecin traitant</InputLabel>
                         <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
