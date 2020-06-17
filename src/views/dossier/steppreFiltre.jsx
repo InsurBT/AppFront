@@ -1,5 +1,5 @@
 import React from 'react';
-import FormFiltre from './formInfoAssure';
+import FormInfoAssure from './formInfoAssure';
 import AjouterDossier from './formDossier';
 import FormValoraisation from './formValoraisation';
 import { makeStyles } from '@material-ui/core/styles';
@@ -37,7 +37,7 @@ function getStepContent(step) {
         switch (step) {
           case 0:
             return (
-              `Info assure` , <FormFiltre/>  );
+              `Info assure` , <FormInfoAssure/>  );
           case 1:
             return <AjouterDossier/> ;
             
@@ -51,60 +51,65 @@ function getStepContent(step) {
       }
 
 export default function VerticalLinearStepper() {
-        const classes = useStyles();
-        const [activeStep, setActiveStep] = React.useState(0);
-        const steps = getSteps();
+  const classes = useStyles();
 
-        const handleNext = () => {
-          setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        };
+  // etat de l'etape actuelle
+  const [activeStep, setActiveStep] = React.useState(1);
+  const steps = getSteps();
 
-        const handleBack = () => {
-          setActiveStep((prevActiveStep) => prevActiveStep - 1);
-        };
+  // etat de l'assure
 
-        const handleReset = () => {
-          setActiveStep(0);
-        };
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
 
   return (
-        <div className={classes.root}>
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((label, index) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <Typography>{getStepContent(index)}</Typography>
-                  <div className={classes.actionsContainer}>
-                    <div>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        className={classes.button}
-                      >
-                        Retour
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Terminer' : 'Suivant'}
-                      </Button>
-                    </div>
-                  </div>
-                </StepContent>
-              </Step>
-            ))}
-          </Stepper>
-          {activeStep === steps.length && (
-            <Paper square elevation={0} className={classes.resetContainer}>
-              <Button onClick={handleReset} className={classes.button}>
-                Recommencer
-              </Button>
-            </Paper>
-          )}
-        </div>
-      );
+    <div className={classes.root}>
+      <Stepper activeStep={activeStep} orientation="vertical">
+        {steps.map((label, index) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+            <StepContent>
+              <Typography>{getStepContent(index)}</Typography>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.button}
+                  >
+                    Retour
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Terminer' : 'Suivant'}
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+      {activeStep === steps.length && (
+        <Paper square elevation={0} className={classes.resetContainer}>
+          <Typography>All steps completed - you&apos;re finished</Typography>
+          <Button onClick={handleReset} className={classes.button}>
+            Recommencer
+          </Button>
+        </Paper>
+      )}
+    </div>
+  );
 }

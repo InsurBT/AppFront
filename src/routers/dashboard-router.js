@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom';
 
 
@@ -35,6 +35,10 @@ export default function DashboardRouter(props) {
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
+
+  // etat de chargement des sous menu
+  // cet etat garde la valeur 'true' tant que les sous menu ne sont pas encore charge
+  const [loading, setLoading] = useState(true);
   
   const switchViews = (
       <Switch>
@@ -72,6 +76,7 @@ export default function DashboardRouter(props) {
   useEffect(() => {
     dossierService.getMenu().then((res) => {
       routes.find(route => route.name === "Listes des dossiers de soins").subMenu = res;
+      setLoading(false);
     })
   }, [])
 

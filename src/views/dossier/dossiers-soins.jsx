@@ -8,7 +8,7 @@ import Table from '../../components/table';
 import SmallHeader from '../../components/small-header';
 import FormPopup from '../../components/form-popup';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import FiltreDossier from './FiltreDossier';
+import FiltreDossier from './FiltreUtilisateur';
 
 
 import Grid from '@material-ui/core/Grid';
@@ -31,13 +31,11 @@ export default function DossierSoins(props) {
     // Etat de l'action designee
     const [action, setAction] = useState("");
 
-    // Etat du menu
-    // const [menu, setMenu] = useState([]);
-
     // Etat de chargement des donnees
     const [loading, setLoading] = useState(true);
-      // l'etat des booleans d'affichage des formulaire pop-up
-      const [formOpen, setFormOpen] = useState(false);
+
+    // l'etat des booleans d'affichage des formulaire pop-up
+    const [formOpen, setFormOpen] = useState(false);
 
     // chargement des dossiers selons la categorie choisie
     useEffect(() => {
@@ -60,13 +58,6 @@ export default function DossierSoins(props) {
         });
     }, [category]);
 
-    // chargement du menu des categories disponible 
-    // useEffect(() => {
-    //     dossierService.getMenu().then(res => {
-    //         setMenu(res);
-    //     })
-    // }, []);
-
     function handleActions(action, dossier) {
         setAction(action);
         switch (action) {
@@ -88,11 +79,11 @@ export default function DossierSoins(props) {
     return (<div>
             <ButtonGroup color="primary">
                 <Button onClick={() => {props.history.push("/home/dossiers/ajouter")}}>Nouveau</Button>
-                <Button>Filtrer</Button>
+                <Button onClick={() => {setFormOpen(true)}}>Filtrer</Button>
             </ButtonGroup>
             {
                 loading ?
-                    <span>Chargement...</span> :
+                    <div>Chargement...</div> :
                     <Table
                         data={data}
                         pageSize={5}
@@ -106,11 +97,11 @@ export default function DossierSoins(props) {
                     />
             }
             <FormPopup
-                    open={formOpen}
-                    onClose={() => {setFormOpen(false)}}
-                    button='Filtrer'
-                    icon='none'>
+                open={formOpen}
+                onClose={() => {setFormOpen(false)}}
+                button='Filtrer'
+                icon='none'>
                 <FiltreDossier/>
-                </FormPopup>
+            </FormPopup>
         </div>)
 }
