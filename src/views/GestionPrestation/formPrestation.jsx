@@ -16,7 +16,6 @@ import Input from '@material-ui/core/Input';
 const useStyles = makeStyles(theme => ({
               
         all: {
-
             marginLeft:30,
         
         }, 

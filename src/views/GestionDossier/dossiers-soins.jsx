@@ -91,7 +91,7 @@ export default function DossierSoins(props) {
                         edit={() => {}}
                         delete={() => {}}
                         columns={columns}
-                        actions={actions}
+                        actions={actions} 
                         action={action}
                         handleAction={handleActions}
                     />

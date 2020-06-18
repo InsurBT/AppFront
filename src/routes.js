@@ -1,7 +1,7 @@
 import Home from './views/home';
-import ListePrestations from './views/referentiel/liste-prestations';
+import ListePrestations from './views/GestionReferentiel/liste-prestations';
 import ListeUtilisateurs from './views/list-utlisateurs';
-import DirectionReg  from './views/referentiel/listeDirectionReg';
+import DirectionReg  from './views/GestionReferentiel/listeDirectionReg';
 import ListeCaisseEtrangeres from './views/caisseEtrangere/caisseEtrangere';
 import ListeCaisseMeres from './views/caisseMere/caisseMere';
 
