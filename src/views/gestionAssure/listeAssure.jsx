@@ -2,12 +2,14 @@
 import React , { useState, useEffect  } from 'react'
 import Table from '../../components/table';
 
+import Button from '@material-ui/core/Button';
+
 
 export default function ListeAssure() {
     const [assure, setAssure] = useState([]);
     
     const columns = [
-        { title: "button", property: "button" },
+        { title: (<Button color="primary">Nouveau</Button>), property: "button" },
         { title: "ImmCE", property: "immce" },
         { title: "Lien Parenté", property: "lienParente" },
         { title: "Nom", property: "nom" },
