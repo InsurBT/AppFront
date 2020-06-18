@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
 
-import Table from '../../components/table';
-import SmallHeader from '../../components/small-header';
-import FormPopup from '../../components/form-popup';
-import TextInput from '../../components/text-input';
-import FormButton from '../../components/form-button';
+import Table from '../../../components/table';
+import SmallHeader from '../../../components/small-header';
+import FormPopup from '../../../components/form-popup';
+import TextInput from '../../../components/text-input';
+import FormButton from '../../../components/form-button';
 
 import FiltreCaisseE from './FiltreCaisseEtrangere';
 
 
-import CaisseEtrangereService from '../../service/caisseEtrangere-service';
-import paysService from '../../service/pays-service';
-import villeService from '../../service/ville-service';
+import CaisseEtrangereService from '../../../service/caisseEtrangere-service';
+import paysService from '../../../service/pays-service';
+import villeService from '../../../service/ville-service';
 import { useEffect } from 'react';
 
 export default function ListeCaisseEtrangeres(props) {
@@ -283,7 +283,6 @@ export default function ListeCaisseEtrangeres(props) {
                     pays: options.find(options => options.id === parseInt(e.target.value)).nom})}
                 
                 }
-                    
                 icon="none"
             />
             <TextInput

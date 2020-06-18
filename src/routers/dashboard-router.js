@@ -49,12 +49,12 @@ export default function DashboardRouter(props) {
                       path={route.layout + route.path}
                       key={key}
                   >
-                    <route.component history={props.history} />
+                    <route.component subRoutes={route.subRoutes} history={props.history} />
                   </Route>
               )
             })
         }
-        <Redirect from="/home/dossiers" to="/home/dossiers/en_instance" />
+        
         <Redirect from="/home" to="/home/accueil" />
       </Switch>
   )
@@ -75,7 +75,7 @@ export default function DashboardRouter(props) {
 
   useEffect(() => {
     dossierService.getMenu().then((res) => {
-      routes.find(route => route.name === "Listes des dossiers de soins").subMenu = res;
+      routes.find(route => route.name === "Gestion des dossiers").subRoutes = res;
       setLoading(false);
     })
   }, [])

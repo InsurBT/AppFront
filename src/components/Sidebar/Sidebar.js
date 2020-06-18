@@ -53,7 +53,7 @@ export default function Sidebar(props) {
               
               
               {
-                prop.subMenu ? (
+                prop.subRoutes ? (
                   <ExpansionPanel className={classNames(classes.itemText, whiteFontClasses, {
                     [classes.itemTextRTL]: props.rtlActive
                   })} style={{background: "none"}}>
@@ -78,7 +78,7 @@ export default function Sidebar(props) {
                     <ExpansionPanelDetails>
                       <List>
                         {
-                          prop.subMenu.map(menu => {
+                          prop.subRoutes.map(menu => {
                             return (
                               <NavLink
                                 to={prop.layout + prop.path + menu.path}

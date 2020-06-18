@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { CardContent, CardActions,Button,TextField,Grid} from '@material-ui/core';
-import FormButton from '../../components/form-button';
-import TextInputselect from '../../components/text-input-select';
+import FormButton from '@material-ui/core/Button';
+import TextInputselect from '../../../components/text-input-select';
 
 
 

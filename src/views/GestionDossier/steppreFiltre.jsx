@@ -10,7 +10,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Prestation from '../../views/GestionPrestation/prestation'
+import Prestation from '../GestionReferentiel/GestionPrestation/prestation'
 
 
 const useStyles = makeStyles((theme) => ({

@@ -39,103 +39,91 @@ export default function FormFiltre() {
   return (
       
     <form className={classes.root} noValidate autoComplete="off">
-
-
-          <MuiPickersUtilsProvider utils={DateFnsUtils}  justify="space-around">
-              
-
-                   
-                    <TextField id="standard-basic" label="N°Dossier" />
-                    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                   
-                    <KeyboardDatePicker
-                        
-                        margin="normal"
-                        label="Date reception"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                    <pre>
-                    &nbsp;&nbsp;
-                    </pre>
-             
-                
-              
-                    <KeyboardDatePicker
-                        
-                        label="Date debut de soins"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                       &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    <KeyboardDatePicker
-                        margin="normal"
-                        label="Date fin de soins"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                
-                     <pre></pre>
-
-               
-                    <KeyboardDatePicker
-                        margin="normal"
-                        label="Date début de soins"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-
-                     &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-
-                    <FormControl className={classes.formControl}>
-                        <InputLabel>Medecin traitant</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={medecin}
-                        onChange={handleChange}
-                        >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                    </FormControl>
-
-                <pre></pre>
-               
-
-                    <FormControlLabel
-                        value="start"
-                        control={<Switch color="primary" minWidth= "300" />}
-                        label="numerisé aprés enregistrement"
-                        labelPlacement="start"
-                        />
-                        <pre></pre>
-   
-               
-                
-            </MuiPickersUtilsProvider>
-        </form>    
+      <MuiPickersUtilsProvider utils={DateFnsUtils}  justify="space-around">        
+        <TextField id="standard-basic" label="N°Dossier" />
+        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+        
+        <KeyboardDatePicker
             
+            margin="normal"
+            label="Date reception"
+            format="MM/dd/yyyy"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+                'aria-label': 'change date',
+            }}
+        />
 
+        <pre>
+        &nbsp;&nbsp;
+        </pre>
+  
+        <KeyboardDatePicker
             
-            
-   
+            label="Date debut de soins"
+            format="MM/dd/yyyy"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+                'aria-label': 'change date',
+            }}
+        />
+
+        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+        <KeyboardDatePicker
+            margin="normal"
+            label="Date fin de soins"
+            format="MM/dd/yyyy"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+                'aria-label': 'change date',
+            }}
+        />
+    
+          <pre></pre>
+    
+        <KeyboardDatePicker
+            margin="normal"
+            label="Date début de soins"
+            format="MM/dd/yyyy"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+                'aria-label': 'change date',
+            }}
+        />
+
+        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+        <FormControl className={classes.formControl}>
+            <InputLabel>Medecin traitant</InputLabel>
+            <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={medecin}
+            onChange={handleChange}
+            >
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+        </FormControl>
+
+        <pre></pre>
+
+        <FormControlLabel
+          value="start"
+          control={<Switch color="primary" minWidth= "300" />}
+          label="numerisé aprés enregistrement"
+          labelPlacement="start"
+        />
+
+        <pre></pre>
+
+      </MuiPickersUtilsProvider>
+    </form>    
   );
 }
