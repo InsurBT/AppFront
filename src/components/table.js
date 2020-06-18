@@ -121,7 +121,13 @@ export default function CustomTable(props) {
                 {
                     props.columns.map((column, index) => {
                         return element ?
-                                <TableCell className={classes.tableCell} key={"TableCell" + index} >{element[column.property].toString()}</TableCell> :
+                                <TableCell className={classes.tableCell} key={"TableCell" + index} >
+                                    {
+                                        React.isValidElement(element[column.property]) ?
+                                            element[column.property] :
+                                            element[column.property].toString()
+                                    }
+                                </TableCell> :
                                 <TableCell className={classes.tableCell} style={{ color: "white"}}>-</TableCell>
                     })
                 }
