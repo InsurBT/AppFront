@@ -104,6 +104,7 @@ export default function FiltreAssure() {
                                 <MenuItem value={20}>agence2</MenuItem>
                                 <MenuItem value={30}>agence3</MenuItem>
                             </Select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                             <Select  className={classes.GriTwo}
                                 
                                 labelId="demo-simple-select-label"
@@ -131,6 +132,7 @@ export default function FiltreAssure() {
                                 <MenuItem value={20}>convention2</MenuItem>
                                 <MenuItem value={30}>convention3</MenuItem>
                             </Select>
+
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Select  className={classes.GriTwo}
                                 
@@ -144,6 +146,7 @@ export default function FiltreAssure() {
                                 <MenuItem value={30}>Mode3</MenuItem>
                             </Select>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                             <Select  className={classes.GriTwo}
                                 
                                 labelId="demo-simple-select-label"
@@ -157,7 +160,6 @@ export default function FiltreAssure() {
                             </Select>
                     </Grid>
                   
-
                     <Grid item xs={12}>
 
                      <FormControlLabel control={
