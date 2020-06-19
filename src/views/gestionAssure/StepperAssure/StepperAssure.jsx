@@ -1,5 +1,5 @@
 import React from 'react';
-import SteppreAssurePrincipale from './StepperAssurePrincipale/stepperAssurePrincipale'
+import SteppreAssurePrincipale from './StepperAssurePrincipale/StepperAssurePrincipale'
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -34,8 +34,7 @@ function getStepContent(stepIndex) {
         return (
             <div >
               
-                <SteppreAssurePrincipale/>;
-              
+                <SteppreAssurePrincipale/>
             </div>)
         
       case 1:
