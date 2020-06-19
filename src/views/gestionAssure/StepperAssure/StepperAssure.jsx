@@ -1,10 +1,12 @@
 import React from 'react';
+import SteppreAssurePrincipale from './StepperAssurePrincipale/stepperAssurePrincipale'
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
+   
   }));
 
 
@@ -25,9 +28,16 @@ return ['Assuré principale', 'Ayants droit', 'Mandataire'];
 }  
 
 function getStepContent(stepIndex) {
+   
     switch (stepIndex) {
       case 0:
-        return 'Assuré principale';
+        return (
+            <div >
+              
+                <SteppreAssurePrincipale/>;
+              
+            </div>)
+        
       case 1:
         return 'Ayants droit';
       case 2:
