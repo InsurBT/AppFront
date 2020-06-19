@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import ConnectedUserContext from '../context/connected-user.context';
 
 import utilisateurService from '../service/utilisateur-service';
+import { Card, CardHeader, Avatar, CardContent } from '@material-ui/core';
 
 export default function Home(props) {
     const {connectedUser, setConnectedUser} = useContext(ConnectedUserContext);
@@ -28,10 +29,20 @@ export default function Home(props) {
         {
             loading ?
                 <div>chargement...</div> :
-                <div>
-                    <h1>{connectedUser.nomComplet}</h1>
-                    <span>Nom d'utilisateur: {connectedUser.nom}</span>
-                </div>
+                <Card>
+                    <CardHeader
+                        title={connectedUser.nomComplet}
+                        avatar={<Avatar>
+                            {connectedUser.nomComplet.charAt(0)}
+                        </Avatar>}
+                        subheader={connectedUser.nom}
+                    />
+                    <CardContent>
+                        Je met du texte ici pour remplire cette element. <br/>
+                        Nous verrons plus tard ce qu'on peut mettre ici <br/>
+
+                    </CardContent>
+                </Card>
         }
     </div>)
 }

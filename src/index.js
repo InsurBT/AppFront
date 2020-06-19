@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import createBrowserHistory from 'history/createBrowserHistory';
+
+import "./assets/css/material-dashboard-react.css?v=1.9.0";
+
 
 const customHistory = createBrowserHistory();
 

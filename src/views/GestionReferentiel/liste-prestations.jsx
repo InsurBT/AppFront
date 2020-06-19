@@ -6,8 +6,13 @@ import FormPopup from '../../components/form-popup';
 import TextInput from '../../components/text-input';
 import FormButton from '../../components/form-button';
 
+import Add from '@material-ui/icons/Add';
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+
 import prestationService from '../../service/prestation-service';
 import { useEffect } from 'react';
+import { TextField } from '@material-ui/core';
 
 export default function ListePrestations(props) {
     
@@ -60,7 +65,7 @@ export default function ListePrestations(props) {
         switch (formMode) {
             case "AJOUTER":
                 setFormParams({
-                    icon: "plus",
+                    icon: <Add />,
                     title: "Ajouter une prestation",
                     button: "Ajouter",
                     onSubmit: (e) => {
@@ -72,7 +77,7 @@ export default function ListePrestations(props) {
                 break;
             case "MODIFIER":
                 setFormParams({
-                    icon: "edit",
+                    icon: <Edit />,
                     title: "Modifier la prestation",
                     button: "Modifier",
                     onSubmit: (e) => {
@@ -84,7 +89,7 @@ export default function ListePrestations(props) {
                 break;
             case "SUPPRIMER":
                 setFormParams({
-                    icon: "trash",
+                    icon: <Delete />,
                     title: "Supprimer cette prestation?",
                     button: "Supprimer",
                     onSubmit: (e) => {
@@ -211,33 +216,30 @@ export default function ListePrestations(props) {
             {...formParams}
             onClose={closeForm}
         >
-            <TextInput
+            <TextField
                 type="text"
                 label="Type de prestation"
                 value={inputPrestation.type}
                 onChange={(e) => {setInputPrestation({...inputPrestation, type: e.target.value})}}
                 icon="none"
             />
-            <TextInput
+            <TextField
                 type="number"
                 label="Nombre d'actes"
                 value={inputPrestation.nbrActes}
                 onChange={(e) => {setInputPrestation({...inputPrestation, nbrActes: e.target.value})}}
-                icon="none"
             />
-            <TextInput
+            <TextField
                 type="number"
                 label="Montant engage"
                 value={inputPrestation.montantEngage}
                 onChange={(e) => {setInputPrestation({...inputPrestation, montantEngage: e.target.value})}}
-                icon="none"
             />
-            <TextInput
+            <TextField
                 type="number"
                 label="Montant paye"
                 value={inputPrestation.montantPaye}
                 onChange={(e) => {setInputPrestation({...inputPrestation, montantPaye: e.target.value})}}
-                icon="none"
             />
             <span style={{color: "red"}}>{invalidMessage}</span>
         </FormPopup>
