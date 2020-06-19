@@ -49,15 +49,16 @@ export default function Sidebar(props) {
         });
         return (
           
-            <ListItem button className={classes.itemLink + listItemClasses}>
-              
-              
+            <ListItem button className={classes.itemLink + listItemClasses}>            
               {
                 prop.subRoutes ? (
-                  <ExpansionPanel className={classNames(classes.itemText, whiteFontClasses, {
-                    [classes.itemTextRTL]: props.rtlActive
-                  })} style={{background: "none"}}>
-                    <ExpansionPanelSummary>
+                  <ExpansionPanel
+                    style={{background: "none"}}
+                    classes={{
+                      root: classes.item
+                    }}
+                  >
+                    <ExpansionPanelSummary className={classNames(classes.itemText, whiteFontClasses)} style={{padding: "0"}}>
                     {typeof prop.icon === "string" ? (
                       <Icon
                         className={classNames(classes.itemIcon, whiteFontClasses, {
