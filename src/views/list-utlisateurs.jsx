@@ -3,11 +3,17 @@ import React, { useState, useEffect } from 'react';
 import Table from '../components/table';
 import SmallHeader from '../components/small-header';
 import FormPopup from '../components/form-popup';
-import TextInput from '../components/text-input';
-import FormButton from '../components/form-button';
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+
+import Add from '@material-ui/icons/Add';
+import Edit from '@material-ui/icons/Edit';
 
 import utilisateurService from '../service/utilisateur-service';
 import agenceService from '../service/agence-service';
+import { MenuItem, FormControl, InputLabel } from '@material-ui/core';
 
 export default function ListeUtilisateurs(props) {
     
@@ -75,7 +81,7 @@ export default function ListeUtilisateurs(props) {
         switch (formMode) {
             case "AJOUTER":
                 setFormParams({
-                    icon: "plus",
+                    icon: <Add />,
                     title: "Ajouter un utilisateur",
                     button: "Ajouter",
                     onSubmit: (e) => {
@@ -87,7 +93,7 @@ export default function ListeUtilisateurs(props) {
                 break;
             case "MODIFIER":
                 setFormParams({
-                    icon: "edit",
+                    icon: <Edit />,
                     title: "Modifier l'utlisateur",
                     button: "Modifier",
                     onSubmit: (e) => {
@@ -178,7 +184,7 @@ export default function ListeUtilisateurs(props) {
     return (<div>
         <SmallHeader>
             Liste des utilisateurs
-            <FormButton onClick={() => {setFormMode("AJOUTER")}}>Ajouter utilisateur</FormButton>
+            <Button onClick={() => {setFormMode("AJOUTER")}} variant="contained" color="primary">Ajouter utilisateur</Button>
         </SmallHeader>
 
         {/* Tableau des donnees */}
@@ -190,7 +196,7 @@ export default function ListeUtilisateurs(props) {
                     data={utilisateurs}
                     buttons
                     edit={openEditForm}
-                    pageSize="2"
+                    pageSize="5"
                 />
         }
 
@@ -199,45 +205,51 @@ export default function ListeUtilisateurs(props) {
             onClose={closeForm}
             {...formParams}
         >
-            <TextInput
+            <TextField
                 type="text"
                 label="Nom Complet"
                 value={inputUtilisateur.nomComplet}
                 onChange={(e) => {setInputUtilisateur({...inputUtilisateur, nomComplet: e.target.value})}}
                 icon="none"
             />
-            <TextInput
+            <TextField
                 type="text"
                 label="Nom d'utlisateur"
                 value={inputUtilisateur.nom}
                 onChange={(e) => {setInputUtilisateur({...inputUtilisateur, nom: e.target.value})}}
-                icon="none"
             />
-            <TextInput
-                type="select"
-                options={agences.map(agence => ({value:agence.code, label:agence.label}))}
-                label="Agence"
-                onChange={(e) => {setInputUtilisateur({
-                    ...inputUtilisateur,
-                    code_agence: e.target.value,
-                    agence: agences.find(agence => agence.code === parseInt(e.target.value)).label})}}
-                icon="none"
-            />
+            <FormControl>
+                <InputLabel>Agence</InputLabel>
+                <Select
+                    type="select"
+                    label="Agence"
+                    onChange={(e) => {setInputUtilisateur({
+                        ...inputUtilisateur,
+                        code_agence: e.target.value,
+                        agence: agences.find(agence => agence.code === parseInt(e.target.value)).label})}}
+                >
+                    {
+                        agences.map(agence => {
+                            return <MenuItem value={agence.code} selected={agence.label === inputUtilisateur.agence}>
+                                {agence.label}
+                            </MenuItem>
+                        })
+                    }
+                </Select>
+            </FormControl>
             {
                 formMode === "AJOUTER" ?
-                [<TextInput
+                [<TextField
                     type="password"
                     label="Mot de passe"
                     value={inputUtilisateur.password}
                     onChange={(e) => {setInputUtilisateur({...inputUtilisateur, password: e.target.value})}}
-                    icon="lock"
                 />,
-                <TextInput
+                <TextField
                     type="password"
                     label="Confirmer le mot de passe"
                     value={inputUtilisateur.confirmationPassword}
                     onChange={(e) => {setInputUtilisateur({...inputUtilisateur, confirmationPassword: e.target.value})}}
-                    icon="lock"
                 />] :
                 ""
             }

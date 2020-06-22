@@ -4,6 +4,8 @@ import Table from '../../../../components/table';
 export default function ListeAyantsDroit() {
 
     const [ayantDroit, setAyantDroit]=useState([]);
+ 
+
 
     const columns=[
         { title:"Nom", property:"nom"},

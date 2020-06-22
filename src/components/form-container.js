@@ -4,6 +4,7 @@ import {formContainerStyle, smallFormContainerStyle} from '../CSS/form-container
 
 import FormHeader from './form-header';
 import FormButton from './form-button';
+import { Card, CardContent, CardHeader, Avatar, Button, Grid } from '@material-ui/core';
 
 export default function FormContainer(props) {
 
@@ -19,14 +20,23 @@ export default function FormContainer(props) {
         })
     })
 
-    return (<div style={{...style, ...props.style}}>
-        <FormHeader title={props.title} icon={props.icon} />
-        <form onSubmit={props.onSubmit}>
-            {props.children}
-            <div style={{textAlign: "right"}}>
-                <FormButton>{props.button}</FormButton>
-            </div>
-        </form>
-    </div>
+    return (<Card style={{...style, ...props.style}}>
+        <CardHeader
+            title={props.title}
+            avatar={<Avatar>
+                {props.icon}
+            </Avatar>}
+        />
+        <CardContent>
+            <form onSubmit={props.onSubmit}>
+                <Grid container direction="column">
+                    {props.children}
+                </Grid>
+                <div style={{textAlign: "right"}}>
+                    <Button type="submit">{props.button}</Button>
+                </div>
+            </form>
+        </CardContent>
+    </Card>
     )
 }

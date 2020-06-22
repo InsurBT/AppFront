@@ -17,20 +17,11 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
       },
     textField:{
-        width: 50,
-        marginRight:50,
-        
+        minWidth: 50,        
     },
     formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-      },
-    textField2:{
-        marginBottom: 20,  
-    },
-    textField1:{
-        width: 290,  
-    },
+        minWidth: 100
+    }
   }));
 
 
@@ -58,19 +49,35 @@ export default function FormIdentification() {
             <form >
                 <Grid container spacing={1} >
                     
-                    <Grid  item xs={3} >
-                        <TextField  id="standard-basic" label="Nom" />
-                    </Grid>
-                    <Grid  item xs={6}  >
-                        <TextField className={classes.textField1} id="standard-basic" label="Nom de jeune fille" />
-                    </Grid>
-                    <pre> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</pre>
-                    <Grid  item xs={3} >
-                        <TextField  id="standard-basic" label="Prénom" />
-                    </Grid>
-                    <Grid  item xs={8} >
-                        <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-label">Sexe</InputLabel>
+                   <Grid item container justify="space-between" xs="9">
+                        <Grid  item >
+                            <TextField  id="standard-basic" label="Nom" />
+                        </Grid>
+                        <Grid  item  >
+                            <TextField className={classes.textField1} id="standard-basic" label="Nom de jeune fille" />
+                        </Grid>
+                        <Grid  item >
+                            <TextField  id="standard-basic" label="Prénom" />
+                        </Grid>
+                   </Grid>
+
+                   <Grid item container justify="space-between" xs="9">
+                        <Grid  item  >
+                            <TextField className={classes.textField} id="standard-basic" label="Age" /> 
+                        </Grid>
+                        <Grid  itemProp >
+                            <TextField className={classes.textField} id="standard-basic" label="CIN" />
+                        </Grid>
+                        <Grid  item className={classes.textField} >
+                            <TextField  id="standard-basic" label="Passeport N°" />
+                        </Grid>
+                   </Grid>
+
+                    
+                    <Grid  item container justify="space-between" xs={9} >
+                        <Grid item>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Sexe</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
@@ -81,55 +88,48 @@ export default function FormIdentification() {
                                     <MenuItem value={20}>Femme</MenuItem>
                                     
                                 </Select>
-                        </FormControl>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-label">Nationalité</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={nationalite}
-                                    onChange={handleChangeNationalite}
-                                    >
-                                    <MenuItem value={10}>Maroccaine</MenuItem>
-                                    <MenuItem value={20}>Française</MenuItem>
-                                    
-                                </Select>
-                        </FormControl>    
-                    </Grid>
-                    <Grid item xs={3}>
-                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            
-                            <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            label="Date de naissance"
-                            value={selectedDate}
-                            onChange={handleDateChangeDate}
-                            KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-                            />
-                        </MuiPickersUtilsProvider>
+                            </FormControl>
+                        </Grid>
+                        <Grid item>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Nationalité</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={nationalite}
+                                        onChange={handleChangeNationalite}
+                                        >
+                                        <MenuItem value={10}>Maroccaine</MenuItem>
+                                        <MenuItem value={20}>Française</MenuItem>
+                                        
+                                    </Select>
+                            </FormControl>    
+                        </Grid>
+                        <Grid item>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <KeyboardDatePicker
+                                    disableToolbar
+                                    variant="inline"
+                                    format="MM/dd/yyyy"
+                                    margin="normal"
+                                    id="date-picker-inline"
+                                    label="Date de naissance"
+                                    value={selectedDate}
+                                    onChange={handleDateChangeDate}
+                                    KeyboardButtonProps={{ 'aria-label': 'change date',}}  
+                                />
+                            </MuiPickersUtilsProvider>
 
+                        </Grid>
                     </Grid>
-                    <Grid  item xs={2}  >
-                        <TextField className={classes.textField} id="standard-basic" label="Age" />
-                        
-                    </Grid>
-                    <Grid  item xs={6} >
-                        <TextField className={classes.textField} id="standard-basic" label="CIN" />
-                    </Grid>
-                    <Grid  item xs={3} className={classes.textField2} >
-                        <TextField  id="standard-basic" label="Passeport N°" />
-                    </Grid>&nbsp;&nbsp;&nbsp;
-                    <Grid item xs={3}>
+                    
+                    <Grid item xs={12}>
                         <FormControlLabel
-                                    value="start"
-                                    control={<Switch color="primary" minWidth= "300" />}
-                                    label="Réside au Maroc"
-                                    labelPlacement="start"
-                            />
+                            value="start"
+                            control={<Switch color="primary" minWidth= "300" />}
+                            label="Réside au Maroc"
+                            labelPlacement="start"
+                        />
 
                     </Grid>
                 </Grid>

@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 
 import FormContainer from '../components/form-container';
-import TextInput from '../components/text-input';
 
 import utilisateurService from '../service/utilisateur-service';
 
 import ConnectedUserContext from '../context/connected-user.context';
+import { TextField } from '@material-ui/core';
 
 export default function Login(props) {
 
@@ -39,13 +39,14 @@ export default function Login(props) {
 
     return (<div>
         <FormContainer title="Login" onSubmit={submit} button="Login">
-            <TextInput label="Login" value={credentials.username} onChange={(e) => {setCredentials({...credentials, username: e.target.value})}} />
-            <TextInput
+            <TextField label="Login" value={credentials.username} onChange={(e) => {setCredentials({...credentials, username: e.target.value})}} />
+            <TextField
                 label="Mot de passe"
                 type="password"
                 icon="lock"
                 value={credentials.password}
-                onChange={(e) => {setCredentials({...credentials, password: e.target.value})}} />
+                onChange={(e) => {setCredentials({...credentials, password: e.target.value})}}
+            />
             <span style={{color: 'red'}}>{invalidMessage}</span>
         </FormContainer>
     </div>);
