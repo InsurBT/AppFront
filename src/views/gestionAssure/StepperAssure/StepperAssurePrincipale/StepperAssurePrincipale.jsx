@@ -4,6 +4,7 @@ import FormAyantDroit from './formAyantsDroit';
 import FormCoordonneesMaroc from './formCoordonneesMaroc';
 import FormCoordonneesEtranger from './formCoordonnesEtranger';
 import FormPaiement from './formPaiement';
+import FormOuvertureDroit from './formOuvertureDriot';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -35,19 +36,17 @@ function getSteps() {
 function getStepContent(step) {
     switch (step) {
       case 0:
-        return <FormIdentification/>;
+        return <FormIdentification/>
       case 1:
-        return <FormAyantDroit/>;
+        return <FormAyantDroit/>
       case 2:
-        return <FormCoordonneesMaroc/>;
+        return <FormCoordonneesMaroc/>
       case 3:
-        return <FormCoordonneesEtranger/>;
+        return <FormCoordonneesEtranger/>
       case 4:
-        return <FormPaiement/>;
+        return <FormPaiement/>
       case 5:
-        return `.`;
-      case 6:
-        return `.`;
+        return <FormOuvertureDroit/>
       default:
         return 'Unknown step';
     }
