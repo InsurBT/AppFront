@@ -3,19 +3,18 @@ import ListePrestations from './views/GestionReferentiel/liste-prestations';
 import ListeUtilisateurs from './views/list-utlisateurs';
 import DirectionReg  from './views/GestionReferentiel/listeDirectionReg';
 import ListeCaisseEtrangeres from './views/GestionReferentiel/caisseEtrangere/caisseEtrangere';
+import ListeAssure from './views/GestionAssure/listeAssure';
 import ListeCaisseMeres from './views/GestionReferentiel/caisseMere/caisseMere';
-import StepperAssure from './views/GestionAssure/StepperAssure/StepperAssure';
-
 import DossiersRouter from './routers/dossiers/dossiers-router';
 import Paremetrage from './routers/parametrage/parametrage';
 import Referentiel from './routers/referentiel/referentiel';
-
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Unarchive from "@material-ui/icons/Unarchive";
 import Settings from "@material-ui/icons/SettingsApplications";
 import Language from '@material-ui/icons/Language';
+
 
 const routes = [
     {
@@ -80,13 +79,12 @@ const routes = [
         layout: "/home",
         subRoutes: []
     },
-
     {
-        name: "Gestion des assures",
-        path: "/stepper_assure",
-        component: StepperAssure,
+        name:"Gestion des assurés",
+        path: "/liste_assure",
+        component: ListeAssure,
         icon: LibraryBooks,
-        layout: "/home"
+        layout:"/home"
     }
 ];
 

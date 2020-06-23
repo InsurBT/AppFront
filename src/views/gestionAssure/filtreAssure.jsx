@@ -208,9 +208,7 @@ export default function FiltreAssure() {
                     </MuiPickersUtilsProvider>
 
                     </Grid>
-                    <Grid>
-                        <Button variant="contained" color="primary"> Filtrer</Button>
-                    </Grid>
+                    
                 </Grid>    
              </form>
             
