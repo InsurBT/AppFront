@@ -1,7 +1,7 @@
 export const tableStyle = {
     width: "100%",
     border: "1px solid #DDDDDD",
-    backgroundColor: "white",
+    //backgroundColor: "white",
     borderCollapse: "collapse",
     display: "block"
 }
@@ -17,7 +17,7 @@ export const thStyle = {
 }
 
 export const theadStyle = {
-    backgroundImage: "white",
+   // backgroundImage: "white",
 }
 
 export const tdStyle = {

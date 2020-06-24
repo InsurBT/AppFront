@@ -1,3 +1,4 @@
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 const assureSevice = {
     getAssureEnInstance: function (categorie) {
         return new Promise((resolve, reject) => {
@@ -13,7 +14,7 @@ const assureSevice = {
                             debutCouverture: " 05/02/2020",
                             finCouverture: " 05/06/2020",
                             agence: "Maarif",
-                            ayantsDroit: "3"
+                            ayantsDroit: "",
                         },
                     ],
                     actions: [

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import assureService from '../../service/assure-service' ;
-import AjouterAssure from '../GestionAssure/StepperAssure/StepperAssure'
+import AjouterAssure from '../GestionAssure/StepperAssure/StepperAssure';
 import Button from '@material-ui/core/Button';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import FiltreAssure from './filtreAssure';
-import { useParams } from 'react-router-dom';
-import { ButtonGroup } from '@material-ui/core';
+import { useParams, Link } from 'react-router-dom';
+import { ButtonGroup, Icon } from '@material-ui/core';
+
+import Person from '@material-ui/icons/Person';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 export default function ListeAssure(props) {
     // categorie d'assuré chosie selon l'url
@@ -43,7 +46,19 @@ export default function ListeAssure(props) {
                     property: attribute
                 });
             }
-            setData(res.assure);
+
+            let assures = res.assure.map(assure => ({
+                ...assure,
+                ayantsDroit: <Link to="" >
+                    {assure.ayantsDroit}
+                    
+                    <Icon>
+                       3&nbsp; 
+                        <SupervisorAccountIcon />
+                    </Icon>
+                </Link>
+            }))
+            setData(assures);
             setColumns(newColumns);
             setActoins(res.actions);
             setLoading(false);

@@ -14,6 +14,7 @@ import {
   blackColor,
   hexToRgb
 } from "../../material-dashboard-react.js";
+import { blueGrey } from "@material-ui/core/colors";
 
 const sidebarStyle = theme => ({
   drawerPaper: {
@@ -124,7 +125,7 @@ const sidebarStyle = theme => ({
       height: "100%",
       content: '""',
       display: "block",
-      background: blackColor,
+      background: blueGrey,
       opacity: ".8"
     }
   },

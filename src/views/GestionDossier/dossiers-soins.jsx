@@ -10,8 +10,6 @@ import FormPopup from '../../components/form-popup';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import FiltreDossier from './FiltreUtilisateur';
 
-
-import Grid from '@material-ui/core/Grid';
 import { useParams } from 'react-router-dom';
 import { ButtonGroup } from '@material-ui/core';
 
@@ -77,10 +75,10 @@ export default function DossierSoins(props) {
     }
 
     return (<div>
-            <ButtonGroup color="primary">
-                <Button onClick={() => {props.history.push("/home/dossiers/ajouter")}}>Nouveau</Button>
-                <Button onClick={() => {setFormOpen(true)}}>Filtrer</Button>
-            </ButtonGroup>
+          
+                <Button variant="outlined" color="primary" onClick={() => {props.history.push("/home/dossiers/ajouter")}}>Nouveau</Button>
+                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}>Filtrer</Button>
+           
             {
                 loading ?
                     <div>Chargement...</div> :

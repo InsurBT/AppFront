@@ -72,7 +72,7 @@ export default function ListeAyantDroit(props) {
                     <div>Chargement...</div> :
                     <Table
                         data={data}
-                        pageSize={5}
+                        pageSize={3}
                         buttons
                         edit={() => {}}
                         delete={() => {}}

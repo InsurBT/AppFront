@@ -43,7 +43,7 @@ const tableStyle = theme => ({
     borderCollapse: "collapse"
   },
   tableHeadCell: {
-    color: "inherit",
+    color: "#1976d2",
     ...defaultFont,
     "&, &$tableCell": {
       fontSize: "1em"
@@ -63,7 +63,7 @@ const tableStyle = theme => ({
   },
   tableHeadRow: {
     height: "56px",
-    color: "inherit",
+    color: "#1976d2",
     display: "table-row",
     outline: "none",
     verticalAlign: "middle"
