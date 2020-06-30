@@ -17,8 +17,8 @@ export default function FiltreCaisseM(props) {
 
 return(
     <CardContent >
-             <Grid container  spacing={1}>         
-             <Grid item xs={3} >
+             <Grid container  spacing={10}>         
+             <Grid item xs={5} >
              <TextField
                         fullWidth
                         margin="dense"
@@ -28,8 +28,7 @@ return(
                         onChange={(e) => {setInput({...input, nom: e.target.value})}}
                         icon="none"
                         />
-                </Grid>
-                <Grid item xs={3} >       
+             
                     <TextField
                         fullWidth
                         margin="dense"
@@ -40,21 +39,29 @@ return(
                         icon="none"
                         />
                   </Grid>
-                  <Grid item xs={3} >
-                    <TextInputselect
-                        type="select"
-                        options={props.options.map(option => ({value:option.id, label:option.nom}))}
-                        label="Pays"
-                        onChange={(e) => {setInput({
-                            ...input,
-                            id: e.target.value,
-                            pays: props.options.find(options => options.id === parseInt(e.target.value)).nom})}}
-                        icon="none"
-                    />
+                  <Grid item xs={5} >
+                <TextInputselect
+                    type="select"
+                    options={props.options.map(option => ({value:option.id, label:option.label}))}
+                    label="Pays"
+                    onChange={(e) => {setInput({
+                        ...input,
+                        idpays: e.target.value,
+                        pays: props.options.find(options => options.id === parseInt(e.target.value)).nom})}
+                    
+                    }
+                        
+                    icon="none"
+                />
+               
+            </Grid>
+            <CardActions>
+                <Grid item xs={5}  justify="center" >
+                    <Grid item xs={5}  justify="center" >
+                    <FormButton >Filtrer</FormButton>  
+                    </Grid>
                 </Grid>
-                <Grid item xs={6}  justify="center" >
-                <FormButton style={{padding : "6px" ,margin: "5"}}>Filtrer</FormButton>
-                </Grid>
+            </CardActions>
 
        </Grid>
         </CardContent>

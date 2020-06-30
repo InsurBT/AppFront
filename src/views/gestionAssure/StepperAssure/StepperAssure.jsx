@@ -1,5 +1,5 @@
 import React from 'react';
-import SteppreAssurePrincipale from './StepperAssurePrincipale/stepperAssurePrincipale';
+import SteppreAssurePrincipale from './StepperAssurePrincipale/StepperAssurePrincipale';
 import ListeAssure from './AyantsDroit/listeAyantsDroit';
 import ListeMondataire from './Mondataire/listeMondataire'    
 import { makeStyles } from '@material-ui/core/styles';

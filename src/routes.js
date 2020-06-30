@@ -4,7 +4,7 @@ import ListeUtilisateurs from './views/list-utlisateurs';
 import DirectionReg  from './views/GestionReferentiel/listeDirectionReg';
 import ListeCaisseEtrangeres from './views/GestionReferentiel/caisseEtrangere/caisseEtrangere';
 import ListeCaisseMeres from './views/GestionReferentiel/caisseMere/caisseMere';
-import StepperAssure from './views/GestionAssure/StepperAssure/StepperAssure';
+import StepperAssure from './views/gestionAssure/StepperAssure/StepperAssure';
 
 import DossiersRouter from './routers/dossiers/dossiers-router';
 import Paremetrage from './routers/parametrage/parametrage';

@@ -245,7 +245,7 @@ export default function ListeCaisseMeres(props) {
        
            <TextInput
                 type="select"
-                options={options.map(option => ({value:option.id, label:option.nom}))}
+                options={options.map(option => ({value:option.id, label:option.label}))}
                 label="Pays"
                 currentValue={input.pays}
                 onChange={(e) => {setInput({

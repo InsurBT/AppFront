@@ -69,7 +69,7 @@ export default function FiltreCaisse(props) {
             <Grid item xs={5} >
                 <TextInputselect
                     type="select"
-                    options={options.map(option => ({value:option.id, label:option.nom}))}
+                    options={options.map(option => ({value:option.id, label:option.label}))}
                     label="Pays"
                     onChange={(e) => {setInput({
                         ...input,

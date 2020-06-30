@@ -68,6 +68,7 @@ export default function ListeCaisseEtrangeres(props) {
         CaisseEtrangereService.getAll().then(res => {
             setData(res);
             setLoading(false);
+            console.log('caisse',res);
         });
         paysService.getAll().then(res => {
             if (typeof res === "string") {
@@ -83,7 +84,7 @@ export default function ListeCaisseEtrangeres(props) {
     /***********************************************************************************/
     useEffect(() => {
         console.log("le code est",input.idpays);
-        villeService.getAll(input.idpays).then(res => {
+        villeService.getAll().then(res => {
             setOptionsVille(res);
             console.log('les villes:',res);
     }
@@ -274,7 +275,7 @@ export default function ListeCaisseEtrangeres(props) {
        
            <TextInput
                 type="select"
-                options={options.map(option => ({value:option.id, label:option.nom}))}
+                options={options.map(option => ({value:option.id, label:option.label}))}
                 label="Pays"
                 currentValue={input.pays}
                 onChange={(e) => {setInput({
