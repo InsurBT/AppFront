@@ -43,7 +43,7 @@ const tableStyle = theme => ({
     borderCollapse: "collapse"
   },
   tableHeadCell: {
-    color: "#303f9f",
+    color: "#1a8cff",
     ...defaultFont,
     "&, &$tableCell": {
       fontSize: "1em"

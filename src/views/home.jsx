@@ -2,32 +2,32 @@ import React, {useContext, useEffect, useState} from 'react';
 import {  CardHeader, Avatar } from '@material-ui/core';
 import ConnectedUserContext from '../context/connected-user.context';
 import utilisateurService from '../service/utilisateur-service';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { Card,  CardContent } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles'
+import img1 from '../assets/img/cnss.png'
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: "70%",
-    height:"50vh",
-    color:"#1565c0",
-    marginLeft:"10%"
-   
-  },
-  media: {
-    height: "30vh",
-  },
-});
 
-  
-export default function Home(props) {
-    const classes = useStyles();
+const styles = theme => ({
+    image: {
+       backgroundImage : `url(${img1})`,
+       backgroundPosition: 'center',
+       backgroundSize: 'cover',
+       width : '100%',
+       height : '600px'
+      },
+    avatar : {
+        backgroundColor : '#b3d9ff',
+        color : '#000',
+        fontSize : '30px'
+    },
+    color : {
+        color : "#1E4584",
+        fontSize : '20px'
+    },
+})
 
+//
+ function Home(props) {
     const {connectedUser, setConnectedUser} = useContext(ConnectedUserContext);
 
     const [loading, setLoading] = useState(connectedUser === null);
@@ -47,44 +47,29 @@ export default function Home(props) {
         }
     }, []);
 
+    const {classes} = props
 
-  return (
-    (<div  >
-      {
-          loading ?
-              <div >chargement...</div> :
+    return (<div>
+        {
+            loading ?
+                <div>chargement...</div> :
+                <Card  className={classes.image}>
+                    <CardHeader
+                        className={classes.color}
+                        title={connectedUser.nomComplet}
+                        avatar={<Avatar className={classes.avatar}>
+                            {connectedUser.nomComplet.charAt(0)}
+                        </Avatar>}
+                        subheader={connectedUser.nom}
+                    />
+                    <CardContent className={classes.color}>
+                        Je met du texte ici pour remplire cette element. <br/>
+                        Nous verrons plus tard ce qu'on peut mettre ici <br/>
 
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/health.jpg"
-          title="CNSS"
-        />
-        <CardContent>
-              <Typography gutterBottom variant="h5" component="h2" >
-            Bienvenue
-            {/* <Card >
-                 
-                        {connectedUser.nomComplet}
-                  
-                        
-                        {connectedUser.nom}
-                    
-            </Card> */}
-                   
-           
-             
-
-
-          </Typography>
-    
-        </CardContent>
-      </CardActionArea>
-      
-    </Card>
-            }
-            </div>)
-        
-  );
+                    </CardContent>
+                </Card>
+        }
+    </div>)
 }
+
+export default withStyles(styles)(Home)

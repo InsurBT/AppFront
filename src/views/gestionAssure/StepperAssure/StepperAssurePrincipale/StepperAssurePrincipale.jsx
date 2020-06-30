@@ -1,11 +1,10 @@
-import React from 'react';
+import React  from 'react';
 import FormIdentification from './formIdentification';
 import FormAyantDroit from './formAyantsDroit';
 import FormCoordonneesMaroc from './formCoordonneesMaroc';
 import FormCoordonneesEtranger from './formCoordonnesEtranger';
 import FormPaiement from './formPaiement';
 import FormOuvertureDroit from './formOuvertureDriot';
-import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -13,22 +12,47 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
+
+const styles = theme => ({
+  labelContainer: {
+    "& $alternativeLabel": {
+      marginTop: 0
+    }
   },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
+  step: {
+    "& $completed": {
+      color: "#1a8cff"
+    },
+    "& $active": {
+      color: "#b3d9ff"
+    },
+    "& $disabled": {
+      color: "#ccffff"
+    }
   },
-  actionsContainer: {
-    marginBottom: theme.spacing(2),
+  alternativeLabel: {},
+  active: {}, //needed so that the &$active tag works
+  completed: {},
+  disabled: {},
+  labelContainer: {
+    "& $alternativeLabel": {
+      marginTop: 0
+    }
   },
-  resetContainer: {
-    padding: theme.spacing(3),
+  button : {
+    backgroundColor : '#b3d9ff',
+    '&:hover' : {
+      backgroundColor : "#1a8cff"
+    }
   },
-}));
+  buttonRetour : {
+    backgroundColor : '#e6f2ff'
+  }
+});
+
+
 
 function getSteps() {
   return ['Identification', 'Ayants Droits', 'Coordonnée au Maroc', `Coordonnées à l'étranger`, 'Paiement','Ouverture de droit'];
@@ -52,8 +76,10 @@ function getStepContent(step) {
     }
   }
 
-export default function StepperAssurePrincipale() {
-    const classes = useStyles();
+ const  StepperAssurePrincipale =(props)=> {
+
+    const { classes } = props
+    //const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
   
@@ -68,27 +94,53 @@ export default function StepperAssurePrincipale() {
     const handleReset = () => {
       setActiveStep(0);
     };
-  
+    
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical">
+        <Stepper 
+            classes={{
+              root: classes.root
+            }}
+            activeStep={activeStep} orientation="vertical" >
           {steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+            <Step
+                key={label}
+                classes={{
+                  root: classes.step,
+                  completed: classes.completed,
+                  active: classes.active,
+                  disabled : classes.disabled
+                }}
+                >
+              <StepLabel 
+                  classes={{
+                    alternativeLabel: classes.alternativeLabel,
+                    labelContainer: classes.labelContainer
+                  }}
+                  StepIconProps={{
+                    classes: {
+                      root: classes.step,
+                      completed: classes.completed,
+                      active: classes.active,
+                      disabled: classes.disabled
+                    }
+                  }}
+              >
+                  {label}
+              </StepLabel>
               <StepContent>
                 <Typography>{getStepContent(index)}</Typography>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button
+                      className={classes.buttonRetour}
                       disabled={activeStep === 0}
                       onClick={handleBack}
-                      className={classes.button}
                     >
                       Retour
                     </Button>
                     <Button
                       variant="contained"
-                      color="primary"
                       onClick={handleNext}
                       className={classes.button}
                     >
@@ -104,10 +156,13 @@ export default function StepperAssurePrincipale() {
           <Paper square elevation={0} className={classes.resetContainer}>
             
             <Button onClick={handleReset} className={classes.button}>
-            Recommencer
+              Recommencer
             </Button>
           </Paper>
         )}
       </div>
     );
+    
 }
+
+export default withStyles(styles)(StepperAssurePrincipale)
