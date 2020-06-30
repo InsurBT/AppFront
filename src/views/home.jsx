@@ -1,11 +1,33 @@
 import React, {useContext, useEffect, useState} from 'react';
-
+import {  CardHeader, Avatar } from '@material-ui/core';
 import ConnectedUserContext from '../context/connected-user.context';
-
 import utilisateurService from '../service/utilisateur-service';
-import { Card, CardHeader, Avatar, CardContent } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
+const useStyles = makeStyles({
+  root: {
+    maxWidth: "70%",
+    height:"50vh",
+    color:"#1565c0",
+    marginLeft:"10%"
+   
+  },
+  media: {
+    height: "30vh",
+  },
+});
+
+  
 export default function Home(props) {
+    const classes = useStyles();
+
     const {connectedUser, setConnectedUser} = useContext(ConnectedUserContext);
 
     const [loading, setLoading] = useState(connectedUser === null);
@@ -25,24 +47,44 @@ export default function Home(props) {
         }
     }, []);
 
-    return (<div>
-        {
-            loading ?
-                <div>chargement...</div> :
-                <Card>
-                    <CardHeader
-                        title={connectedUser.nomComplet}
-                        avatar={<Avatar>
-                            {connectedUser.nomComplet.charAt(0)}
-                        </Avatar>}
-                        subheader={connectedUser.nom}
-                    />
-                    <CardContent>
-                        Je met du texte ici pour remplire cette element. <br/>
-                        Nous verrons plus tard ce qu'on peut mettre ici <br/>
 
-                    </CardContent>
-                </Card>
-        }
-    </div>)
+  return (
+    (<div  >
+      {
+          loading ?
+              <div >chargement...</div> :
+
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image="/health.jpg"
+          title="CNSS"
+        />
+        <CardContent>
+              <Typography gutterBottom variant="h5" component="h2" >
+            Bienvenue
+            {/* <Card >
+                 
+                        {connectedUser.nomComplet}
+                  
+                        
+                        {connectedUser.nom}
+                    
+            </Card> */}
+                   
+           
+             
+
+
+          </Typography>
+    
+        </CardContent>
+      </CardActionArea>
+      
+    </Card>
+            }
+            </div>)
+        
+  );
 }

@@ -16,7 +16,8 @@ import Input from '@material-ui/core/Input';
 const useStyles = makeStyles(theme => ({
               
         all: {
-            marginLeft:30,
+            marginLeft:"5%",
+            marginTop:"5%",
         
         }, 
         root: {
@@ -36,6 +37,7 @@ const useStyles = makeStyles(theme => ({
         },
         Button: {
           '& > *': {
+         
             margin: theme.spacing(8),
           },
         },  
@@ -61,6 +63,7 @@ export default function FormPrestation() {
 
     return (
         <div className={classes.all} >
+          
             <Grid item xs={9} >
                 <FormControl className={classes.root}>
                     <InputLabel id="demo-simple-select-label">Prestation</InputLabel>
@@ -75,7 +78,7 @@ export default function FormPrestation() {
                         <MenuItem value={30}>Prestation3</MenuItem>
                       </Select>
                 </FormControl>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <FormControl className={classes.root}>
                   <InputLabel id="demo-simple-select-label">Cotation</InputLabel>
                     <Select
@@ -91,9 +94,9 @@ export default function FormPrestation() {
                 </FormControl>
 
                        
-                <TextField  id="standard-basic" label="Tarif" />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField  id="standard-basic" label="Taux remboursement" />
+                <TextField className={classes.root} id="standard-basic" label="Tarif" />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <TextField className={classes.root} id="standard-basic" label="Taux remboursement" />
 
             </Grid>  
                         

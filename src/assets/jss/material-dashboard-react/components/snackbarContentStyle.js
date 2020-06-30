@@ -72,11 +72,7 @@ const snackbarContentStyle = {
     color: whiteColor,
     ...primaryBoxShadow
   },
-  rose: {
-    backgroundColor: roseColor[3],
-    color: whiteColor,
-    ...roseBoxShadow
-  },
+ 
   message: {
     padding: "0",
     display: "block",
