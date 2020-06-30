@@ -2,7 +2,7 @@ import api from '../environement/api';
 
 const villeService = {
     getAll: function(code) {
-        return api.post("villes/getAll",code, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+        return api.post("ville/getAll",code, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
                 return res.json();
             } else {

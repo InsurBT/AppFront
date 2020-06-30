@@ -72,9 +72,6 @@ export default function ListeAssure(props) {
             case "nouveau":
                 console.log("Action nouveau " + assure.imme);
                 break;
-            case "modifier":
-                console.log("Action modifier " + assure.imme);
-                break;
             case "consulter":
                 console.log("Action consulter " + assure.imme);
                 break;

@@ -8,7 +8,6 @@ const assureSevice = {
                     assures,
                     actions: [
                         "nouveau",
-                        "modifier",
                         "consulter"
                     ]
                 });

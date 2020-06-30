@@ -1,9 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-
+import {  CardHeader, Avatar } from '@material-ui/core';
 import ConnectedUserContext from '../context/connected-user.context';
-
 import utilisateurService from '../service/utilisateur-service';
-import { Card, CardHeader, Avatar, CardContent } from '@material-ui/core';
+import { Card,  CardContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles'
 import img1 from '../assets/img/cnss.png'
 

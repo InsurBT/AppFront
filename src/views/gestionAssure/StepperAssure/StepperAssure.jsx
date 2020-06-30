@@ -13,6 +13,7 @@ import Link from '@material-ui/core/Link';
 
   const styles = theme => ({
     root: {
+     
       width: '100%',
     },
     backButton: {

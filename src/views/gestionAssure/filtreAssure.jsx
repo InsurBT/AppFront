@@ -1,189 +1,305 @@
-import React , {useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import { TextField, InputLabel, Select, MenuItem, Button } from '@material-ui/core/';
+import React, { useState} from 'react';
+import { CardContent,Grid,TextField,InputLabel} from '@material-ui/core';
+import { useEffect } from 'react';
+import agenceService from '../../service/agence-service';
+import DirectionRegService from '../../service/directionReg-service';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const TabdrRegional = ['Tanger-Tetouan-Al Hoceima', 'Oriental',
-    'Fès-Meknès', 'Rabat-Salé-Kénitra',
-    'Casablanca-Settat', 'Marrakesh-Safi'
-]
-const TabAGENCEMa = ['tanger', 'tetouan',
-    'fes', 'mekness', 'Rabat', 'Sale', 'Casablanca'
-]
-const TabConvention = ['Convention1', 'Convention2', 'Convention3', 'Convention4', 'Convention4']
-const TabModePaiement = ['Mode paiement1', 'Mode paiement2', 'Mode paiement3', 'Mode paiement4', 'Mode paiement5']
-const TabFormulaire = ['Formulaire1', 'Formulaire2', 'Formulaire3', 'Formulaire4', 'Formulaire5']
-const FiltreAssure = () => {
+export default function FiltreAssure(props) {
+    const [checkedReception, setCheckedReception] = useState(false);
 
-    const [filtre , setfiltre] = useState({
-        immatriculation : '',
-        dateInscription : '2020-01-01',
-        principalInsured : {
-            Nom : '',
-            Prenom : ''
-        },
-        ayantDroit : {
-            Nom : '',
-            Prenom : ''
-        },
-        agence : {
-            DrRegional : '',
-            Agence : ''
-        },
-        ConvenForm : {
-            convention : '',
-            modePaiement : '',
-            formulaire : ''
-        },
-        dateDebut:'2020-01-01',
-        dateFin : '2020-01-01'
-    })
+    const [checkedSoins,setCheckedSoins]=useState(false);
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            '& > *': {
-                margin: theme.spacing(1),
-                width: '25ch',
-            },
-        },
-        label: {
-            color: 'dodgerblue',
-            fontSize: '18px',
-            fontStyle: 'oblique'
-        },
-        button: {
-            color: 'dodgerblue',
-        }
-    }));
-    const classes = useStyles();
-    const { ConvenForm, agence } = filtre
-    return (
-        <>
-            <div style={{ display: 'flex' }}>
-                <div className="form-groum" style={{ display: 'initial' }}>
-                    <TextField color='primary' margin='normal'
-                        label="Num Immatriculation"
-                        value={filtre.immatriculation}
-                        onChange={(e) => setfiltre({ ...filtre, immatriculation: e.target.value })}
-                    />
+    const [input, setInput] = useState({
+        code: "",
+        nomAssure: "",
+        nomAyantDroit:"",
+        prenomAssure:"",
+        prenomAyantDroit:"",
+        agence:"",
+        dr:"",
+        idAgence:"",
+        idDr:"",
+        convention:"",
+        formulaire:"",
+        dateReceptionDu:"",
+        dateReceptionAu:"",
+        dateSoinsDu:"",
+        dateSoinsAu:""
+    });
+    const [agence, setAgence] = useState('');
+    const handleChangeAgence = (event) => {
+        setAgence(event.target.value);
+    };
+    const [DRegional, setDRegional] = useState('');
+    const handleChangeDRegional = (event) => {
+        setDRegional(event.target.value);
+    };
+    const [convention, setConvention] = useState('');
+    const handleChangeConvention = (event) => {
+        setConvention(event.target.value);
+    };
+    const [modepaiment, setModePaiment] = useState('');
+    const handleChangeModePaiment = (event) => {
+        setModePaiment(event.target.value);
+    };
+    const [formulaire, setFormulaire] = useState('');
+    const handleChangeFormulaire = (event) => {
+        setFormulaire(event.target.value);
+    };
+    const [state, setState] = useState({
+        checkedB: true,
+
+      });
+
+    const [agences, setAgences] = useState([]);
+    const [optionsDr,setOptionsDr] = useState([]);
+
+    useEffect(() => {
+        agenceService.getAll().then(res => {
+            if (typeof res === "string") {
+                console.log(res);
+            } else {
+                setAgences(res);
+            }
+        });
+
+        DirectionRegService.getAll().then(res => {
+            if (typeof res === "string") {
+                console.log(res);
+            } else {
+                setOptionsDr(res);
+            }
+        })
+    }, []);
+
+    /***********************************************************************************/
+
+    return(
+        <CardContent >
+            <Grid container  spacing={1}>   
+                <Grid item xs={6}>N° immatriculation</Grid>
+
+                <Grid item xs={6}>Assuré principal</Grid> 
+            
+                <Grid item xs={6} >
                     <TextField
-                        color='primary'
-                        label="Date d'inscription"
-                        type="date"
-                        value={filtre.dateInscription}
-                        onChange={(e) => setfiltre({ ...filtre, dateInscription: e.target.value })}
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="number"
+                        label="N° immatriculation"
+                        value={input.code}
+                        onChange={(e) => {setInput({...input, code: e.target.value})}}
+                        icon="none"
                     />
-                </div>
-                <div className="form-groum" style={{ display: 'initial' }}>
-                    <InputLabel className={classes.label} shrink>Asuure Principale</InputLabel>
-                    <TextField required label="Nom"
-                        value={filtre.principalInsured.Nom}
-                        onChange={(e) => setfiltre({ ...filtre, principalInsured: { ...filtre.principalInsured, Nom: e.target.value } })}
-                    />
+                </Grid>      
+                
+                <Grid item xs={3}>
                     <TextField
-                        label="Prenom"
-                        value={filtre.principalInsured.Prenom}
-                        onChange={(e) => setfiltre({ ...filtre, principalInsured: { ...filtre.principalInsured, Prenom: e.target.value } })}
-                    />
-                </div>
-                <div className="form-groum" style={{ display: 'initial' }}>
-                    <InputLabel className={classes.label} shrink>Ayant Droit</InputLabel>
-                    <TextField
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="text"
                         label="Nom"
-                        value={filtre.ayantDroit.Nom}
-                        onChange={(e) => setfiltre({ ...filtre, ayantDroit: { ...filtre.ayantDroit, Nom: e.target.value } })}
+                        value={input.nomAssure}
+                        onChange={(e) => {setInput({...input, nomAssure: e.target.value})}}
+                        icon="none"
                     />
+                </Grid>
+
+                <Grid item xs={3}>
+                        <TextField
+                            fullWidth
+                            margin="dense"
+                            variant="outlined"
+                            type="text"
+                            label="Prénom"
+                            value={input.prenomAssure}
+                            onChange={(e) => {setInput({...input, prenomAssure: e.target.value})}}
+                            icon="none"
+                        />
+                </Grid>
+
+                <Grid item xs={6} >Date inscription </Grid>
+
+                <Grid item xs={6}>Ayants droit</Grid>
+
+                <Grid item xs={6}>
+                   
                     <TextField
-                        label="Prenom"
-                        value={filtre.ayantDroit.Prenom}
-                        onChange={(e) => setfiltre({ ...filtre, ayantDroit: { ...filtre.ayantDroit, Prenom: e.target.value } })}
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="date"
+                        value={input.dateSoinsAu}
+                        onChange={(e) => {setInput({...input, dateSoinsAu: e.target.value})}}
+                        icon="none"
+                      
                     />
-                </div>
-            </div>
-            <div style={{ display: 'flex' }}>
-                <div className="form-groum" style={{ display: 'table-cell', marginRight: '12px', marginTop: '20px' }}>
-                    <InputLabel className={classes.label} shrink>Agence</InputLabel>
-                    <Select
-                        displayEmpty
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        value={agence.DrRegional}
-                        onChange={(e) => setfiltre({ ...filtre, agence: { ...filtre.agence, DrRegional: e.target.value } })}
-                    >
-                        <MenuItem value="" disabled>
-                            DR Regional
-                        </MenuItem>
-                        {TabdrRegional.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
-                    </Select>
-                    <Select
-                        displayEmpty
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        value={agence.Agence}
-                        onChange={(e) => setfiltre({ ...filtre, agence: { ...filtre.agence, Agence: e.target.value } })}
-                    >
-                        <MenuItem value="" disabled>
-                            AGENCE
-                        </MenuItem>
-                        {TabAGENCEMa.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
-                    </Select>
-                </div>
-                <div className="form-groum" style={{ display: 'initial', marginLeft: "20px", marginTop: '20px' }}>
-                    <InputLabel className={classes.label} shrink>Convention-Formulaire</InputLabel>
-                    <Select
-                        displayEmpty
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        value={ConvenForm.convention}
-                        onChange={(e) => setfiltre({ ...filtre, ConvenForm: { ...filtre.ConvenForm, convention: e.target.value } })}
-                    >
-                        <MenuItem value="" disabled>
-                            Convention
-                        </MenuItem>
-                        {TabConvention.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
-                    </Select>
-                    <Select
-                        displayEmpty
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        value={ConvenForm.modePaiement}
-                        onChange={(e) => setfiltre({ ...filtre, ConvenForm: { ...filtre.ConvenForm, modePaiement: e.target.value } })}
-                    >
-                        <MenuItem value="" disabled>
-                            Mode de Paiement
-                        </MenuItem>
-                        {TabModePaiement.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
-                    </Select>
-                    <Select
-                        displayEmpty
-                        value={ConvenForm.formulaire}
-                        onChange={(e) => setfiltre({ ...filtre, ConvenForm: { ...filtre.ConvenForm, formulaire: e.target.value } })}
-                    >
-                        <MenuItem value="" disabled>
-                            Formulaire
-                        </MenuItem>
-                        {TabFormulaire.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
-                    </Select>
-                </div>
-            </div>
-            <div style={{ marginTop: '25px' }} >
-                <TextField
-                    color='primary'
-                    label="Date Debut"
-                    type="date"
-                    value={filtre.dateDebut}
-                    onChange={(e) => setfiltre({ ...filtre, dateDebut: e.target.value })}
-                />
-                <TextField
-                    color='primary'
-                    label="Date Fin"
-                    type="date"
-                    value={filtre.dateFin}
-                    onChange={(e) => setfiltre({ ...filtre, dateFin: e.target.value })}
-                />
-                <div style={{ float: 'right', margin: '0 145px' }} >
-                    <Button className={classes.button} onClick={e => {console.log(filtre) }}>
-                        Filtrer
-                    </Button>
-                </div>
-            </div>
-        </>
+                </Grid>
+            
+                <Grid item xs={3}>
+                    <TextField
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="text"
+                        label="Nom"
+                        value={input.nomAyantDroit}
+                        onChange={(e) => {setInput({...input, nomAyantDroit: e.target.value})}}
+                        icon="none"
+                    />
+                </Grid>
+
+                <Grid item xs={3}>
+                    <TextField
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="text"
+                        label="Prénom"
+                        value={input.prenomAyantDroit}
+                        onChange={(e) => {setInput({...input, prenomAyantDroit: e.target.value})}}
+                        icon="none"
+                    />
+                </Grid>
+                <Grid item xs={6}>Agence</Grid>
+                <Grid item xs ={6}>
+                    <input
+                        type='checkbox'
+                        checked={checkedReception}
+                        onChange={(event) => {setCheckedReception(event.target.checked);}}
+                    />Couverture
+                </Grid>
+             
+                <Grid item xs={3}  >
+                    <label>DR Régionale</label>
+
+                    <Select fullWidth 
+                                margin="dense"   variant="outlined"
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            placeholder="Dr régionale"
+                            label="Dr régionale"
+                            value={DRegional}
+                            onChange={handleChangeDRegional}
+                            >
+                            <MenuItem value={10}>DRegional1</MenuItem>
+                            <MenuItem value={20}>DRegional1</MenuItem>
+                            <MenuItem value={30}>DRegional1</MenuItem>
+                        </Select>
+
+                </Grid>
+
+                <Grid item xs={3} >
+                    <label>Agence</label>
+
+                    <Select fullWidth  
+                                margin="dense"   variant="outlined"
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            placeholder="Agence"
+                            value={agence}
+                            onChange={handleChangeAgence}
+
+                            >
+                            <MenuItem value={10}>agence1</MenuItem>
+                            <MenuItem value={20}>agence2</MenuItem>
+                            <MenuItem value={30}>agence3</MenuItem>
+                        </Select>
+
+                </Grid>
+                <Grid item xs={3}>
+                    <label>Date Debut </label>
+                    <TextField
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="date"
+                        value={input.dateReceptionDu}
+                        onChange={(e) => {setInput({...input, dateReceptionDu: e.target.value})}}
+                        icon="none"
+                        disabled={!checkedReception}
+                    />
+                </Grid>
+
+                <Grid item xs={3}>
+                    <label>Date fin </label>
+                    <TextField
+                        fullWidth
+                        margin="dense"
+                        type="date"
+                        variant="outlined"
+                        value={input.dateReceptionAu}
+                        onChange={(e) => {setInput({...input, dateReceptionAu: e.target.value})}}
+                        icon="none"
+                        disabled={!checkedReception}
+                    />
+                </Grid>
+              
+
+            
+                    
+                <Grid item xs ={12}> Convention-Formulaire </Grid>
+            
+
+                <Grid item xs={3}>
+                <label>Convention</label>
+                    <Select 
+                    fullWidth
+                                  margin="dense"   variant="outlined"
+                                labelId="demo-simple-select-label3"
+                                id="demo-simple-select"
+                                value={convention}
+                                placeholder="Convention"
+                                onChange={handleChangeConvention}
+                                >
+                                <MenuItem value={10}>convention1</MenuItem>
+                                <MenuItem value={20}>convention2</MenuItem>
+                                <MenuItem value={30}>convention3</MenuItem>
+                            </Select>
+
+                </Grid>
+
+                <Grid item xs={3}>
+                <label>Mode de paiement</label>
+                    <Select fullWidth
+                                  margin="dense"   variant="outlined"
+                                labelId="demo-simple-select-label2"
+                                id="demo-simple-select1"
+                                value={modepaiment}
+                                onChange={handleChangeModePaiment}
+                                placeholder="Mode de paiement"
+                                >
+                                <MenuItem value={10}>Mode1</MenuItem>
+                                <MenuItem value={20}>Mode2</MenuItem>
+                                <MenuItem value={30}>Mode3</MenuItem>
+                            </Select>
+
+                </Grid>
+
+         
+                
+                <Grid item xs={3}>
+                <label>Formulaire</label>
+                <Select  fullWidth
+                                  margin="dense"   variant="outlined"
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={formulaire}
+                                onChange={handleChangeFormulaire}
+                                placeholder="Formulaire"
+                                >
+                                <MenuItem value={10}>Formulaire</MenuItem>
+                                <MenuItem value={20}>Formulaire3</MenuItem>
+                                <MenuItem value={30}>Formulaire4</MenuItem>
+                            </Select>
+
+                </Grid>
+            </Grid>
+        </CardContent>
     )
 }
 
-export default FiltreAssure;

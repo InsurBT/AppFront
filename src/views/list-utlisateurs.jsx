@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from 'react';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '../components/table';
 import SmallHeader from '../components/small-header';
 import FormPopup from '../components/form-popup';
-
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
-
 import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
-
 import utilisateurService from '../service/utilisateur-service';
 import agenceService from '../service/agence-service';
 import { MenuItem, FormControl, InputLabel } from '@material-ui/core';
 
 export default function ListeUtilisateurs(props) {
+
+    const useStyles = makeStyles((theme) => ({
+        button : {
+            backgroundColor : '#B3D9FF',
+            '&:hover' : {
+              backgroundColor : "#1A8CFF"
+            }
+          }
+      }));
     
+    const classes = useStyles();
     const [utilisateurs, setUtilisateurs] = useState([]);
+    const [role, setRole] = useState('');
+  
+    const handleChangeRole = (event) => {
+      setRole(event.target.value);
+    };
+  
 
     const [agences, setAgences] = useState([]);
 
@@ -184,7 +197,7 @@ export default function ListeUtilisateurs(props) {
     return (<div>
         <SmallHeader>
             Liste des utilisateurs
-            <Button onClick={() => {setFormMode("AJOUTER")}} variant="contained" color="primary">Ajouter utilisateur</Button>
+            <Button className={classes.button} onClick={() => {setFormMode("AJOUTER")}} variant="contained" color="primary">Ajouter utilisateur</Button>
         </SmallHeader>
 
         {/* Tableau des donnees */}
@@ -223,7 +236,7 @@ export default function ListeUtilisateurs(props) {
                 <InputLabel>Agence</InputLabel>
                 <Select
                     type="select"
-                    label="Agence"
+                    // label="Agence"
                     onChange={(e) => {setInputUtilisateur({
                         ...inputUtilisateur,
                         code_agence: e.target.value,
@@ -237,7 +250,19 @@ export default function ListeUtilisateurs(props) {
                         })
                     }
                 </Select>
-            </FormControl>
+                <FormControl>
+                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={role}
+                    onChange={handleChangeRole}
+                    >
+                    <MenuItem value={10}>Admin</MenuItem>
+                    <MenuItem value={20}>Agent</MenuItem>
+            
+                    </Select>
+                    </FormControl>
             {
                 formMode === "AJOUTER" ?
                 [<TextField
@@ -255,6 +280,7 @@ export default function ListeUtilisateurs(props) {
                 ""
             }
             <span style={{color: "red"}}>{invalidMessage}</span>
+            </FormControl>
         </FormPopup>
     </div>)
 }

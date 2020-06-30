@@ -17,9 +17,7 @@ import routes from "../routes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "../assets/img/faces/sidebar-2.jpg";
-
-import img from "../assets/img/faces/images.jpg";
+import img from "../assets/img/faces/assurance.png";
 
 import logo from "../assets/img/service4.png";
 
@@ -122,7 +120,7 @@ export default function DashboardRouter(props) {
       routes={routes}
       logoText={"Soin de santé"}
       logo={logo}
-      //image={img}
+     image={img}
       handleDrawerToggle={handleDrawerToggle}
       open={mobileOpen}
       color={whiteColor}
