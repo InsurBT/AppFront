@@ -16,8 +16,8 @@ const styles = theme => ({
        height : '600px'
       },
     avatar : {
-        backgroundColor : '#b3d9ff',
-        color : '#000',
+        backgroundColor : '#1E4584',
+        color : '#fff',
         fontSize : '30px'
     },
     color : {
