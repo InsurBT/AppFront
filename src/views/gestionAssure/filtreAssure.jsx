@@ -5,8 +5,20 @@ import agenceService from '../../service/agence-service';
 import DirectionRegService from '../../service/directionReg-service';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles'
 
-export default function FiltreAssure(props) {
+const styles = theme => ({
+    Grid : {
+        color: '#33CCCC',
+        fontSize: '18px',
+        fontFamily : 'auto'
+    },
+    label : {
+        color : '#008AE6'
+    }
+})
+
+function FiltreAssure(props) {
     const [checkedReception, setCheckedReception] = useState(false);
 
     const [checkedSoins,setCheckedSoins]=useState(false);
@@ -76,12 +88,14 @@ export default function FiltreAssure(props) {
 
     /***********************************************************************************/
 
+    const {classes} = props   
+    
     return(
         <CardContent >
             <Grid container  spacing={1}>   
-                <Grid item xs={6}>N° immatriculation</Grid>
+                <Grid item xs={6} className={classes.Grid}>N° immatriculation</Grid>
 
-                <Grid item xs={6}>Assuré principal</Grid> 
+                <Grid item xs={6} className={classes.Grid}>Assuré principal</Grid> 
             
                 <Grid item xs={6} >
                     <TextField
@@ -122,9 +136,9 @@ export default function FiltreAssure(props) {
                         />
                 </Grid>
 
-                <Grid item xs={6} >Date inscription </Grid>
+                <Grid item xs={6} className={classes.Grid}>Date inscription </Grid>
 
-                <Grid item xs={6}>Ayants droit</Grid>
+                <Grid item xs={6} className={classes.Grid}>Ayants droit</Grid>
 
                 <Grid item xs={6}>
                    
@@ -165,8 +179,8 @@ export default function FiltreAssure(props) {
                         icon="none"
                     />
                 </Grid>
-                <Grid item xs={6}>Agence</Grid>
-                <Grid item xs ={6}>
+                <Grid item xs={6} className={classes.Grid}>Agence</Grid>
+                <Grid className={classes.Grid} item xs ={6}>
                     <input
                         type='checkbox'
                         checked={checkedReception}
@@ -175,7 +189,7 @@ export default function FiltreAssure(props) {
                 </Grid>
              
                 <Grid item xs={3}  >
-                    <label>DR Régionale</label>
+                    <label className={classes.label}>DR Régionale</label>
 
                     <Select fullWidth 
                                 margin="dense"   variant="outlined"
@@ -194,7 +208,7 @@ export default function FiltreAssure(props) {
                 </Grid>
 
                 <Grid item xs={3} >
-                    <label>Agence</label>
+                    <label className={classes.label}>Agence</label>
 
                     <Select fullWidth  
                                 margin="dense"   variant="outlined"
@@ -212,7 +226,7 @@ export default function FiltreAssure(props) {
 
                 </Grid>
                 <Grid item xs={3}>
-                    <label>Date Debut </label>
+                    <label className={classes.label}>Date Debut </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -226,7 +240,7 @@ export default function FiltreAssure(props) {
                 </Grid>
 
                 <Grid item xs={3}>
-                    <label>Date fin </label>
+                    <label className={classes.label}>Date fin </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -242,11 +256,11 @@ export default function FiltreAssure(props) {
 
             
                     
-                <Grid item xs ={12}> Convention-Formulaire </Grid>
+                <Grid className={classes.Grid} item xs ={12}> Convention-Formulaire </Grid>
             
 
                 <Grid item xs={3}>
-                <label>Convention</label>
+                <label className={classes.label}>Convention</label>
                     <Select 
                     fullWidth
                                   margin="dense"   variant="outlined"
@@ -264,7 +278,7 @@ export default function FiltreAssure(props) {
                 </Grid>
 
                 <Grid item xs={3}>
-                <label>Mode de paiement</label>
+                <label className={classes.label}>Mode de paiement</label>
                     <Select fullWidth
                                   margin="dense"   variant="outlined"
                                 labelId="demo-simple-select-label2"
@@ -283,7 +297,7 @@ export default function FiltreAssure(props) {
          
                 
                 <Grid item xs={3}>
-                <label>Formulaire</label>
+                <label className={classes.label}>Formulaire</label>
                 <Select  fullWidth
                                   margin="dense"   variant="outlined"
                                 labelId="demo-simple-select-label"
@@ -303,3 +317,4 @@ export default function FiltreAssure(props) {
     )
 }
 
+export default withStyles(styles)(FiltreAssure)

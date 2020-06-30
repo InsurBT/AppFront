@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${img1})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
+      theme.palette.type === 'light' ? theme.palette.grey[0] : theme.palette.grey[900],
+    backgroundSize: '700px',
     backgroundPosition: 'center',
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: '160px 32px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -112,7 +112,7 @@ export default function Login(props) {
             <LockOutlinedIcon /> 
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Connexion
           </Typography>
           <form className={classes.form} noValidate onSubmit={submit}>
           <TextField
@@ -121,7 +121,7 @@ export default function Login(props) {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Adresse Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -134,7 +134,7 @@ export default function Login(props) {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Mot de passe"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -151,20 +151,9 @@ export default function Login(props) {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Connexion
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+           
             <Box mt={5}>
               <Copyright />
             </Box>

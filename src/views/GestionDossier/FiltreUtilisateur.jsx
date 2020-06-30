@@ -4,9 +4,20 @@ import { useEffect } from 'react';
 import agenceService from '../../service/agence-service';
 import DirectionRegService from '../../service/directionReg-service';
 import TextInputselect from '../../components/text-input-select';
+import { withStyles } from '@material-ui/core/styles'
 
+const styles = theme => ({
+    Grid : {
+        color: '#33CCCC',
+        fontSize: '18px',
+        fontFamily : 'auto'
+    },
+    label : {
+        color : '#008AE6'
+    }
+})
 
-export default function FiltreUtilisateur(props) {
+ function FiltreUtilisateur(props) {
     const [checkedReception, setCheckedReception] = useState(false);
 
     const [checkedSoins,setCheckedSoins]=useState(false);
@@ -52,12 +63,14 @@ export default function FiltreUtilisateur(props) {
 
     /***********************************************************************************/
 
+    const {classes} = props
+
     return(
         <CardContent >
             <Grid container  spacing={1}>   
-                <Grid item xs={6}>N° immatriculation</Grid>
+                <Grid item xs={6} className={classes.Grid}>N° immatriculation</Grid>
 
-                <Grid item xs={6}>Assuré principal</Grid> 
+                <Grid item xs={6} className={classes.Grid}>Assuré principal</Grid> 
             
                 <Grid item xs={6} >
                     <TextField
@@ -98,9 +111,9 @@ export default function FiltreUtilisateur(props) {
                         />
                 </Grid>
 
-                <Grid item xs={6} >Agence </Grid>
+                <Grid item xs={6} className={classes.Grid} >Agence </Grid>
 
-                <Grid item xs={6}>Ayants droit</Grid>
+                <Grid item xs={6} className={classes.Grid}>Ayants droit</Grid>
 
                 <Grid item xs={3}  >
                     <TextInputselect
@@ -168,10 +181,10 @@ export default function FiltreUtilisateur(props) {
                     Date Réception
                 </Grid>
                     
-                <Grid item xs ={6}> Convention-Formulaire </Grid>
+                <Grid item xs ={6} className={classes.Grid}> Convention-Formulaire </Grid>
             
                 <Grid item xs={3}>
-                    <label>Date Du </label>
+                    <label className={classes.label}>Date Du </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -185,7 +198,7 @@ export default function FiltreUtilisateur(props) {
                 </Grid>
 
                 <Grid item xs={3}>
-                    <label>Date Au </label>
+                    <label className={classes.label}>Date Au </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -199,7 +212,7 @@ export default function FiltreUtilisateur(props) {
                 </Grid>
 
                 <Grid item xs={3}>
-                    <label>Convention </label>
+                    <label className={classes.label}>Convention </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -213,7 +226,7 @@ export default function FiltreUtilisateur(props) {
                 </Grid>
 
                 <Grid item xs={3}>
-                    <label> Formulaire </label>
+                    <label className={classes.label}> Formulaire </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -229,11 +242,11 @@ export default function FiltreUtilisateur(props) {
                 <Grid item sm={12}>
                 <input type='checkbox'  checked={checkedSoins}
                     onChange={(event) => {setCheckedSoins(event.target.checked);}}/>  
-                <label> Date Soin </label>
+                <label className={classes.label}> Date Soin </label>
                 </Grid>
 
                 <Grid item xs={3}>
-                    <label>Date Du </label>
+                    <label className={classes.label}>Date Du </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -247,7 +260,7 @@ export default function FiltreUtilisateur(props) {
                 </Grid>
                 
                 <Grid item xs={3}>
-                    <label>Date Au </label>
+                    <label className={classes.label}>Date Au </label>
                     <TextField
                         fullWidth
                         margin="dense"
@@ -263,3 +276,5 @@ export default function FiltreUtilisateur(props) {
         </CardContent>
     )
 }
+
+export default withStyles(styles)(FiltreUtilisateur)
