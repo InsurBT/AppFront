@@ -13,8 +13,6 @@ import Person from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 export default function ListeAssure(props) {
-    // categorie d'assuré chosie selon l'url
-    const { category } = useParams();
 
     // L'etat des colonne a afficher dans le tableau
     const [columns, setColumns] = useState([]);
@@ -34,11 +32,11 @@ export default function ListeAssure(props) {
     // l'etat des booleans d'affichage des formulaire pop-up
     const [formOpen, setFormOpen] = useState(false);
 
-    // chargement des assurés selons la categorie choisie
+    // chargement des assurés
     useEffect(() => {
-        console.log(category);
+        
         setLoading(true);
-        assureService.getAssureEnInstance(category).then(res => {
+        assureService.getAll().then(res => {
             let newColumns = [];
             for (var attribute in res.assure[0]) {
                 newColumns.push({
@@ -49,7 +47,7 @@ export default function ListeAssure(props) {
 
             let assures = res.assure.map(assure => ({
                 ...assure,
-                ayantsDroit: <Link to="" >
+                ayantsDroit: <Link to="#" >
                     {assure.ayantsDroit}
                     
                     <Icon>
@@ -65,7 +63,7 @@ export default function ListeAssure(props) {
         }).catch((err) => {
             console.log(err);
         });
-    }, [category]);
+    }, []);
 
     function handleActions(action, assure) {
         setAction(action);
@@ -103,13 +101,14 @@ export default function ListeAssure(props) {
                         actions={actions} 
                         action={action}
                         handleAction={handleActions}
+                        searchBar
                     />
             }
             <FormPopup
                 open={formOpen}
                 onClose={() => {setFormOpen(false)}}
                 button='Filtrer'
-                icon='none'>
+            >
                 <FiltreAssure/>
             </FormPopup>
         </div>)

@@ -1,6 +1,6 @@
 import React from 'react';
 import FormInfoAssure from './formInfoAssure';
-import AjouterDossier from './formDossier';
+import FormDossier from './formDossier';
 import FormValoraisation from './formValoraisation';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -11,6 +11,10 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Prestation from '../GestionReferentiel/GestionPrestation/prestation'
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+import assureService from '../../service/assure-service';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,30 +37,54 @@ function getSteps() {
         return ['Info assure', 'Dossier', 'Prestation','Valoraisation'];
       }
 
-function getStepContent(step) {
-        switch (step) {
-          case 0:
-            return  <FormInfoAssure/>  ;
-          case 1:
-            return <AjouterDossier/> ;
-            
-          case 2:
-            return <Prestation/>;
-          case 3:
-          return <FormValoraisation/>;
-          default:
-            return 'Unknown step';
-        }
-      }
 
 export default function VerticalLinearStepper() {
   const classes = useStyles();
 
+  // id de l'assure passé en paramètre dand l'url
+  const { idAssure } = useParams();
+
   // etat de l'etape actuelle
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
+
   const steps = getSteps();
 
   // etat de l'assure
+  const [assure, setAssure] = useState({
+    imme: 0,
+    nom: "",
+    prenom: "",
+    dateCouverture: "",
+    dateFinCouverture: "",
+    dateNaissance: "",
+    formulaireOuvertureDroit: "",
+    consomation: "",
+    dateSortie: "",
+    consomationFamiliale: "",
+    lien: ""
+  });
+
+  // chargement des informations de l'assuré
+  useEffect(() => {
+    assureService.getAssureById(idAssure).then((res) => {
+      setAssure(res);
+    })
+  }, [])
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return  <FormInfoAssure assure={assure} setAssure={setAssure}/> ;
+      case 1:
+        return <FormDossier/>;
+      case 2:
+        return <Prestation/>;
+      case 3:
+        return <FormValoraisation/>;
+      default:
+        return 'Unknown step';
+    }
+  }
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

@@ -100,7 +100,13 @@ export default function CustomTable(props) {
             rows.push(<TableRow
                     className={classes.tableBodyRow}
                     key={i}
-                    onClick={() => {if (element) setSelectedElement(element);}}
+                    onClick={() => {
+                        if (element) {
+                            setSelectedElement(element);
+                            if (props.onElementClick)
+                                props.onElementClick(element);
+                        }
+                    }}
                     style={
                         element === selectedElement ?
                             {backgroundColor: "rgba(100,149,237,0.3)"} : {}
@@ -188,8 +194,8 @@ export default function CustomTable(props) {
         }
     }
 
-    return (<div className={classes.tableResponsive} style={{ borderRadius: "1%"}}>
-        <div style={{margin: "auto", maxWidth: "300px", display: "flex"}}>
+    return (<div className={classes.tableResponsive} style={{ borderRadius: "1%", backgroundColor: "white"}}>
+        { props.searchBar ? <div style={{margin: "auto", maxWidth: "300px", display: "flex"}}>
             <TextField
                 label="Recherche"
                 value={filter}
@@ -199,7 +205,7 @@ export default function CustomTable(props) {
             <IconButton>
                 <SearchIcon />
             </IconButton>
-        </div>
+        </div> : null}
         <Table className={classes.table} >
             <TableHead className={classes.blueTableHeader}>
                 <TableRow className={classes.tableHeadRow}>

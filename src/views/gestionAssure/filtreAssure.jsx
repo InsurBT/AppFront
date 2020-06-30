@@ -175,38 +175,34 @@ export default function FiltreAssure() {
                     </Grid>
                     <Grid item xs={3}>
                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            
                             <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            label="Date debut"
-                            value={selectedDate}
-                            onChange={handleDateChangeDate}
-                            KeyboardButtonProps={{ 'aria-label': 'change date',}}  
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Date debut"
+                                value={selectedDate}
+                                onChange={handleDateChangeDate}
+                                KeyboardButtonProps={{ 'aria-label': 'change date',}}
                             />
                         </MuiPickersUtilsProvider>
-
                     </Grid>
                     
                     <Grid item xs={3}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            
-                        <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="Date fin"
-                        value={selectedDate}
-                        onChange={handleDateChangeDate}
-                        KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-                        />
-                    </MuiPickersUtilsProvider>
-
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Date fin"
+                                value={selectedDate}
+                                onChange={handleDateChangeDate}
+                                KeyboardButtonProps={{ 'aria-label': 'change date',}}
+                            />
+                        </MuiPickersUtilsProvider>
                     </Grid>
                     
                 </Grid>    

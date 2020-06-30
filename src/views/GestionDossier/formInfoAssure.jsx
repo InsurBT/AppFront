@@ -20,84 +20,89 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function FormFiltre() {
+export default function FormFiltre(props) {
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2020-06-18T21:11:54'));
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+  const {assure, setAssure} = props;
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
          
-          <TextField id="standard-basic" label="Immatriculation" />
-          <TextField id="standard-basic" label="Nom" />
-          <TextField id="standard-basic" label="Date naissance" />
-                    <pre>
-                    &nbsp;&nbsp;
-                    </pre>
+        <TextField
+          label="Immatriculation"
+          value={assure.imme}
+          onChange={ (e) => { setAssure({...assure, imme: e.target.value}) } }
+        />
+        <TextField
+          label="Nom"
+          value={assure.nom}
+          onChange={ (e) => { setAssure({...assure, nom: e.target.value}) } }
+        />
+        <TextField
+          label="Date naissance"
+          value={assure.imme}
+          onChange={ (e) => { setAssure({...assure, imme: e.target.value}) } }
+        />
+        <pre>
+        &nbsp;&nbsp;
+        </pre>
 
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Date d'couverture"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-              /> 
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Date d'couverture"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{ 'aria-label': 'change date',}}  
+          /> 
           <TextField id="standard-basic" label="Formulaire d'ouverture de droit" className={classes.roo} />
-       
-                    <pre>
-                    &nbsp;&nbsp;
-                    </pre>
-   
-        
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Date fin d'couverture"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-            
+          <pre>
+          &nbsp;&nbsp;
+          </pre>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Date fin d'couverture"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
+          
           <TextField id="standard-basic" label="Consomation" />
           <TextField id="standard-basic" label="Date sortie" />
-                    <pre>
-                    &nbsp;&nbsp;
-                    </pre>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="date-picker-inline"
-              label="Annul couverture"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-            />
-       
+          <pre>
+          &nbsp;&nbsp;
+          </pre>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Annul couverture"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
+      
           <TextField id="standard-basic" label="Consomation famille" />
           <TextField id="standard-basic" label="Lien" />
-                    <pre>
-                    &nbsp;&nbsp;
-                    </pre>
-    
-        </MuiPickersUtilsProvider>
+          <pre>
+          &nbsp;&nbsp;
+          </pre>
+      </MuiPickersUtilsProvider>
       
     </form>
   );

@@ -3,19 +3,26 @@ import React, { useState, useEffect } from 'react';
 import dossierService from '../../service/dossier-service';
 
 import Button from '@material-ui/core/Button';
-import NavigationButton from '../../components/navigation-button';
 import Table from '../../components/table';
-import SmallHeader from '../../components/small-header';
 import FormPopup from '../../components/form-popup';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import FiltreDossier from './FiltreUtilisateur';
+import FiltreDossier from './FiltreDossier';
+import FiltreAssure from './FiltreAssure';
 
 import { useParams } from 'react-router-dom';
-import { ButtonGroup } from '@material-ui/core';
+import Popup from 'reactjs-popup';
 
 export default function DossierSoins(props) {
     // categorie de dossier chosie selon l'url
     const { category } = useParams();
+
+    // etat des infos du dossier entrees dans le formulaire pour le filtre
+    const [inputDossier, setInputDossier] = useState({
+        imme: 0,
+
+    });
+
+    // etat des infos de l'assure entrees dans le formulaire pour choisir l'assure
+    const [inputAssure, setInputAssure] = useState({});
 
     // L'etat des colonne a afficher dans le tableau
     const [columns, setColumns] = useState([]);
@@ -34,6 +41,8 @@ export default function DossierSoins(props) {
 
     // l'etat des booleans d'affichage des formulaire pop-up
     const [formOpen, setFormOpen] = useState(false);
+
+    const [openFiltreAssure, setOpenFiltreAssure] = useState(false);
 
     // chargement des dossiers selons la categorie choisie
     useEffect(() => {
@@ -74,9 +83,15 @@ export default function DossierSoins(props) {
         setAction("");
     }
 
+    function closeForm() {
+        setInputAssure({});
+        setInputDossier({});
+        setFormOpen(false);
+    }
+
     return (<div>
           
-                <Button variant="outlined" color="primary" onClick={() => {props.history.push("/home/dossiers/ajouter")}}>Nouveau</Button>
+                <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }>Nouveau</Button>
                 <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}>Filtrer</Button>
            
             {
@@ -92,14 +107,25 @@ export default function DossierSoins(props) {
                         actions={actions} 
                         action={action}
                         handleAction={handleActions}
+                        searchBar
                     />
             }
             <FormPopup
                 open={formOpen}
-                onClose={() => {setFormOpen(false)}}
+                onClose={closeForm}
                 button='Filtrer'
-                icon='none'>
+                icon='none'
+            >
                 <FiltreDossier/>
             </FormPopup>
+            <Popup
+                open={openFiltreAssure}
+                onClose={() => {setOpenFiltreAssure(false)}}
+                closeOnDocumentClick
+            >
+                <div style={{margin: "10px"}}>
+                    <FiltreAssure handleAjouter={ ({imme}) => { props.history.push("/home/dossiers/ajouter/" + imme) } } />
+                </div>
+            </Popup>
         </div>)
 }
