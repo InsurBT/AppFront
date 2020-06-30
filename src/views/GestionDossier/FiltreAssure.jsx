@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, TextField, FormLabel, FormControl, Select, MenuItem, InputLabel, Button, CircularProgress } from '@material-ui/core';
+import { Grid, TextField, FormControl, Select, MenuItem, InputLabel, Button, CircularProgress } from '@material-ui/core';
 
 import Table from '../../components/table';
 
@@ -11,6 +11,9 @@ export default function FiltreinputAssure(props) {
         imme: "",
         nom: "",
         prenom: "",
+        dateNaissance: "",
+        dateOuverture: "",
+        dateFinOuverture: "",
         code_agence: "",
         code_dr: "",
     });

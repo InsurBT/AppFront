@@ -66,8 +66,11 @@ export default function VerticalLinearStepper() {
 
   // chargement des informations de l'assuré
   useEffect(() => {
-    assureService.getAssureById(idAssure).then((res) => {
-      setAssure(res);
+    console.log(idAssure);
+    assureService.getAssureById(parseInt(idAssure)).then((res) => {
+      if (res) {
+        setAssure(res);
+      }
     })
   }, [])
 
@@ -102,7 +105,7 @@ export default function VerticalLinearStepper() {
     <div className={classes.root}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
-          <Step key={label}>
+          <Step key={index}>
             <StepLabel>{label}</StepLabel>
             <StepContent>
               <Typography>{getStepContent(index)}</Typography>
