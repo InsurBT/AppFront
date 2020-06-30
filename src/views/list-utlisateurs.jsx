@@ -210,6 +210,7 @@ export default function ListeUtilisateurs(props) {
                     buttons
                     edit={openEditForm}
                     pageSize="5"
+                    searchBar
                 />
         }
 
