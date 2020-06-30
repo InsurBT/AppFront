@@ -2,15 +2,16 @@ import React from 'react';
 import SteppreAssurePrincipale from './StepperAssurePrincipale/StepperAssurePrincipale';
 import ListeAssure from './AyantsDroit/listeAyantsDroit';
 import ListeMondataire from './Mondataire/listeMondataire'    
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 
-const useStyles = makeStyles((theme) => ({
+  const styles = theme => ({
     root: {
       width: '100%',
     },
@@ -21,9 +22,42 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
-   
-  }));
-
+    labelContainer: {
+      "& $alternativeLabel": {
+        marginTop: 0
+      }
+    },
+    step: {
+      "& $completed": {
+        color: "#33cccc"
+      },
+      "& $active": {
+        color: "#d6f5f5"
+      },
+      "& $disabled": {
+        color: "#ccffff"
+      }
+    },
+    alternativeLabel: {},
+    active: {}, //needed so that the &$active tag works
+    completed: {},
+    disabled: {},
+    labelContainer: {
+      "& $alternativeLabel": {
+        marginTop: 0
+      }
+    },
+    button : {
+      backgroundColor : '#b3d9ff',
+      '&:hover' : {
+        backgroundColor : "#1a8cff"
+      }
+    },
+    buttonRetour : {
+      backgroundColor : '#e6f2ff'
+    }
+  });
+  
 
 function getSteps() {
 return ['Assuré principale', 'Ayants droit', 'Mandataire'];
@@ -49,8 +83,8 @@ function getStepContent(stepIndex) {
     }
   }
 
-export default function StepperAssure() {
-    const classes = useStyles();
+const StepperAssure= (props)=> {
+    const {classes} = props
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
   
@@ -68,10 +102,38 @@ export default function StepperAssure() {
   
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
+        <Stepper 
+            classes={{
+              root: classes.root
+            }}
+            activeStep={activeStep} alternativeLabel
+            >
           {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+            <Step 
+                key={label}
+                classes={{
+                  root: classes.step,
+                  completed: classes.completed,
+                  active: classes.active,
+                  disabled : classes.disabled
+                }}
+                >
+              <StepLabel
+                  classes={{
+                    alternativeLabel: classes.alternativeLabel,
+                    labelContainer: classes.labelContainer
+                  }}
+                  StepIconProps={{
+                    classes: {
+                      root: classes.step,
+                      completed: classes.completed,
+                      active: classes.active,
+                      disabled: classes.disabled
+                    }
+                  }}
+              >
+                {label}
+              </StepLabel>
             </Step>
           ))}
         </Stepper>
@@ -79,7 +141,10 @@ export default function StepperAssure() {
           {activeStep === steps.length ? (
             <div>
               <Typography className={classes.instructions}>toutes les étapes sont terminées</Typography>
-              <Button onClick={handleReset}>Reset</Button>
+              <Link color="inherit" href="http://localhost:3000/home/liste_assure">
+                  <Button className={classes.buttonRetour}>Terminer</Button>
+              </Link>
+             
             </div>
           ) : (
             <div>
@@ -87,12 +152,12 @@ export default function StepperAssure() {
               <div>
                 <Button
                   disabled={activeStep === 0}
+                  className={classes.buttonRetour}
                   onClick={handleBack}
-                  className={classes.backButton}
                 >
                   Retour
                 </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
+                <Button variant="contained" className={classes.button} onClick={handleNext}>
                   {activeStep === steps.length - 1 ? 'Terminer' : 'Suivant'}
                 </Button>
               </div>
@@ -102,3 +167,5 @@ export default function StepperAssure() {
       </div>
     );
 }
+
+export default withStyles(styles)(StepperAssure)

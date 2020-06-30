@@ -5,8 +5,9 @@ import Button from '@material-ui/core/Button';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import AddIcon from '@material-ui/icons/Add'
 import FiltreAssure from './filtreAssure';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ButtonGroup, Icon } from '@material-ui/core';
 
 import Person from '@material-ui/icons/Person';
@@ -85,8 +86,12 @@ export default function ListeAssure(props) {
 
     return (<div>
             <ButtonGroup color="primary">
-                <Button onClick={() =>  {props.history.push("/home/dossiers/ajouterAssure")}}>Nouveau</Button>
-                <Button onClick={() => {setFormOpen(true)}}>Filtrer</Button>
+                <Button onClick={() =>  {props.history.push("/home/dossiers/ajouterAssure")}}>
+                    <AddIcon />
+                </Button>
+                <Button onClick={() => {setFormOpen(true)}}>
+                    <FilterListIcon />
+                </Button>
             </ButtonGroup>
             {
                 loading ?

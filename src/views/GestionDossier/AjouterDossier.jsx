@@ -2,7 +2,7 @@ import React from 'react';
 import FormInfoAssure from './formInfoAssure';
 import FormDossier from './formDossier';
 import FormValoraisation from './formValoraisation';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -16,30 +16,61 @@ import { useState, useEffect } from 'react';
 
 import assureService from '../../service/assure-service';
 
-
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   root: {
-        width: '100%',
-      },
-      button: {
-        marginTop: theme.spacing(1),
-        marginRight: theme.spacing(1),
-      },
-      actionsContainer: {
-        marginBottom: theme.spacing(2),
-      },
-      resetContainer: {
-        padding: theme.spacing(3),
-      },
-}));
+    width: '100%',
+  },
+  actionsContainer: {
+    marginBottom: theme.spacing(2),
+  },
+  resetContainer: {
+    padding: theme.spacing(3),
+  },
+  labelContainer: {
+    "& $alternativeLabel": {
+      marginTop: 0
+    }
+  },
+  step: {
+    "& $completed": {
+      color: "#1a8cff"
+    },
+    "& $active": {
+      color: "#b3d9ff"
+    },
+    "& $disabled": {
+      color: "#ccffff"
+    }
+  },
+  alternativeLabel: {},
+  active: {}, //needed so that the &$active tag works
+  completed: {},
+  disabled: {},
+  labelContainer: {
+    "& $alternativeLabel": {
+      marginTop: 0
+    }
+  },
+  button : {
+    backgroundColor : '#b3d9ff',
+    '&:hover' : {
+      backgroundColor : "#1a8cff"
+    }
+  },
+  buttonRetour : {
+    backgroundColor : '#e6f2ff'
+  }
+});
+
+
 
 function getSteps() {
         return ['Info assure', 'Dossier', 'Prestation','Valoraisation'];
       }
 
 
-export default function VerticalLinearStepper() {
-  const classes = useStyles();
+const VerticalLinearStepper= (props) => {
+  const {classes} = props;
 
   // id de l'assure passé en paramètre dand l'url
   const { idAssure } = useParams();
@@ -103,10 +134,38 @@ export default function VerticalLinearStepper() {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
+      <Stepper 
+          classes={{
+            root: classes.root
+          }}
+          activeStep={activeStep} 
+          orientation="vertical">
         {steps.map((label, index) => (
-          <Step key={index}>
-            <StepLabel>{label}</StepLabel>
+          <Step 
+              key={label}
+              classes={{
+                root: classes.step,
+                completed: classes.completed,
+                active: classes.active,
+                disabled : classes.disabled
+              }}
+            >
+            <StepLabel
+                classes={{
+                  alternativeLabel: classes.alternativeLabel,
+                  labelContainer: classes.labelContainer
+                }}
+                StepIconProps={{
+                  classes: {
+                    root: classes.step,
+                    completed: classes.completed,
+                    active: classes.active,
+                    disabled: classes.disabled
+                  }
+                }}
+            >
+              {label}
+            </StepLabel>
             <StepContent>
               <Typography>{getStepContent(index)}</Typography>
               <div className={classes.actionsContainer}>
@@ -114,13 +173,12 @@ export default function VerticalLinearStepper() {
                   <Button
                     disabled={activeStep === 0}
                     onClick={handleBack}
-                    className={classes.button}
+                    className={classes.buttonRetour}
                   >
                     Retour
                   </Button>
                   <Button
                     variant="contained"
-                    color="primary"
                     onClick={handleNext}
                     className={classes.button}
                   >
@@ -143,3 +201,5 @@ export default function VerticalLinearStepper() {
     </div>
   );
 }
+
+export default withStyles(styles)(VerticalLinearStepper)

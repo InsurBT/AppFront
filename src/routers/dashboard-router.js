@@ -122,7 +122,7 @@ export default function DashboardRouter(props) {
       routes={routes}
       logoText={"Soin de santé"}
       logo={logo}
-      image={img}
+      //image={img}
       handleDrawerToggle={handleDrawerToggle}
       open={mobileOpen}
       color={whiteColor}

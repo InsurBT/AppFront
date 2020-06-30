@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import createBrowserHistory from 'history/createBrowserHistory';
-
+import './index.css'
 import "./assets/css/material-dashboard-react.css?v=1.9.0";
 
 

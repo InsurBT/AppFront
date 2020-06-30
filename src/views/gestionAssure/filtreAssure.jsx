@@ -1,211 +1,189 @@
 import React , {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider,KeyboardDatePicker} from '@material-ui/pickers';
+import { TextField, InputLabel, Select, MenuItem, Button } from '@material-ui/core/';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-      },
-      
-    GridOne:{
-        marginTop:25,
-    },
-    GriTwo:{
-        minWidth: 120,
-    }  
-    
-  }));
+const TabdrRegional = ['Tanger-Tetouan-Al Hoceima', 'Oriental',
+    'Fès-Meknès', 'Rabat-Salé-Kénitra',
+    'Casablanca-Settat', 'Marrakesh-Safi'
+]
+const TabAGENCEMa = ['tanger', 'tetouan',
+    'fes', 'mekness', 'Rabat', 'Sale', 'Casablanca'
+]
+const TabConvention = ['Convention1', 'Convention2', 'Convention3', 'Convention4', 'Convention4']
+const TabModePaiement = ['Mode paiement1', 'Mode paiement2', 'Mode paiement3', 'Mode paiement4', 'Mode paiement5']
+const TabFormulaire = ['Formulaire1', 'Formulaire2', 'Formulaire3', 'Formulaire4', 'Formulaire5']
+const FiltreAssure = () => {
 
+    const [filtre , setfiltre] = useState({
+        immatriculation : '',
+        dateInscription : '2020-01-01',
+        principalInsured : {
+            Nom : '',
+            Prenom : ''
+        },
+        ayantDroit : {
+            Nom : '',
+            Prenom : ''
+        },
+        agence : {
+            DrRegional : '',
+            Agence : ''
+        },
+        ConvenForm : {
+            convention : '',
+            modePaiement : '',
+            formulaire : ''
+        },
+        dateDebut:'2020-01-01',
+        dateFin : '2020-01-01'
+    })
 
-export default function FiltreAssure() {
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            '& > *': {
+                margin: theme.spacing(1),
+                width: '25ch',
+            },
+        },
+        label: {
+            color: 'dodgerblue',
+            fontSize: '18px',
+            fontStyle: 'oblique'
+        },
+        button: {
+            color: 'dodgerblue',
+        }
+    }));
     const classes = useStyles();
-    const [agence, setAgence] = useState('');
-    const handleChangeAgence = (event) => {
-        setAgence(event.target.value);
-    };
-    const [DRegional, setDRegional] = useState('');
-    const handleChangeDRegional = (event) => {
-        setDRegional(event.target.value);
-    };
-    const [convention, setConvention] = useState('');
-    const handleChangeConvention = (event) => {
-        setConvention(event.target.value);
-    };
-    const [modepaiment, setModePaiment] = useState('');
-    const handleChangeModePaiment = (event) => {
-        setModePaiment(event.target.value);
-    };
-    const [formulaire, setFormulaire] = useState('');
-    const handleChangeFormulaire = (event) => {
-        setFormulaire(event.target.value);
-    };
-    const [state, setState] = useState({
-        checkedB: true,
-
-      });
-    
-    const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-    };
-
-    const [selectedDate, setSelectedDate] = useState(new Date('2020-06-18T21:11:54'));
-
-    const handleDateChangeDate = (date) => {
-      setSelectedDate(date);
-    };
-  
-
+    const { ConvenForm, agence } = filtre
     return (
-        <div className={classes.root}>
-            <form >
-                <Grid container spacing={2} >
-                    
-                    <Grid  item xs={3} className={classes.GridOne}>
-                        <TextField  id="standard-basic" label="N°immatriculation" />
-                        <TextField  id="standard-basic" label="date d'inscription" />
-                    </Grid>
-
-                    <Grid  item xs={3}>
-                    <Typography color="primary">Assuré principal</Typography>
-                        <TextField  id="standard-basic" label="Nom" />
-                        <TextField  id="standard-basic" label="Prenom" />
-                    </Grid>
-
-                    <Grid  item xs={3}>
-                    <Typography color="primary">Ayants droit</Typography>
-                        <TextField  id="standard-basic" label="Nom" />
-                        <TextField  id="standard-basic" label="Prenom" />
-                    </Grid>
-
-                    <pre> </pre>
-
-                    <Grid  item xs={3}>
-                    <Typography color="primary"> Agence </Typography>
-                       
-                            <Select  className={classes.GriTwo}
-                               
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={agence}
-                                onChange={handleChangeAgence}
-                                >
-                                <MenuItem value={10}>agence1</MenuItem>
-                                <MenuItem value={20}>agence2</MenuItem>
-                                <MenuItem value={30}>agence3</MenuItem>
-                            </Select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <Select  className={classes.GriTwo}
-                                
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={DRegional}
-                                onChange={handleChangeDRegional}
-                                >
-                                <MenuItem value={10}>DRegional1</MenuItem>
-                                <MenuItem value={20}>DRegional1</MenuItem>
-                                <MenuItem value={30}>DRegional1</MenuItem>
-                            </Select>
-                       
-                    </Grid>
-
-                    <Grid  item xs={5}>
-                    <Typography color="primary">Convention-Formulaire</Typography>
-                           <Select  className={classes.GriTwo}
-                                
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={convention}
-                                onChange={handleChangeConvention}
-                                >
-                                <MenuItem value={10}>convention1</MenuItem>
-                                <MenuItem value={20}>convention2</MenuItem>
-                                <MenuItem value={30}>convention3</MenuItem>
-                            </Select>
-
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Select  className={classes.GriTwo}
-                                
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={modepaiment}
-                                onChange={handleChangeModePaiment}
-                                >
-                                <MenuItem value={10}>Mode1</MenuItem>
-                                <MenuItem value={20}>Mode2</MenuItem>
-                                <MenuItem value={30}>Mode3</MenuItem>
-                            </Select>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <Select  className={classes.GriTwo}
-                                
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={formulaire}
-                                onChange={handleChangeFormulaire}
-                                >
-                                <MenuItem value={10}>Formulaire</MenuItem>
-                                <MenuItem value={20}>Formulaire3</MenuItem>
-                                <MenuItem value={30}>Formulaire4</MenuItem>
-                            </Select>
-                    </Grid>
-                  
-                    <Grid item xs={12}>
-
-                     <FormControlLabel control={
-                            <Checkbox
-                                checked={state.checkedB}
-                                onChange={handleChange}
-                                name="checkedB"
-                                color="primary"
-                            />
-                            }
-                            label="Couverture"
+        <>
+            <div style={{ display: 'flex' }}>
+                <div className="form-groum" style={{ display: 'initial' }}>
+                    <TextField color='primary' margin='normal'
+                        label="Num Immatriculation"
+                        value={filtre.immatriculation}
+                        onChange={(e) => setfiltre({ ...filtre, immatriculation: e.target.value })}
                     />
-                    </Grid>
-                    <Grid item xs={3}>
-                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date debut"
-                                value={selectedDate}
-                                onChange={handleDateChangeDate}
-                                KeyboardButtonProps={{ 'aria-label': 'change date',}}
-                            />
-                        </MuiPickersUtilsProvider>
-                    </Grid>
-                    
-                    <Grid item xs={3}>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date fin"
-                                value={selectedDate}
-                                onChange={handleDateChangeDate}
-                                KeyboardButtonProps={{ 'aria-label': 'change date',}}
-                            />
-                        </MuiPickersUtilsProvider>
-                    </Grid>
-                    
-                </Grid>    
-             </form>
-            
-        </div>
+                    <TextField
+                        color='primary'
+                        label="Date d'inscription"
+                        type="date"
+                        value={filtre.dateInscription}
+                        onChange={(e) => setfiltre({ ...filtre, dateInscription: e.target.value })}
+                    />
+                </div>
+                <div className="form-groum" style={{ display: 'initial' }}>
+                    <InputLabel className={classes.label} shrink>Asuure Principale</InputLabel>
+                    <TextField required label="Nom"
+                        value={filtre.principalInsured.Nom}
+                        onChange={(e) => setfiltre({ ...filtre, principalInsured: { ...filtre.principalInsured, Nom: e.target.value } })}
+                    />
+                    <TextField
+                        label="Prenom"
+                        value={filtre.principalInsured.Prenom}
+                        onChange={(e) => setfiltre({ ...filtre, principalInsured: { ...filtre.principalInsured, Prenom: e.target.value } })}
+                    />
+                </div>
+                <div className="form-groum" style={{ display: 'initial' }}>
+                    <InputLabel className={classes.label} shrink>Ayant Droit</InputLabel>
+                    <TextField
+                        label="Nom"
+                        value={filtre.ayantDroit.Nom}
+                        onChange={(e) => setfiltre({ ...filtre, ayantDroit: { ...filtre.ayantDroit, Nom: e.target.value } })}
+                    />
+                    <TextField
+                        label="Prenom"
+                        value={filtre.ayantDroit.Prenom}
+                        onChange={(e) => setfiltre({ ...filtre, ayantDroit: { ...filtre.ayantDroit, Prenom: e.target.value } })}
+                    />
+                </div>
+            </div>
+            <div style={{ display: 'flex' }}>
+                <div className="form-groum" style={{ display: 'table-cell', marginRight: '12px', marginTop: '20px' }}>
+                    <InputLabel className={classes.label} shrink>Agence</InputLabel>
+                    <Select
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                        value={agence.DrRegional}
+                        onChange={(e) => setfiltre({ ...filtre, agence: { ...filtre.agence, DrRegional: e.target.value } })}
+                    >
+                        <MenuItem value="" disabled>
+                            DR Regional
+                        </MenuItem>
+                        {TabdrRegional.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
+                    </Select>
+                    <Select
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                        value={agence.Agence}
+                        onChange={(e) => setfiltre({ ...filtre, agence: { ...filtre.agence, Agence: e.target.value } })}
+                    >
+                        <MenuItem value="" disabled>
+                            AGENCE
+                        </MenuItem>
+                        {TabAGENCEMa.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
+                    </Select>
+                </div>
+                <div className="form-groum" style={{ display: 'initial', marginLeft: "20px", marginTop: '20px' }}>
+                    <InputLabel className={classes.label} shrink>Convention-Formulaire</InputLabel>
+                    <Select
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                        value={ConvenForm.convention}
+                        onChange={(e) => setfiltre({ ...filtre, ConvenForm: { ...filtre.ConvenForm, convention: e.target.value } })}
+                    >
+                        <MenuItem value="" disabled>
+                            Convention
+                        </MenuItem>
+                        {TabConvention.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
+                    </Select>
+                    <Select
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                        value={ConvenForm.modePaiement}
+                        onChange={(e) => setfiltre({ ...filtre, ConvenForm: { ...filtre.ConvenForm, modePaiement: e.target.value } })}
+                    >
+                        <MenuItem value="" disabled>
+                            Mode de Paiement
+                        </MenuItem>
+                        {TabModePaiement.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
+                    </Select>
+                    <Select
+                        displayEmpty
+                        value={ConvenForm.formulaire}
+                        onChange={(e) => setfiltre({ ...filtre, ConvenForm: { ...filtre.ConvenForm, formulaire: e.target.value } })}
+                    >
+                        <MenuItem value="" disabled>
+                            Formulaire
+                        </MenuItem>
+                        {TabFormulaire.map((elem, index) => <MenuItem key={index} value={elem} >{elem}</MenuItem>)}
+                    </Select>
+                </div>
+            </div>
+            <div style={{ marginTop: '25px' }} >
+                <TextField
+                    color='primary'
+                    label="Date Debut"
+                    type="date"
+                    value={filtre.dateDebut}
+                    onChange={(e) => setfiltre({ ...filtre, dateDebut: e.target.value })}
+                />
+                <TextField
+                    color='primary'
+                    label="Date Fin"
+                    type="date"
+                    value={filtre.dateFin}
+                    onChange={(e) => setfiltre({ ...filtre, dateFin: e.target.value })}
+                />
+                <div style={{ float: 'right', margin: '0 145px' }} >
+                    <Button className={classes.button} onClick={e => {console.log(filtre) }}>
+                        Filtrer
+                    </Button>
+                </div>
+            </div>
+        </>
     )
 }
+
+export default FiltreAssure;

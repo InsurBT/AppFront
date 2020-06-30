@@ -8,6 +8,7 @@ import FormPopup from '../../components/form-popup';
 import FiltreDossier from './FiltreDossier';
 import FiltreAssure from './FiltreAssure';
 
+import FilterListIcon from '@material-ui/icons/FilterList';
 import { useParams } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 
