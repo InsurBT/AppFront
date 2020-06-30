@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         minWidth: 100
+    },
+    label : {
+        color: 'dodgerblue',
+        fontStyle: 'oblique' 
     }
   }));
 
@@ -54,19 +58,19 @@ export default function FormIdentification() {
                             <TextField  id="standard-basic" label="Nom" />
                         </Grid>
                         <Grid  item  >
-                            <TextField className={classes.textField1} id="standard-basic" label="Nom de jeune fille" />
+                            <TextField  className={classes.textField1} id="standard-basic" label="Nom de jeune fille" />
                         </Grid>
                         <Grid  item >
-                            <TextField  id="standard-basic" label="Prénom" />
+                            <TextField   id="standard-basic" label="Prénom" />
                         </Grid>
                    </Grid>
 
                    <Grid item container justify="space-between" xs="9">
                         <Grid  item  >
-                            <TextField className={classes.textField} id="standard-basic" label="Age" /> 
+                            <TextField  id="standard-basic" label="Age" /> 
                         </Grid>
                         <Grid  itemProp >
-                            <TextField className={classes.textField} id="standard-basic" label="CIN" />
+                            <TextField  id="standard-basic" label="CIN" />
                         </Grid>
                         <Grid  item className={classes.textField} >
                             <TextField  id="standard-basic" label="Passeport N°" />
@@ -77,7 +81,7 @@ export default function FormIdentification() {
                     <Grid  item container justify="space-between" xs={9} >
                         <Grid item>
                             <FormControl className={classes.formControl}>
-                                <InputLabel id="demo-simple-select-label">Sexe</InputLabel>
+                                <InputLabel  id="demo-simple-select-label">Sexe</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
@@ -92,7 +96,7 @@ export default function FormIdentification() {
                         </Grid>
                         <Grid item>
                             <FormControl className={classes.formControl}>
-                                <InputLabel id="demo-simple-select-label">Nationalité</InputLabel>
+                                <InputLabel  id="demo-simple-select-label">Nationalité</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
@@ -108,6 +112,7 @@ export default function FormIdentification() {
                         <Grid item>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
+                                    
                                     disableToolbar
                                     variant="inline"
                                     format="MM/dd/yyyy"
@@ -125,6 +130,7 @@ export default function FormIdentification() {
                     
                     <Grid item xs={12}>
                         <FormControlLabel
+                            
                             value="start"
                             control={<Switch color="primary" minWidth= "300" />}
                             label="Réside au Maroc"

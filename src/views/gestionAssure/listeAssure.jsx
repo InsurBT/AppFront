@@ -6,6 +6,8 @@ import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import FiltreAssure from './filtreAssure';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus , faFilter } from '@fortawesome/free-solid-svg-icons'
 import { useParams, Link } from 'react-router-dom';
 import { ButtonGroup, Icon } from '@material-ui/core';
 
@@ -87,8 +89,12 @@ export default function ListeAssure(props) {
 
     return (<div>
             <ButtonGroup color="primary">
-                <Button onClick={() =>  {props.history.push("/home/dossiers/ajouterAssure")}}>Nouveau</Button>
-                <Button onClick={() => {setFormOpen(true)}}>Filtrer</Button>
+                <Button onClick={() =>  {props.history.push("/home/dossiers/ajouterAssure")}}>
+                    <FontAwesomeIcon icon={faPlus} size="2x" color="#008ae6" />
+                </Button>
+                <Button onClick={() => {setFormOpen(true)}}>
+                    <FontAwesomeIcon icon={faFilter} size="2x" color="#33cccc" />
+                </Button>
             </ButtonGroup>
             {
                 loading ?
