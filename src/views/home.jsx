@@ -63,8 +63,7 @@ const styles = theme => ({
                         subheader={connectedUser.nom}
                     />
                     <CardContent className={classes.color}>
-                        Je met du texte ici pour remplire cette element. <br/>
-                        Nous verrons plus tard ce qu'on peut mettre ici <br/>
+                    BIENVENUE SUR LE PORTAIL ASSURÉ DE LA CNSS <br/>
 
                     </CardContent>
                 </Card>

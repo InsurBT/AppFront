@@ -83,7 +83,7 @@ export default function ListeAssure(props) {
 
     return (<div>
             <ButtonGroup color="primary">
-                <Button onClick={() =>  {props.history.push("/home/dossiers/ajouterAssure")}}>
+                <Button onClick={() =>  {props.history.push("/home/Assure/ajouterAssure")}}>
                     <AddIcon />
                 </Button>
                 <Button onClick={() => {setFormOpen(true)}}>
@@ -110,6 +110,7 @@ export default function ListeAssure(props) {
                 open={formOpen}
                 onClose={() => {setFormOpen(false)}}
                 button='Filtrer'
+                icon = {<FilterListIcon/>}
             >
                 <FiltreAssure/>
             </FormPopup>

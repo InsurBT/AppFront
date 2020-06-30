@@ -217,7 +217,9 @@ export default function ListePrestations(props) {
                     data={prestations}
                     buttons
                     delete={openDeleteForm}
-                    edit={openEditForm} />
+                    edit={openEditForm}
+                    searchBar />
+                    
         }
 
         {/* Formulaire d'ajout ou de modification */}

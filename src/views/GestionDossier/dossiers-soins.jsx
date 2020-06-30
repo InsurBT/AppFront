@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import dossierService from '../../service/dossier-service';
 
+
 import Button from '@material-ui/core/Button';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
@@ -115,7 +116,8 @@ export default function DossierSoins(props) {
                 open={formOpen}
                 onClose={closeForm}
                 button='Filtrer'
-                icon='none'
+
+                icon = {<FilterListIcon/>}
             >
                 <FiltreDossier/>
             </FormPopup>

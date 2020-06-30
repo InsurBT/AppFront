@@ -14,6 +14,7 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Unarchive from "@material-ui/icons/Unarchive";
 import Settings from "@material-ui/icons/SettingsApplications";
 import Language from '@material-ui/icons/Language';
+import AssureRouter from './routers/dossiers/Assure-router';
 
 
 const routes = [
@@ -82,7 +83,7 @@ const routes = [
     {
         name:"Gestion des assurés",
         path: "/liste_assure",
-        component: ListeAssure,
+        component: AssureRouter,
         icon: LibraryBooks,
         layout:"/home"
     }
