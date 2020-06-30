@@ -9,9 +9,8 @@ import SmallHeader from '../../components/small-header';
 import FormPopup from '../../components/form-popup';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import FiltreDossier from './FiltreUtilisateur';
-
-
-import Grid from '@material-ui/core/Grid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus , faFilter } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from 'react-router-dom';
 import { ButtonGroup } from '@material-ui/core';
 
@@ -77,10 +76,14 @@ export default function DossierSoins(props) {
     }
 
     return (<div>
-            <ButtonGroup color="primary">
-                <Button onClick={() => {props.history.push("/home/dossiers/ajouter")}}>Nouveau</Button>
-                <Button onClick={() => {setFormOpen(true)}}>Filtrer</Button>
-            </ButtonGroup>
+          
+                <Button variant="outlined" color="primary" onClick={() => {props.history.push("/home/dossiers/ajouter")}}>
+                    <FontAwesomeIcon icon={faPlus} size="2x" color="#008ae6" />
+                </Button>
+                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}>
+                    <FontAwesomeIcon icon={faFilter} size="2x" color="#33cccc" />
+                </Button>
+           
             {
                 loading ?
                     <div>Chargement...</div> :

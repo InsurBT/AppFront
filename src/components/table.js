@@ -188,7 +188,7 @@ export default function CustomTable(props) {
         }
     }
 
-    return (<div className={classes.tableResponsive} style={{backgroundColor: "white", borderRadius: "1%"}}>
+    return (<div className={classes.tableResponsive} style={{backgroundColor: "#f4f6f8", borderRadius: "1%" }}>
         <div style={{margin: "auto", maxWidth: "300px", display: "flex"}}>
             <TextField
                 label="Recherche"

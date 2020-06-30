@@ -14,6 +14,7 @@ import {
   blackColor,
   hexToRgb
 } from "../../material-dashboard-react.js";
+import { blueGrey } from "@material-ui/core/colors";
 
 const sidebarStyle = theme => ({
   drawerPaper: {
@@ -28,7 +29,8 @@ const sidebarStyle = theme => ({
     [theme.breakpoints.up("md")]: {
       width: drawerWidth,
       position: "fixed",
-      height: "100%"
+      height: "100%",
+      
     },
     [theme.breakpoints.down("sm")]: {
       width: drawerWidth,
@@ -72,7 +74,8 @@ const sidebarStyle = theme => ({
       height: "1px",
       right: "15px",
       width: "calc(100% - 30px)",
-      backgroundColor: "rgba(" + hexToRgb(grayColor[6]) + ", 0.3)"
+      backgroundColor: "rgba(" + hexToRgb(grayColor[6]) + ", 0.3)",
+      
     }
   },
   logoLink: {
@@ -98,14 +101,18 @@ const sidebarStyle = theme => ({
     display: "inline-block",
     maxHeight: "30px",
     marginLeft: "10px",
-    marginRight: "15px"
+    marginRight: "15px",
+    
   },
   img: {
     width: "35px",
     top: "22px",
     position: "absolute",
     verticalAlign: "middle",
-    border: "0"
+    border: "0",
+    
+    
+
   },
   background: {
     position: "absolute",
@@ -116,7 +123,8 @@ const sidebarStyle = theme => ({
     top: "0",
     left: "0",
     backgroundSize: "cover",
-    backgroundPosition: "center center",
+    backgroundPosition: "center center", 
+    filter : "blur(2px)",
     "&:after": {
       position: "absolute",
       zIndex: "3",
@@ -125,7 +133,8 @@ const sidebarStyle = theme => ({
       content: '""',
       display: "block",
       background: blackColor,
-      opacity: ".8"
+      opacity: ".5",
+      
     }
   },
   list: {

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '../../components/table';
 import SmallHeader from '../../components/small-header';
 import FormPopup from '../../components/form-popup';
 import TextInput from '../../components/text-input';
-import FormButton from '../../components/form-button';
-
+import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
@@ -15,6 +14,16 @@ import { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 
 export default function ListePrestations(props) {
+    const useStyles = makeStyles((theme) => ({
+        button : {
+            backgroundColor : '#B3D9FF',
+            '&:hover' : {
+            backgroundColor : "#1A8CFF"
+            }
+        }
+    }));
+        
+    const classes = useStyles();
     
     const [prestations, setPrestations] = useState([]);
 
@@ -196,7 +205,7 @@ export default function ListePrestations(props) {
     return (<div>
         <SmallHeader>
             Liste des prestations
-            <FormButton onClick={() => {setFormMode("AJOUTER")}}>Ajouter prestation</FormButton>
+            <Button variant="contained" className={classes.button} onClick={() => {setFormMode("AJOUTER")}}>Ajouter prestation</Button>
         </SmallHeader>
 
         {/* Tableau des donnees */}

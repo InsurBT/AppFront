@@ -1,11 +1,33 @@
 import React, {useContext, useEffect, useState} from 'react';
-
+import {  CardHeader, Avatar } from '@material-ui/core';
 import ConnectedUserContext from '../context/connected-user.context';
-
 import utilisateurService from '../service/utilisateur-service';
-import { Card, CardHeader, Avatar, CardContent } from '@material-ui/core';
+import { Card,  CardContent } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles'
+import img1 from '../assets/img/cnss.png'
 
-export default function Home(props) {
+
+const styles = theme => ({
+    image: {
+       backgroundImage : `url(${img1})`,
+       backgroundPosition: 'center',
+       backgroundSize: 'cover',
+       width : '100%',
+       height : '600px'
+      },
+    avatar : {
+        backgroundColor : '#b3d9ff',
+        color : '#000',
+        fontSize : '30px'
+    },
+    color : {
+        color : "#1E4584",
+        fontSize : '20px'
+    },
+})
+
+//
+ function Home(props) {
     const {connectedUser, setConnectedUser} = useContext(ConnectedUserContext);
 
     const [loading, setLoading] = useState(connectedUser === null);
@@ -25,19 +47,22 @@ export default function Home(props) {
         }
     }, []);
 
+    const {classes} = props
+
     return (<div>
         {
             loading ?
                 <div>chargement...</div> :
-                <Card>
+                <Card  className={classes.image}>
                     <CardHeader
+                        className={classes.color}
                         title={connectedUser.nomComplet}
-                        avatar={<Avatar>
+                        avatar={<Avatar className={classes.avatar}>
                             {connectedUser.nomComplet.charAt(0)}
                         </Avatar>}
                         subheader={connectedUser.nom}
                     />
-                    <CardContent>
+                    <CardContent className={classes.color}>
                         Je met du texte ici pour remplire cette element. <br/>
                         Nous verrons plus tard ce qu'on peut mettre ici <br/>
 
@@ -46,3 +71,5 @@ export default function Home(props) {
         }
     </div>)
 }
+
+export default withStyles(styles)(Home)

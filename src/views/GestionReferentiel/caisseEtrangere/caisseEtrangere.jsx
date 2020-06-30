@@ -1,21 +1,35 @@
 import React, { useState, useContext } from 'react';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '../../../components/table';
 import SmallHeader from '../../../components/small-header';
 import FormPopup from '../../../components/form-popup';
 import TextInput from '../../../components/text-input';
-import FormButton from '../../../components/form-button';
+import Button from '@material-ui/core/Button';
 
 import FiltreCaisseE from './FiltreCaisseEtrangere';
+import TextField from '@material-ui/core/TextField';
+import Add from '@material-ui/icons/Add';
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
 
 
 import CaisseEtrangereService from '../../../service/caisseEtrangere-service';
 import paysService from '../../../service/pays-service';
 import villeService from '../../../service/ville-service';
 import { useEffect } from 'react';
+import TextInputselect from '../../../components/text-input-select';
 
 export default function ListeCaisseEtrangeres(props) {
-    
+    const useStyles = makeStyles((theme) => ({
+        button : {
+            backgroundColor : '#B3D9FF',
+            '&:hover' : {
+            backgroundColor : "#1A8CFF"
+            }
+        }
+    }));
+        
+    const classes = useStyles();
     const [data, setData] = useState([]);
 
     const [options,setOptions] = useState([]);
@@ -97,7 +111,7 @@ export default function ListeCaisseEtrangeres(props) {
         switch (formMode) {
             case "AJOUTER":
                 setFormParams({
-                    icon: "plus",
+                    icon: <Add/>,
                     title: "Ajouter",
                     button: "Ajouter",
                     onSubmit: (e) => {
@@ -109,7 +123,7 @@ export default function ListeCaisseEtrangeres(props) {
                 break;
             case "MODIFIER":
                 setFormParams({
-                    icon: "edit",
+                    icon: <Edit/>,
                     title: "Modifier",
                     button: "Modifier",
                     onSubmit: (e) => {
@@ -121,7 +135,7 @@ export default function ListeCaisseEtrangeres(props) {
                 break;
             case "SUPPRIMER":
                 setFormParams({
-                    icon: "trash",
+                    icon: <Delete/>,
                     title: "Supprimer",
                     button: "Supprimer",
                     onSubmit: (e) => {
@@ -237,7 +251,7 @@ export default function ListeCaisseEtrangeres(props) {
     return (<div>
         <SmallHeader>
             Liste des caisses étrangere
-            <FormButton onClick={() => {setFormMode("AJOUTER")}}>Ajouter </FormButton>
+            <Button className={classes.button}  onClick={() => {setFormMode("AJOUTER")}}>Ajouter </Button>
         </SmallHeader>
         <FiltreCaisseE />
 
@@ -258,14 +272,14 @@ export default function ListeCaisseEtrangeres(props) {
             {...formParams}
             onClose={closeForm}
         >
-            <TextInput
+            <TextField
                 type="text"
                 label="Nom"
                 value={input.nom}
                 onChange={(e) => {setInput({...input, nom: e.target.value})}}
                 icon="none"
             />
-            <TextInput
+            <TextField
                 type="text"
                 label="Adresse"
                 value={input.adresse}
@@ -273,7 +287,7 @@ export default function ListeCaisseEtrangeres(props) {
                 icon="none"
             />
        
-           <TextInput
+           <TextInputselect
                 type="select"
                 options={options.map(option => ({value:option.id, label:option.label}))}
                 label="Pays"
@@ -286,7 +300,7 @@ export default function ListeCaisseEtrangeres(props) {
                 }
                 icon="none"
             />
-            <TextInput
+            <TextInputselect
                 type="select"
                 options={optionsVille.map(option => ({value:option.id, label:option.nom}))}
                 label="Ville"
@@ -301,7 +315,7 @@ export default function ListeCaisseEtrangeres(props) {
                 icon="none"
             />
     
-            <TextInput
+            <TextField
                 type="text"
                 label="Téléphone"
                 value={input.telephone}
@@ -309,14 +323,14 @@ export default function ListeCaisseEtrangeres(props) {
                 icon="none"
             />
           
-            <TextInput
+            <TextField
                 type="text"
                 label="Fax"
                 value={input.fax}
                 onChange={(e) => {setInput({...input, fax: e.target.value})}}
                 icon="none"
             />
-            <TextInput
+            <TextField
                 type="text"
                 label="E-mail"
                 value={input.email}

@@ -1,31 +1,48 @@
-import React , { useState, useEffect  } from 'react'
+import React , { useState, useEffect  } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '../../components/table';
 import SmallHeader from '../../components/small-header';
 import FormPopup from '../../components/form-popup';
 import TextInput from '../../components/text-input';
-import FormButton from '../../components/form-button';
 import DirectionRegService from '../../service/directionReg-service';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Add from '@material-ui/icons/Add';
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+
 
 export default function DirectionReg (props) {
 
-     const [directionReg, setDirectionReg] = useState([]);
+    const useStyles = makeStyles((theme) => ({
+        button : {
+            backgroundColor : '#B3D9FF',
+            '&:hover' : {
+            backgroundColor : "#1A8CFF"
+            }
+        }
+    }));
+        
+    const classes = useStyles();
 
-     // l'etat de chargement des donnees
-     const [loading, setLoading] = useState(true);
+        const [directionReg, setDirectionReg] = useState([]);
 
-     // l'etat des valeur de l'input
-     const [inputDirectionReg, setInputDirectionReg] = useState({
+        // l'etat de chargement des donnees
+        const [loading, setLoading] = useState(true);
+
+        // l'etat des valeur de l'input
+        const [inputDirectionReg, setInputDirectionReg] = useState({
         id: NaN,
         code: "",
         designation: "",
         ville: "",
         adresse: ""
-     });
+        });
 
-     // l'etat du mode du formulaire
-     const [formMode, setFormMode] = useState("FERMER");
+        // l'etat du mode du formulaire
+        const [formMode, setFormMode] = useState("FERMER");
 
-     // parametre du formulair
+        // parametre du formulair
     const [formParams, setFormParams] = useState({
         icon: "",
         title: "",
@@ -34,7 +51,7 @@ export default function DirectionReg (props) {
         open: false
     });
 
-     // etat du message d'erreur en cas de formulaire invailde
+        // etat du message d'erreur en cas de formulaire invailde
     const [invalidMessage, setInvalidMessag] = useState("");
 
     const columns = [
@@ -59,7 +76,7 @@ export default function DirectionReg (props) {
 
             case "AJOUTER":
                 setFormParams({
-                    icon: "plus",
+                    icon: <Add />,
                     title: "Ajouter Direction regionale ",
                     button: "Ajouter",
                     onSubmit: (e) => {
@@ -72,7 +89,7 @@ export default function DirectionReg (props) {
 
             case "MODIFIER":
                 setFormParams({
-                    icon: "edit",
+                    icon: <Edit />,
                     title: "Modifier Direction regionale",
                     button: "Modifier",
                     onSubmit: (e) => {
@@ -85,7 +102,7 @@ export default function DirectionReg (props) {
 
             case "SUPPRIMER":
                 setFormParams({
-                    icon: "trash",
+                    icon: <Delete/>,
                     title: "Supprimer cette Direction regionale?",
                     button: "Supprimer",
                     onSubmit: (e) => {
@@ -199,7 +216,7 @@ export default function DirectionReg (props) {
     return (<div>
         <SmallHeader>
             Liste des directions regionales
-            <FormButton onClick={() => {setFormMode("AJOUTER")}}>Ajouter</FormButton>
+            <Button variant="contained" className={classes.button} onClick={() => {setFormMode("AJOUTER")}} >Ajouter</Button>
         </SmallHeader>
 
         {/* Tableau des donnees */}
@@ -221,28 +238,29 @@ export default function DirectionReg (props) {
             {...formParams}
             onClose={closeForm}
         >
-            <TextInput
+            <TextField
+                
                 type="number"
                 label="Code"
                 value={inputDirectionReg.code}
                 onChange={(e) => {setInputDirectionReg({...inputDirectionReg, code: e.target.value})}}
                 icon="none"
             />
-            <TextInput
+            <TextField
                 type="text"
                 label="Designation"
                 value={inputDirectionReg.designation}
                 onChange={(e) => {setInputDirectionReg({...inputDirectionReg, designation: e.target.value})}}
                 icon="none"
             />
-            <TextInput
+            <TextField
                 type="text"
                 label="Ville"
                 value={inputDirectionReg.ville}
                 onChange={(e) => {setInputDirectionReg({...inputDirectionReg, ville: e.target.value})}}
                 icon="none"
             />
-            <TextInput
+            <TextField
                 type="text"
                 label="Adresse"
                 value={inputDirectionReg.adresse}
