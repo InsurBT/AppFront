@@ -235,8 +235,6 @@ export default function ListeUtilisateurs(props) {
             <FormControl>
                 <InputLabel>Agence</InputLabel>
                 <Select
-                    type="select"
-                    // label="Agence"
                     onChange={(e) => {setInputUtilisateur({
                         ...inputUtilisateur,
                         code_agence: e.target.value,
@@ -250,19 +248,20 @@ export default function ListeUtilisateurs(props) {
                         })
                     }
                 </Select>
-                <FormControl>
+            </FormControl>
+            <FormControl>
                 <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                    <Select
+                <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={role}
                     onChange={handleChangeRole}
-                    >
+                >
                     <MenuItem value={10}>Admin</MenuItem>
                     <MenuItem value={20}>Agent</MenuItem>
-            
-                    </Select>
-                    </FormControl>
+        
+                </Select>
+            </FormControl>
             {
                 formMode === "AJOUTER" ?
                 [<TextField
@@ -280,7 +279,6 @@ export default function ListeUtilisateurs(props) {
                 ""
             }
             <span style={{color: "red"}}>{invalidMessage}</span>
-            </FormControl>
         </FormPopup>
     </div>)
 }

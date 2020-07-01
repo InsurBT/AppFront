@@ -39,14 +39,14 @@ export default function ListeAssure(props) {
         setLoading(true);
         assureService.getAll().then(res => {
             let newColumns = [];
-            for (var attribute in res.assure[0]) {
+            for (var attribute in res.assures[0]) {
                 newColumns.push({
                     title: attribute,
                     property: attribute
                 });
             }
 
-            let assures = res.assure.map(assure => ({
+            let assures = res.assures.map(assure => ({
                 ...assure,
                 ayantsDroit: <Link to="#" >
                     {assure.ayantsDroit}
