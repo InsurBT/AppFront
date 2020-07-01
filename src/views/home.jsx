@@ -10,8 +10,9 @@ import img1 from '../assets/img/cnss.png'
 const styles = theme => ({
     image: {
        backgroundImage : `url(${img1})`,
+       backgroundRepeat: 'no-repeat',
        backgroundPosition: 'center',
-       backgroundSize: 'cover',
+       backgroundSize: '700px',
        width : '100%',
        height : '600px'
       },

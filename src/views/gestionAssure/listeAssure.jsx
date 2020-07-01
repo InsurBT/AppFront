@@ -8,8 +8,6 @@ import AddIcon from '@material-ui/icons/Add'
 import FiltreAssure from './filtreAssure';
 import { Link } from 'react-router-dom';
 import { ButtonGroup, Icon } from '@material-ui/core';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPlus} from '@fortawesome/free-solid-svg-icons'
 import Person from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
@@ -84,7 +82,7 @@ export default function ListeAssure(props) {
     return (<div>
             <ButtonGroup color="primary">
                 <Button onClick={() =>  {props.history.push("/home/gestionAssure/ajouterAssure")}}>
-                    <FontAwesomeIcon icon={faPlus} size="2x" color="#008ae6" />
+                    <AddIcon />
                 </Button>
                 <Button onClick={() => {setFormOpen(true)}}>
                     <FilterListIcon />

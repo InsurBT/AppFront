@@ -10,7 +10,7 @@ export default function DossiersRouter(props) {
 
     return (
         <Switch>
-            <Route path={path + "/ajouter"} component={AjouterDossier} />
+            <Route path={path + "/ajouter/:idAssure"} component={AjouterDossier} />
             <Route path={path + "/:category"} component={DossierSoins} />
             
             <Redirect from={path} to={path + "/en_instance"} />
