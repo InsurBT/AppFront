@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import assureService from '../../service/assure-service' ;
-import AjouterAssure from '../GestionAssure/StepperAssure/StepperAssure';
 import Button from '@material-ui/core/Button';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
@@ -9,7 +8,8 @@ import AddIcon from '@material-ui/icons/Add'
 import FiltreAssure from './filtreAssure';
 import { Link } from 'react-router-dom';
 import { ButtonGroup, Icon } from '@material-ui/core';
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faPlus} from '@fortawesome/free-solid-svg-icons'
 import Person from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
@@ -52,7 +52,7 @@ export default function ListeAssure(props) {
                     {assure.ayantsDroit}
                     
                     <Icon>
-                       3&nbsp; 
+                       &nbsp; 
                         <SupervisorAccountIcon />
                     </Icon>
                 </Link>
@@ -83,8 +83,8 @@ export default function ListeAssure(props) {
 
     return (<div>
             <ButtonGroup color="primary">
-                <Button onClick={() =>  {props.history.push("/home/dossiers/ajouterAssure")}}>
-                    <AddIcon />
+                <Button onClick={() =>  {props.history.push("/home/gestionAssure/ajouterAssure")}}>
+                    <FontAwesomeIcon icon={faPlus} size="2x" color="#008ae6" />
                 </Button>
                 <Button onClick={() => {setFormOpen(true)}}>
                     <FilterListIcon />
