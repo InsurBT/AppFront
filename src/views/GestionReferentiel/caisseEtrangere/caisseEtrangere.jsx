@@ -98,7 +98,7 @@ export default function ListeCaisseEtrangeres(props) {
     /***********************************************************************************/
     useEffect(() => {
         console.log("le code est",input.idpays);
-        villeService.getAll(input.idpays).then(res => {
+        villeService.getAll().then(res => {
             setOptionsVille(res);
             console.log('les villes:',res);
     }

@@ -17,6 +17,12 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  button : {
+    backgroundColor : '#B3D9FF',
+    '&:hover' : {
+    backgroundColor : "#1A8CFF"
+    }
+}
 });
 
 function createData(action, prestation, cotation, nbrActes, mtEngage, mtAregle, remboursable, notifNonRem) {
@@ -27,10 +33,9 @@ function createData(action, prestation, cotation, nbrActes, mtEngage, mtAregle, 
     createData('', '','','','','','',''),
   ];
 export default function Prestation() {
-    const [open, setOpen] = useState(false);
-      
 
-    const classes = useStyles();
+    const [open, setOpen] = useState(false);
+     const classes = useStyles();
 
 return (<div>
         <TableContainer component={Paper}>
@@ -38,7 +43,7 @@ return (<div>
                 <TableHead>
                     <TableRow>
                             
-                            <TableCell align="right"> <Button variant="contained" color="primary"  onClick={() => setOpen(true) }> Nouveau</Button></TableCell>
+                            <TableCell align="right"> <Button variant="contained" className={classes.button}  onClick={() => setOpen(true) }> Nouveau</Button></TableCell>
                             <TableCell align="right">prestation</TableCell>
                             <TableCell align="right">cotation</TableCell>
                             <TableCell align="right">bbrActes</TableCell>

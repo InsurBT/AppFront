@@ -6,6 +6,8 @@ import ListeCaisseEtrangeres from './views/GestionReferentiel/caisseEtrangere/ca
 import ListeAssure from './views/GestionAssure/listeAssure';
 import ListeCaisseMeres from './views/GestionReferentiel/caisseMere/caisseMere';
 import DossiersRouter from './routers/dossiers/dossiers-router';
+import AssureRouter from './routers/assure/assuré-router';
+
 import Paremetrage from './routers/parametrage/parametrage';
 import Referentiel from './routers/referentiel/referentiel';
 import Dashboard from "@material-ui/icons/Dashboard";
@@ -73,7 +75,6 @@ const routes = [
     {
         name: "Gestion des dossiers",
         path: "/dossiers",
-        param: "category",
         component: DossiersRouter,
         icon: LibraryBooks,
         layout: "/home",
@@ -81,8 +82,8 @@ const routes = [
     },
     {
         name:"Gestion des assurés",
-        path: "/liste_assure",
-        component: ListeAssure,
+        path: "/gestionAssure",
+        component: AssureRouter,
         icon: LibraryBooks,
         layout:"/home"
     }

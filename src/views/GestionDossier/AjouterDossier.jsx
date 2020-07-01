@@ -85,15 +85,26 @@ const VerticalLinearStepper= (props) => {
     imme: 0,
     nom: "",
     prenom: "",
-    dateCouverture: "",
-    dateFinCouverture: "",
+    debutCouverture: "",
+    finCouverture: "",
     dateNaissance: "",
-    formulaireOuvertureDroit: "",
+    formulaireDroit: "",
     consomation: "",
     dateSortie: "",
     consomationFamiliale: "",
     lien: ""
   });
+
+  // etat du dossier
+  const [dossier, setDossier] = useState({
+    num: 0,
+    dateReception: "",
+    dateFinCouverture: "",
+    debutSoin: "",
+    finSoin: "",
+    medecinTraitant: "",
+  });
+
 
   // chargement des informations de l'assuré
   useEffect(() => {
@@ -108,9 +119,9 @@ const VerticalLinearStepper= (props) => {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return  <FormInfoAssure assure={assure} setAssure={setAssure}/> ;
+        return  <FormInfoAssure assure={assure} setAssure={setAssure} /> ;
       case 1:
-        return <FormDossier/>;
+        return <FormDossier dossier={dossier} setDossier={setDossier} />;
       case 2:
         return <Prestation/>;
       case 3:
@@ -192,9 +203,9 @@ const VerticalLinearStepper= (props) => {
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
+          <Typography>Le dossier a bien été ajouté</Typography>
           <Button onClick={handleReset} className={classes.button}>
-            Recommencer
+            Ajouter un autre dossier
           </Button>
         </Paper>
       )}
