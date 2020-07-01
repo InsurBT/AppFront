@@ -3,7 +3,7 @@ import ListePrestations from './views/GestionReferentiel/liste-prestations';
 import ListeUtilisateurs from './views/list-utlisateurs';
 import DirectionReg  from './views/GestionReferentiel/listeDirectionReg';
 import ListeCaisseEtrangeres from './views/GestionReferentiel/caisseEtrangere/caisseEtrangere';
-import ListeAssure from './views/gestionAssure/listeAssure';
+import ListeAssure from './views/GestionAssure/listeAssure';
 import ListeCaisseMeres from './views/GestionReferentiel/caisseMere/caisseMere';
 import DossiersRouter from './routers/dossiers/dossiers-router';
 import AssureRouter from './routers/assure/assuré-router';

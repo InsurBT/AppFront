@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom';
-import ListeAssure from '../../views/gestionAssure/listeAssure'
-import stepperAssure from  '../../views/gestionAssure/StepperAssure/StepperAssure'
-import gestionAyantDroit from '../../views/gestionAssure/StepperAssure/GestionAyantDroit'
+import ListeAssure from '../../views/GestionAssure/listeAssure'
+import stepperAssure from  '../../views/GestionAssure/StepperAssure/StepperAssure'
+import gestionAyantDroit from '../../views/GestionAssure/StepperAssure/GestionAyantDroit'
 
 
 export default function AssureRouter(props) {
