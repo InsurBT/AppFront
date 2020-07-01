@@ -169,4 +169,4 @@ const StepperAssure= (props)=> {
     );
 }
 
-export default withStyles(styles)(StepperAssure)
+export default withStyles(styles)(StepperAssure);
