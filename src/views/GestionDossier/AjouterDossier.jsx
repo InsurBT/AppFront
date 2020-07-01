@@ -1,7 +1,7 @@
 import React from 'react';
-import FormInfoAssure from './formInfoAssure';
-import FormDossier from './formDossier';
-import FormValoraisation from './formValoraisation';
+import FormInfoAssure from './formulaire/formInfoAssure';
+import FormDossier from './formulaire/formDossier';
+import FormValoraisation from './formulaire/formValoraisation';
 import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -10,11 +10,21 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Prestation from '../GestionReferentiel/GestionPrestation/prestation'
+import Prestation from './formulaire/Prestations'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import assureService from '../../service/assure-service';
+
+function todaysDate() {
+  const today = new Date();
+
+  let day = ("0" + today.getDay()).slice(-2);
+  let month = ("0" + today.getMonth()).slice(-2);
+  let year = today.getFullYear();
+
+  return [year, month, day].join('-');
+}
 
 const styles = theme => ({
   root: {
@@ -65,12 +75,14 @@ const styles = theme => ({
 
 
 function getSteps() {
-        return ['Info assure', 'Dossier', 'Prestation','Valoraisation'];
-      }
+  return ['Info assure', 'Dossier', 'Prestation','Valoraisation'];
+}
 
 
-const VerticalLinearStepper= (props) => {
+const AjouterDossier = (props) => {
   const {classes} = props;
+
+  const today = todaysDate();
 
   // id de l'assure passé en paramètre dand l'url
   const { idAssure } = useParams();
@@ -97,14 +109,20 @@ const VerticalLinearStepper= (props) => {
 
   // etat du dossier
   const [dossier, setDossier] = useState({
-    num: 0,
-    dateReception: "",
-    dateFinCouverture: "",
-    debutSoin: "",
-    finSoin: "",
-    medecinTraitant: "",
+    imme: "",
+    categorie: "en_instance",
+    numDossier: "",
+    dateReception: today,
+    debutSoin: today,
+    finSoin: today,
+    formulair: "",
+    convention: "",
+    Agence: "",
+    Direction: ""
   });
 
+  //etat des prestations
+  const [prestations, setPrestations] = useState([]);
 
   // chargement des informations de l'assuré
   useEffect(() => {
@@ -119,11 +137,11 @@ const VerticalLinearStepper= (props) => {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return  <FormInfoAssure assure={assure} setAssure={setAssure} /> ;
+        return  <FormInfoAssure assure={assure} setAssure={setAssure} classes={classes} /> ;
       case 1:
-        return <FormDossier dossier={dossier} setDossier={setDossier} />;
+        return <FormDossier dossier={dossier} setDossier={setDossier} classes={classes} />;
       case 2:
-        return <Prestation/>;
+        return <Prestation prestations={prestations} setPrestations={setPrestations} classes={classes} />;
       case 3:
         return <FormValoraisation/>;
       default:
@@ -213,4 +231,4 @@ const VerticalLinearStepper= (props) => {
   );
 }
 
-export default withStyles(styles)(VerticalLinearStepper)
+export default withStyles(styles)(AjouterDossier)

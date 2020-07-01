@@ -25,7 +25,7 @@ const assures = [
         debutCouverture: "2020-02-25",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 12932,
@@ -37,7 +37,7 @@ const assures = [
         debutCouverture: "2020-01-19",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 13342,
@@ -49,7 +49,7 @@ const assures = [
         debutCouverture: "2020-03-11",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 13232,
@@ -61,7 +61,7 @@ const assures = [
         debutCouverture: "2020-09-30",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 12932,
@@ -73,7 +73,7 @@ const assures = [
         debutCouverture: "2019-12-29",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 13926,
@@ -85,7 +85,7 @@ const assures = [
         debutCouverture: "2020-10-05",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 13663,
@@ -97,7 +97,7 @@ const assures = [
         debutCouverture: "2020-05-05",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 12821,
@@ -109,7 +109,7 @@ const assures = [
         debutCouverture: "2020-02-05",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 14144,
@@ -121,7 +121,7 @@ const assures = [
         debutCouverture: "2020-02-05",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 13366,
@@ -133,7 +133,7 @@ const assures = [
         debutCouverture: "2020-02-05",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
         imme: 13333,
@@ -145,7 +145,7 @@ const assures = [
         debutCouverture: "2020-02-05",
         finCouverture: "2020-06-05",
         agence: "Maarif",
-        ayantsDroit: "",
+        ayantsDroit: Math.ceil(Math.random() * 6)
     }
 ];
 

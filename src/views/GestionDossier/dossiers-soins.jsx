@@ -18,8 +18,14 @@ export default function DossierSoins(props) {
 
     // etat des infos du dossier entrees dans le formulaire pour le filtre
     const [inputDossier, setInputDossier] = useState({
-        imme: 0,
-
+        imme: "",
+        categorie: "",
+        numDossier: "",
+        debutSoin: "",
+        formulair: "",
+        convention: "",
+        Agence: "",
+        Direction: ""
     });
 
     // etat des infos de l'assure entrees dans le formulaire pour choisir l'assure
@@ -47,7 +53,6 @@ export default function DossierSoins(props) {
 
     // chargement des dossiers selons la categorie choisie
     useEffect(() => {
-        console.log(category);
         setLoading(true);
         dossierService.getDossiersEnInstance(category).then(res => {
             let newColumns = [];
@@ -64,7 +69,7 @@ export default function DossierSoins(props) {
         }).catch((err) => {
             console.log(err);
         });
-    }, [category]);
+    }, [category]); 
 
     function handleActions(action, dossier) {
         setAction(action);
@@ -117,7 +122,7 @@ export default function DossierSoins(props) {
                 button='Filtrer'
                 icon='none'
             >
-                <FiltreDossier/>
+                <FiltreDossier />
             </FormPopup>
             <Popup
                 open={openFiltreAssure}

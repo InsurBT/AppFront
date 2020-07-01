@@ -1,4 +1,4 @@
-import assures from "./assures";
+import assures from "./data/assures";
 
 const assureSevice = {
     getAll: function () {
