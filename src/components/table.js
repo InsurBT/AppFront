@@ -65,16 +65,11 @@ export default function CustomTable(props) {
 
     // initialisation des pages a l'affichage et a chaque fois que les donnees a afficher sont modifiees
     useEffect(() => {
-<<<<<<< HEAD
-        const pageSize = parseInt(props.pageSize) || 5;
-        const newPages = []
-=======
         const pageSize = parseInt(props.pageSize) || 10;
         const newPages = [];
 
         setCurrentPageIndex(0);
         setSelectedPage(1);
->>>>>>> 099ac724ad5ee5bf291820bd5e9529520b9baba4
         
         if (displayedData.length === 0) {
             newPages.push([]);
