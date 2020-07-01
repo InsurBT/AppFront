@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom';
 import DossierSoins from '../../views/GestionDossier/dossiers-soins';
 import AjouterAssure from '../../views/gestionAssure/StepperAssure/StepperAssure';
 import gestionAyantDroit from '../../views/gestionAssure/StepperAssure/GestionAyantDroit'
-import AjouterDossier from '../../views/GestionDossier/steppreFiltre';
+import AjouterDossier from '../../views/GestionDossier/AjouterDossier';
 
 export default function DossiersRouter(props) {
     const {path, url} = useRouteMatch();
