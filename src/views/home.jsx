@@ -10,8 +10,9 @@ import img1 from '../assets/img/cnss.png'
 const styles = theme => ({
     image: {
        backgroundImage : `url(${img1})`,
+       backgroundRepeat: 'no-repeat',
        backgroundPosition: 'center',
-       backgroundSize: 'cover',
+       backgroundSize: '700px',
        width : '100%',
        height : '600px'
       },
@@ -63,8 +64,7 @@ const styles = theme => ({
                         subheader={connectedUser.nom}
                     />
                     <CardContent className={classes.color}>
-                        Je met du texte ici pour remplire cette element. <br/>
-                        Nous verrons plus tard ce qu'on peut mettre ici <br/>
+                    BIENVENUE SUR LE PORTAIL ASSURÉ DE LA CNSS <br/>
 
                     </CardContent>
                 </Card>

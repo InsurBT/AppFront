@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField';
 import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
+import swal from 'sweetalert';
+
 
 
 export default function DirectionReg (props) {
@@ -144,7 +146,15 @@ export default function DirectionReg (props) {
 
 
     function deleteDirectionReg(prestataire) {
-        if (window.confirm("Voulez supprimer cette prestataire?")) {
+        swal({
+            title : "Voulez supprimer cette dr regionale?",
+            text : "",
+            icon : "warning",
+           
+           
+
+        }).then((WillDelete)=>{
+        if (WillDelete) {
             let newDirectionReg = [];
             DirectionRegService.delete(directionReg.id).then(res => {
                 if (res === true) {
@@ -156,6 +166,9 @@ export default function DirectionReg (props) {
             });
         }
     }
+    )
+    }
+    
 
     function editDirectionReg(id) {
         if (validForm()) {
@@ -230,6 +243,7 @@ export default function DirectionReg (props) {
                     delete={openDeleteForm}
                     edit={openEditForm} 
                     pageSize="5"
+                    searchBar
                     />
         }
 

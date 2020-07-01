@@ -108,6 +108,7 @@ export default function ListeAssure(props) {
                 open={formOpen}
                 onClose={() => {setFormOpen(false)}}
                 button='Filtrer'
+                icon = {<FilterListIcon/>}
             >
                 <FiltreAssure/>
             </FormPopup>

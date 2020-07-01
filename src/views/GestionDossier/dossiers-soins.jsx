@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import dossierService from '../../service/dossier-service';
-
+import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
@@ -97,8 +97,12 @@ export default function DossierSoins(props) {
 
     return (<div>
           
-                <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }>Nouveau</Button>
-                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}>Filtrer</Button>
+                <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }>
+                    <AddIcon />
+                </Button>
+                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}>
+                    <FilterListIcon  />
+                </Button>
            
             {
                 loading ?
@@ -120,7 +124,8 @@ export default function DossierSoins(props) {
                 open={formOpen}
                 onClose={closeForm}
                 button='Filtrer'
-                icon='none'
+
+                icon = {<FilterListIcon/>}
             >
                 <FiltreDossier />
             </FormPopup>
