@@ -25,21 +25,21 @@ export default function GestionAyantDroit() {
       <Paper  className={classes.paper} elevation={3} >
         
             <TextField  id="standard-basic" label="Immatriculaton" />&nbsp;&nbsp;&nbsp;
-            <TextField  id="standard-basic" label="N°d'ordre" />&nbsp;&nbsp;&nbsp;
+            <TextField  id="standard-basic1" label="N°d'ordre" />&nbsp;&nbsp;&nbsp;
             
             
-            <TextField  id="standard-basic" label="Rang" />&nbsp;
-            <TextField  id="standard-basic" label="Lien" />&nbsp;&nbsp;&nbsp;
+            <TextField  id="standard-basic2" label="Rang" />&nbsp;
+            <TextField  id="standard-basic3" label="Lien" />&nbsp;&nbsp;&nbsp;
             
-            <TextField  id="standard-basic" label="Nom" />&nbsp;&nbsp;
-            <TextField  id="standard-basic" label="Prénom" />&nbsp;&nbsp;&nbsp;
+            <TextField  id="standard-basic5" label="Nom" />&nbsp;&nbsp;
+            <TextField  id="standard-basic6" label="Prénom" />&nbsp;&nbsp;&nbsp;
             
            
-            <TextField  id="standard-basic" label="date naissance" />&nbsp;&nbsp;
-            <TextField  id="standard-basic" label="Sexe" />&nbsp;&nbsp;&nbsp;
+            <TextField  id="standard-basic7" label="date naissance" />&nbsp;&nbsp;
+            <TextField  id="standard-basic8" label="Sexe" />&nbsp;&nbsp;&nbsp;
            
-            <TextField  id="standard-basic" label="CIN" />&nbsp;&nbsp;
-            <TextField  id="standard-basic" label="Adresse" />&nbsp;&nbsp;&nbsp;
+            <TextField  id="standard-basic9" label="CIN" />&nbsp;&nbsp;
+            <TextField  id="standard-basic11" label="Adresse" />&nbsp;&nbsp;&nbsp;
     
         
      </Paper>

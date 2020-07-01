@@ -118,7 +118,8 @@ export default function DossierSoins(props) {
                 open={formOpen}
                 onClose={closeForm}
                 button='Filtrer'
-                icon='none'
+
+                icon = {<FilterListIcon/>}
             >
                 <FiltreDossier/>
             </FormPopup>

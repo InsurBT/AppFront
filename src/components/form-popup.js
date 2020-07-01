@@ -10,6 +10,7 @@ export default function FormPopup(props) {
                 open={props.open}
                 closeOnDocumentClick
                 onClose={props.onClose}
+            
             >
         <FormContainer {...props} style={{margin: "0", width: "100%"}} >
             
