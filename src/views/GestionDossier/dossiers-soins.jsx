@@ -32,7 +32,15 @@ export default function DossierSoins(props) {
     const [inputAssure, setInputAssure] = useState({});
 
     // L'etat des colonne a afficher dans le tableau
-    const [columns, setColumns] = useState([]);
+    const columns = [
+        { title: "Numero", property: "NumDossier" },
+        { title: "Id assuré", property: "imme" },
+        { title: "Debut de soin", property: "debutSoin" },
+        { title: "Fin de soin", property: "finSoin" },
+        { title: "Formulaire", property: "formulair" },
+        { title: "Convention", property: "convention" },
+        { title: "Date de reception", property: "dateReception" }
+    ]
 
     // Etat des donnees affichees dans le taleau
     const [data, setData] = useState([]);
@@ -55,15 +63,7 @@ export default function DossierSoins(props) {
     useEffect(() => {
         setLoading(true);
         dossierService.getDossiersEnInstance(category).then(res => {
-            let newColumns = [];
-            for (var attribute in res.dossiers[0]) {
-                newColumns.push({
-                    title: attribute,
-                    property: attribute
-                });
-            }
             setData(res.dossiers);
-            setColumns(newColumns);
             setActoins(res.actions);
             setLoading(false);
         }).catch((err) => {
