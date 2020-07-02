@@ -66,8 +66,6 @@ const styles = theme => ({
         }
     }, []);
 
-    console.log("mmouaad ana login" , connectedUser)
-
     const {classes} = props
 
     return (

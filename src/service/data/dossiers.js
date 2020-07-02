@@ -29,4 +29,6 @@ const dossiers = [
         Agence: "Maarif",
         Direction: "Direction Regionale Casa Anfa"
     }
-]
+];
+
+export default dossiers;
