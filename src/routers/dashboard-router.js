@@ -12,7 +12,6 @@ import { blue } from '@material-ui/core/colors';
 import Navbar from "../components/Navbars/Navbar.js";
 import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
-
 import routes from "../routes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
@@ -116,15 +115,17 @@ export default function DashboardRouter(props) {
   };
 
   return (<div>
-    <Sidebar
-      routes={routes}
-      logoText={"Soin de santé"}
-      logo={logo}
-     image={img}
-      handleDrawerToggle={handleDrawerToggle}
-      open={mobileOpen}
-      color={whiteColor}
+    
+      <Sidebar
+          routes={routes}
+          logoText={"Soin de santé"}
+          logo={logo}
+        image={img}
+          handleDrawerToggle={handleDrawerToggle}
+          open={mobileOpen}
+          color={whiteColor}
     />
+    
     <div className={classes.mainPanel} ref={mainPanel}>
       <Navbar
         routes={routes}
