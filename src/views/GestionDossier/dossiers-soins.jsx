@@ -10,6 +10,7 @@ import FiltreDossier from './FiltreDossier';
 import FiltreAssure from './FiltreAssure';
 
 import FilterListIcon from '@material-ui/icons/FilterList';
+import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 
@@ -93,8 +94,8 @@ export default function DossierSoins(props) {
 
     return (<div>
           
-                <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }>Nouveau</Button>
-                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}>Filtrer</Button>
+                <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }><AddIcon/></Button>
+                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}><FilterListIcon/></Button>
            
             {
                 loading ?

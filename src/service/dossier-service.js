@@ -36,9 +36,9 @@ const dossierSevice = {
                         }
                     ],
                     actions: [
-                        "nouveau",
-                        "modifier",
-                        "consulter"
+                        "En instance",
+                        "Valider",
+                        "Rejeter"
                     ]
                 });
             }, 1500);
@@ -54,12 +54,12 @@ const dossierSevice = {
                         path: "/en_instance"
                     },
                     {
-                        name: "Retourne",
-                        path: "/retourne"
+                        name: "Rejeté",
+                        path: "/Rejete"
                     },
                     {
-                        name: "Blocage TP",
-                        path: "/blocage_TP"
+                        name: "Validé",
+                        path: "/Validé"
                     }
                 ]);
             }, 1500);
