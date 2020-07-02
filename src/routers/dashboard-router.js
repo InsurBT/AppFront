@@ -115,15 +115,14 @@ export default function DashboardRouter(props) {
   };
 
   return (<div>
-    
-      <Sidebar
-          routes={routes}
-          logoText={"Soin de santé"}
-          logo={logo}
-        image={img}
-          handleDrawerToggle={handleDrawerToggle}
-          open={mobileOpen}
-          color={whiteColor}
+    <Sidebar
+      routes={routes}
+      logoText={"Soin de santé"}
+      logo={logo}
+      image={img}
+      handleDrawerToggle={handleDrawerToggle}
+      open={mobileOpen}
+      color={whiteColor}
     />
     
     <div className={classes.mainPanel} ref={mainPanel}>

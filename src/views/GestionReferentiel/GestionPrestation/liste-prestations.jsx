@@ -27,9 +27,8 @@ export default function ListePrestations(props) {
     const [inputPrestation, setInputPrestation] = useState({
         id: NaN,
         type: "",
-        nbrActes: "",
-        montantEngage: "",
-        montantPaye: ""
+        tauxRemboursement: "",
+        tarif: "",
     });
 
     // l'etat du mode du formulaire
@@ -50,8 +49,8 @@ export default function ListePrestations(props) {
     // les colonnes a afficher dans le tableau
     const columns = [
         { title: "Prestations", property: "type" },
-      
-        { title: "Montant payee", property: "montantPaye" }
+        { title: "Tarif", property: "tarif" },
+        { title: "Taux de remboursement", property: "tauxRemboursement" },
     ];
     //********************************************************************** */
 
@@ -171,19 +170,17 @@ export default function ListePrestations(props) {
     function validForm() {
         return (
             inputPrestation.type !== "" &&
-            !isNaN(parseInt(inputPrestation.nbrActes)) &&
-            !isNaN(parseInt(inputPrestation.montantEngage)) &&
-            !isNaN(parseInt(inputPrestation.montantPaye))
-        ) 
+            !isNaN(parseInt(inputPrestation.tauxRemboursement)) &&
+            !isNaN(parseInt(inputPrestation.tarif))
+        );
     }
 
     function clearInput() {
         setInputPrestation({
             id: NaN,
             type: "",
-            nbrActes: "",
-            montantEngage: "",
-            montantPaye: ""
+            tauxRemboursement: "",
+            tarif: "",
         })
     }
 
@@ -229,20 +226,14 @@ export default function ListePrestations(props) {
             <TextField
                 type="number"
                 label="Nombre d'actes"
-                value={inputPrestation.nbrActes}
-                onChange={(e) => {setInputPrestation({...inputPrestation, nbrActes: e.target.value})}}
+                value={inputPrestation.tauxRemboursement}
+                onChange={(e) => {setInputPrestation({...inputPrestation, tauxRemboursement: e.target.value})}}
             />
             <TextField
                 type="number"
                 label="Montant engage"
-                value={inputPrestation.montantEngage}
-                onChange={(e) => {setInputPrestation({...inputPrestation, montantEngage: e.target.value})}}
-            />
-            <TextField
-                type="number"
-                label="Montant paye"
-                value={inputPrestation.montantPaye}
-                onChange={(e) => {setInputPrestation({...inputPrestation, montantPaye: e.target.value})}}
+                value={inputPrestation.tarif}
+                onChange={(e) => {setInputPrestation({...inputPrestation, tarif: e.target.value})}}
             />
             <span style={{color: "red"}}>{invalidMessage}</span>
         </FormPopup>

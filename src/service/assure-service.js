@@ -35,7 +35,7 @@ const assureSevice = {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(assures.find((assure) => assure.imme === id));
-            }, 1500);
+            }, 500);
         });
     }
 }

@@ -9,7 +9,7 @@ const ayantDroitSevice = {
                             Penom: "Youssef",
                             NomJeuneFille: " El Madani",
                             lienParente: "fils",
-                            status: "marié",
+                            status: "Célebataire",
                             rang: " 2",
                             sexe: " masculin",
                             dateNaissance: "13/05/1997",

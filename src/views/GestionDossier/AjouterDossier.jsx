@@ -137,7 +137,7 @@ const AjouterDossier = (props) => {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return  <FormInfoAssure assure={assure} setAssure={setAssure} classes={classes} /> ;
+        return  <FormInfoAssure assure={assure} setAssure={setAssure} classes={classes} />;
       case 1:
         return <FormDossier dossier={dossier} setDossier={setDossier} classes={classes} />;
       case 2:

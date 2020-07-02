@@ -29,7 +29,7 @@ const routes = [
     },
 
     {
-        name: "Parametrage",
+        name: "Paramétrage",
         path: "/parametrage",
         component: Paremetrage,
         icon: Settings,
@@ -44,7 +44,7 @@ const routes = [
     },
 
     {
-        name: "Referentiel",
+        name: "Référentiel",
         path: "/referentiel",
         component: Referentiel,
         icon: Language,
