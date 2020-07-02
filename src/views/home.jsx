@@ -123,10 +123,7 @@ const styles = theme => ({
                 </TimelineSeparator>
                 <TimelineContent>
                 <Paper elevation={3} className={classes.paper}>
-                    <Typography variant="h6" component="h1">
-                    Le Rôle
-                    </Typography>
-                    <Typography>{connectedUser.role} </Typography>
+                    <Typography  variant="h6" component="h1">{connectedUser.role} </Typography>
                 </Paper>
                 </TimelineContent>
             </TimelineItem>

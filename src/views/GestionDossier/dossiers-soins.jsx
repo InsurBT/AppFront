@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import dossierService from '../../service/dossier-service';
-
-
+import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
@@ -10,7 +9,6 @@ import FiltreDossier from './FiltreDossier';
 import FiltreAssure from './FiltreAssure';
 
 import FilterListIcon from '@material-ui/icons/FilterList';
-import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 
@@ -20,8 +18,14 @@ export default function DossierSoins(props) {
 
     // etat des infos du dossier entrees dans le formulaire pour le filtre
     const [inputDossier, setInputDossier] = useState({
-        imme: 0,
-
+        imme: "",
+        categorie: "",
+        numDossier: "",
+        debutSoin: "",
+        formulair: "",
+        convention: "",
+        Agence: "",
+        Direction: ""
     });
 
     // etat des infos de l'assure entrees dans le formulaire pour choisir l'assure
@@ -49,7 +53,6 @@ export default function DossierSoins(props) {
 
     // chargement des dossiers selons la categorie choisie
     useEffect(() => {
-        console.log(category);
         setLoading(true);
         dossierService.getDossiersEnInstance(category).then(res => {
             let newColumns = [];
@@ -66,7 +69,7 @@ export default function DossierSoins(props) {
         }).catch((err) => {
             console.log(err);
         });
-    }, [category]);
+    }, [category]); 
 
     function handleActions(action, dossier) {
         setAction(action);
@@ -120,7 +123,7 @@ export default function DossierSoins(props) {
 
                 icon = {<FilterListIcon/>}
             >
-                <FiltreDossier/>
+                <FiltreDossier />
             </FormPopup>
             <Popup
                 open={openFiltreAssure}

@@ -1,45 +1,27 @@
+import dossiers from "./data/dossiers";
+
 const dossierSevice = {
     getDossiersEnInstance: function (categorie) {
+        let actions = [];
+
+        switch (categorie) {
+            case "en_instance":
+                actions = ["nouveau", "valider", "retourner"];
+                break;
+            case "valide":
+                actions = ["nouveau", "remettre en instance", "retourner"];
+                break;
+            case "retourne":
+                actions = ["nouveau", "remettre en instance", "valider"];
+                break;
+            default:
+                actions = ["aucune action pour cette categorie"]
+        }
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve({
-                    dossiers: [
-                        {
-                            imme: 13342,
-                            beneficiaire: "Mohammed El Madani",
-                            NumDossier: "5666-2020-02-100",
-                            debutSoin: "05/02/2020",
-                            formulair: "NM121",
-                            convention: "France",
-                            Agence: "Maarif",
-                            Direction: "Direction Regionale Casa Anfa"
-                        },
-                        {
-                            imme: 12342,
-                            beneficiaire: "Jhon Doe",
-                            NumDossier: "5666-2020-02-100",
-                            debutSoin: "05/02/2020",
-                            formulair: "NM121",
-                            convention: "France",
-                            Agence: "Maarif",
-                            Direction: "Direction Regionale Casa Anfa"
-                        },
-                        {
-                            imme: 13323,
-                            beneficiaire: "Alami Ali",
-                            NumDossier: "5666-2020-02-100",
-                            debutSoin: "05/02/2020",
-                            formulair: "NM121",
-                            convention: "France",
-                            Agence: "Maarif",
-                            Direction: "Direction Regionale Casa Anfa"
-                        }
-                    ],
-                    actions: [
-                        "En instance",
-                        "Valider",
-                        "Rejeter"
-                    ]
+                    dossiers: dossiers.filter(dossier => dossier.categorie === categorie),
+                    actions
                 });
             }, 1500);
         })
@@ -54,12 +36,12 @@ const dossierSevice = {
                         path: "/en_instance"
                     },
                     {
-                        name: "Rejeté",
-                        path: "/Rejete"
+                        name: "Retourné",
+                        path: "/retourne"
                     },
                     {
                         name: "Validé",
-                        path: "/Validé"
+                        path: "/valide"
                     }
                 ]);
             }, 1500);

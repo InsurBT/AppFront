@@ -1,29 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '../../components/table';
-import SmallHeader from '../../components/small-header';
-import FormPopup from '../../components/form-popup';
-import TextInput from '../../components/text-input';
+import Table from '../../../components/table';
+import SmallHeader from '../../../components/small-header';
+import FormPopup from '../../../components/form-popup';
+import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
 
-import prestationService from '../../service/prestation-service';
-import { useEffect } from 'react';
-import { TextField } from '@material-ui/core';
+import prestationService from '../../../service/prestation-service';
+
+import styles from '../../../assets/jss/material-dashboard-react/components/buttonStyle';
+
+const useStyle = makeStyles(styles);
 
 export default function ListePrestations(props) {
-    const useStyles = makeStyles((theme) => ({
-        button : {
-            backgroundColor : '#B3D9FF',
-            '&:hover' : {
-            backgroundColor : "#1A8CFF"
-            }
-        }
-    }));
-        
-    const classes = useStyles();
+    const classes = useStyle();
     
     const [prestations, setPrestations] = useState([]);
 
@@ -205,7 +198,7 @@ export default function ListePrestations(props) {
     return (<div>
         <SmallHeader>
             Liste des prestations
-            <Button variant="contained" className={classes.button} onClick={() => {setFormMode("AJOUTER")}}>Ajouter prestation</Button>
+            <Button variant="contained" className={classes.basicButton} onClick={() => {setFormMode("AJOUTER")}}>Ajouter prestation</Button>
         </SmallHeader>
 
         {/* Tableau des donnees */}

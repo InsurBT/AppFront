@@ -12,6 +12,12 @@ import {
 } from "../../material-dashboard-react.js";
 
 const buttonStyle = {
+  basicButton: {
+    backgroundColor : '#b3d9ff',
+    '&:hover' : {
+      backgroundColor : "#1a8cff"
+    }
+  },
   button: {
     minHeight: "auto",
     minWidth: "auto",
