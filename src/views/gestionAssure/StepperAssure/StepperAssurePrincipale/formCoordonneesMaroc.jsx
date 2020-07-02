@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import agenceService from '../../../../service/agence-service';
+import villeService from '../../../../service/ville-service';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,6 +33,24 @@ export default function FormCoordonneesMaroc() {
 
     const classes = useStyles();
     const [ville, setVille] = React.useState('');
+    const [agences, setAgences] = useState([]);
+    const [optionsVille,setOptionsVille] = useState([]);
+
+    useEffect(() => {
+      
+        villeService.getAll(1).then(res => {
+            setOptionsVille(res);
+            console.log('les villes:',res);
+    }
+    ); 
+        agenceService.getAll().then(res => {
+            if (typeof res === "string") {
+                console.log(res);
+            } else {
+                setAgences(res);
+            }
+        })
+    }, []);
 
     const handleChangeVille = (event) => {
         setVille(event.target.value);
@@ -56,10 +76,13 @@ export default function FormCoordonneesMaroc() {
                             value={ville}
                             onChange={handleChangeVille}
                             >
-                            <MenuItem value={10}>Casablanca</MenuItem>
-                            <MenuItem value={20}>Rabat</MenuItem>
-                            <MenuItem value={20}>Agadir</MenuItem>
-                            
+                            {
+                                    optionsVille.map(villes => {
+                                        return <MenuItem value={villes.id} selected={villes.nom === ville}>
+                                            {villes.nom}
+                                        </MenuItem>
+                                    })
+                            }
                         </Select>
                 </FormControl> 
                 <pre></pre>
@@ -72,8 +95,13 @@ export default function FormCoordonneesMaroc() {
                             value={agence}
                             onChange={handleChangeAgence}
                             >
-                            <MenuItem value={10}>Agadir 1</MenuItem>
-                            <MenuItem value={20}>Agadir 2</MenuItem>
+                                   {
+                                    agences.map(agence => {
+                                        return <MenuItem value={agence.code} selected={agence.label === agence}>
+                                            {agence.label}
+                                        </MenuItem>
+                                    })
+                                    }
                             
                         </Select>
                 </FormControl>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

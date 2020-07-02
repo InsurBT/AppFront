@@ -30,3 +30,4 @@ const dossiers = [
         Direction: "Direction Regionale Casa Anfa"
     }
 ]
+export default dossiers;

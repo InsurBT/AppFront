@@ -141,7 +141,7 @@ const StepperAssure= (props)=> {
         <div>
           {activeStep === steps.length ? (
             <div>
-              <Typography className={classes.instructions}>toutes les étapes sont terminées</Typography>
+              <Typography className={classes.instructions}>L'assuré a été ajouté avec succès </Typography>
               <Link color="inherit" href="http://localhost:3000/home/liste_assure">
                   <Button className={classes.buttonRetour}>Terminer</Button>
               </Link>
