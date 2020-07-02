@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import paysService from '../../../../service/pays-service';
 import villeService from '../../../../service/ville-service';
+import CaisseEtrangereService from '../../../../service/caisseEtrangere-service';
+import CaisseMereService from '../../../../service/caisseMere-service';
 import TextInputselect from '../../../../components/text-input-select';
 
 
@@ -48,12 +50,18 @@ export default function FormCoordonnesEtranger() {
     const handleChangeVille = (event) => {
         setVille(event.target.value);
     };
-
+/************************************************************************** */
     const [pays, setPays] = React.useState('');
 
     const [options,setOptions] = useState([]);
 
     const [optionsVille,setOptionsVille] = useState([]);
+    
+    const [caisseEtrangere,setCaisseEtrangere] = useState([]);
+
+    const [caisses,setCaisses] = useState([]);
+
+    /******************************************************************************** */
 
     const handleChangePays = (event) => {
         setPays(event.target.value);
@@ -68,7 +76,18 @@ export default function FormCoordonnesEtranger() {
     const handleChangeCaisseMere = (event) => {
         setCaisseMere(event.target.value);
     };
+
+    /********************************************************************************************************* */
+
     useEffect(() => {
+        CaisseEtrangereService.getAll().then(res => {
+            setCaisseEtrangere(res);
+            console.log('caisse',res);
+        });
+        CaisseMereService.getAll().then(res => {
+            setCaisses(res);
+         
+        });
         paysService.getAll().then(res => {
             if (typeof res === "string") {
                 console.log(res);
@@ -140,9 +159,13 @@ export default function FormCoordonnesEtranger() {
                             value={caisse}
                             onChange={handleChangeCaisse}
                             >
-                            <MenuItem value={10}> 1</MenuItem>
-                            <MenuItem value={20}> 2</MenuItem>
-                            
+                             {
+                                    caisseEtrangere.map(caisses => {
+                                        return <MenuItem value={caisses.code} selected={caisses.nom === caisse}>
+                                            {caisses.nom}
+                                        </MenuItem>
+                                    })
+                            }
                         </Select>
                 </FormControl>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <TextField className={classes.textField}  id="standard-basic" label="Mobile" />
@@ -154,8 +177,13 @@ export default function FormCoordonnesEtranger() {
                             value={caisseMere}
                             onChange={handleChangeCaisseMere}
                             >
-                            <MenuItem value={10}> 1</MenuItem>
-                            <MenuItem value={20}> 2</MenuItem>
+                              {
+                                    caisses.map(caissesMere => {
+                                        return <MenuItem value={caissesMere.code} selected={caissesMere.nom === caisseMere}>
+                                            {caissesMere.nom}
+                                        </MenuItem>
+                                    })
+                               }
                             
                         </Select>
                 </FormControl>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

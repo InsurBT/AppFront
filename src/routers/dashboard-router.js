@@ -19,7 +19,7 @@ import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js
 
 import img from "../assets/img/faces/assurance.png";
 
-import logo from "../assets/img/service4.png";
+import logo from "../assets/img/faces/soinsante.png";
 
 import utilisateurService from '../service/utilisateur-service';
 import dossierService from '../service/dossier-service';

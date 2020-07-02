@@ -97,12 +97,8 @@ export default function DossierSoins(props) {
 
     return (<div>
           
-                <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }>
-                    <AddIcon />
-                </Button>
-                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}>
-                    <FilterListIcon  />
-                </Button>
+                <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }><AddIcon/></Button>
+                <Button variant="outlined" color="primary" onClick={() => {setFormOpen(true)}}><FilterListIcon/></Button>
            
             {
                 loading ?

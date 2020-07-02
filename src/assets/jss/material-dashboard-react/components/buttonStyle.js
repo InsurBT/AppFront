@@ -12,7 +12,9 @@ import {
 } from "../../material-dashboard-react.js";
 
 const buttonStyle = {
+  
   basicButton: {
+    color : "#000",
     backgroundColor : '#b3d9ff',
     '&:hover' : {
       backgroundColor : "#1a8cff"
