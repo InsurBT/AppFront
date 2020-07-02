@@ -1,15 +1,22 @@
 import api from '../environement/api';
 
+import prestations from './data/referentielPrestation';
+
 const prestationService = {
-    getAll: function(nom) {
-        return api.get("prestation/getAll", {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                return res.text();
-            }
-        });
+    getAll: function() {
+        // return api.get("prestation/getAll", {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+        //     if (res.ok) {
+        //         return res.json();
+        //     } else {
+        //         return res.text();
+        //     }
+        // });
         
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(prestations);
+            }, 300);
+        })
     },
 
     add: function (prestation) {

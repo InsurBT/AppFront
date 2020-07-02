@@ -218,6 +218,7 @@ export default function ListeUtilisateurs(props) {
         <FormPopup
             onClose={closeForm}
             {...formParams}
+            direction="column"
         >
             <TextField
                 type="text"

@@ -124,19 +124,19 @@ export default function DossierSoins(props) {
                 open={formOpen}
                 onClose={closeForm}
                 button='Filtrer'
-
-                icon = {<FilterListIcon/>}
+                icon={<FilterListIcon/>}
             >
                 <FiltreDossier />
             </FormPopup>
-            <Popup
+            <FormPopup
                 open={openFiltreAssure}
+                title="Filtre Utilisateur"
+                icon={<FilterListIcon/>}
                 onClose={() => {setOpenFiltreAssure(false)}}
-                closeOnDocumentClick
             >
                 <div style={{margin: "10px"}}>
                     <FiltreAssure handleAjouter={ ({imme}) => { props.history.push("/home/dossiers/ajouter/" + imme) } } />
                 </div>
-            </Popup>
+            </FormPopup>
         </div>)
 }
