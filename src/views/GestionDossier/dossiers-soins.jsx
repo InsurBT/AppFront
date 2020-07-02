@@ -7,12 +7,12 @@ import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
 import FiltreDossier from './FiltreDossier';
 import FiltreAssure from './FiltreAssure';
-
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useParams } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 
 export default function DossierSoins(props) {
+
     // categorie de dossier chosie selon l'url
     const { category } = useParams();
 
@@ -116,23 +116,23 @@ export default function DossierSoins(props) {
                         searchBar
                     />
             }
-            <FormPopup
-                open={formOpen}
-                onClose={closeForm}
-                button='Filtrer'
-                icon={<FilterListIcon/>}
-            >
-                <FiltreDossier />
-            </FormPopup>
-            <FormPopup
-                open={openFiltreAssure}
-                title="Filtre Utilisateur"
-                icon={<FilterListIcon/>}
-                onClose={() => {setOpenFiltreAssure(false)}}
-            >
-                <div style={{margin: "10px"}}>
-                    <FiltreAssure handleAjouter={ ({imme}) => { props.history.push("/home/dossiers/ajouter/" + imme) } } />
-                </div>
-            </FormPopup>
+                <FormPopup
+                    open={formOpen}
+                    onClose={closeForm}
+                    button='Filtrer'
+
+                    icon = {<FilterListIcon/>}
+                >
+                    <FiltreDossier />
+                </FormPopup>
+                <Popup
+                    open={openFiltreAssure}
+                    onClose={() => {setOpenFiltreAssure(false)}}
+                    closeOnDocumentClick
+                >
+                    <div style={{margin: "10px"}}>
+                        <FiltreAssure handleAjouter={ ({imme}) => { props.history.push("/home/dossiers/ajouter/" + imme) } } />
+                    </div>
+                </Popup>
         </div>)
 }
