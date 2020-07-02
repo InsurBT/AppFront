@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
       '& > *': {
         width: 250,  
       },
+      margin :"0 20px"
     },
     paper: {
         padding: theme.spacing(2), 
@@ -37,13 +38,14 @@ const useStyles = makeStyles(theme => ({
 
     },
     Button: {
-      '& > *': {
-        margin: theme.spacing(8),
+      backgroundColor : '#b3d9ff',
+      '&:hover' : {
+      backgroundColor : "#1a8cff"
       },
+      margin:'0 80px'
     },  
     input:{
-      width: 320,
-
+      width: '200px',
   },
 }));
 
@@ -83,9 +85,6 @@ export default function FormPrestation(props) {
                     }
                   </Select>
             </FormControl>
-          </Grid>
-                  
-          <Grid item>
             <FormControl className={classes.root}>
               <InputLabel id="demo-simple-select-label">Cotation</InputLabel>
                 <Select
@@ -103,9 +102,6 @@ export default function FormPrestation(props) {
                   
           <Grid item>
             <TextField className={classes.root} label="Tarif" />
-          </Grid>
-            
-          <Grid item>
             <TextField className={classes.root} label="Taux remboursement" />
           </Grid>
 
@@ -120,28 +116,30 @@ export default function FormPrestation(props) {
                             label="Non remboursable"
                             labelPlacement="start"
                     />
-                      
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Input placeholder="Motif" inputProps={{ 'aria-label': 'description' }} className={classes.input} />
 
             </Paper>     
       </Grid>
 
-      <TextField
+      <TextField 
+        className={classes.root}
         label="Frais engagés"
         value={prestation.montantEngage}
         onChange={(e) => {setPrestation({...prestation, montantEngage: e.target.value})}}
       />
       <TextField
+        className={classes.root}
         label="Nombre d'actes"
         value={prestation.nbrActes}
         onChange={(e) => {setPrestation({...prestation, nbrActes: e.target.value})}}
       />
-      <TextField label="Mt à rembourser" />
+      <TextField className={classes.root} label="Mt à rembourser" />
 
                   
-      <Box className={classes.Button}>
-          <Button variant="contained">Valider</Button> 
-          <Button variant="contained">Quiter</Button>
+      <Box >
+          <Button className={classes.Button} variant="contained">Valider</Button> 
+          <Button className={classes.Button} variant="contained">Quiter</Button>
       </Box>
           
     </div>
