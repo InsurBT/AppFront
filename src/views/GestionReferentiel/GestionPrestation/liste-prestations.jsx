@@ -50,8 +50,7 @@ export default function ListePrestations(props) {
     // les colonnes a afficher dans le tableau
     const columns = [
         { title: "Prestations", property: "type" },
-        { title: "Nbr Actes", property: "nbrActes" },
-        { title: "Montant Engage", property: "montantEngage" },
+      
         { title: "Montant payee", property: "montantPaye" }
     ];
     //********************************************************************** */

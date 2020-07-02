@@ -65,10 +65,15 @@ export default function DashboardRouter(props) {
 
   const {setConnectedUser} = useContext(ConnectedUserContext);
 
+  const  [hide , setHide]=useState(true);
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-      
+  
+  function hideSideBar (props) {
+    setHide (!hide);
+  }
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
       setMobileOpen(false);
@@ -116,7 +121,9 @@ export default function DashboardRouter(props) {
   };
 
   return (<div>
-    <Sidebar
+
+
+   { hide ? <Sidebar
       routes={routes}
       logoText={"Soin de santé"}
       logo={logo}
@@ -124,9 +131,12 @@ export default function DashboardRouter(props) {
       handleDrawerToggle={handleDrawerToggle}
       open={mobileOpen}
       color={whiteColor}
-    />
+    /> : null 
+    }
+
     <div className={classes.mainPanel} ref={mainPanel}>
       <Navbar
+        click={hideSideBar}
         routes={routes}
         handleDrawerToggle={handleDrawerToggle}
       />
