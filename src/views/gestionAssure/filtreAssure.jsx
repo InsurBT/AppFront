@@ -93,7 +93,7 @@ function FiltreAssure(props) {
     return(
         <CardContent >
             <Grid container  spacing={1}>   
-                <Grid item xs={6} className={classes.Grid}>N° immatriculation</Grid>
+                <Grid item xs={6} className={classes.Grid}> N° immatriculation</Grid>
 
                 <Grid item xs={6} className={classes.Grid}>Assuré principal</Grid> 
             
@@ -219,8 +219,8 @@ function FiltreAssure(props) {
                             onChange={handleChangeAgence}
 
                             >
-                            <MenuItem value={10}>agence1</MenuItem>
-                            <MenuItem value={20}>agence2</MenuItem>
+                            <MenuItem value={10}>maarif</MenuItem>
+                            <MenuItem value={20}>derb ghallef</MenuItem>
                             <MenuItem value={30}>agence3</MenuItem>
                         </Select>
 

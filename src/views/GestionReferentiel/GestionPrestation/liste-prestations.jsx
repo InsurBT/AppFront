@@ -217,6 +217,7 @@ export default function ListePrestations(props) {
             onClose={closeForm}
         >
             <TextField
+            fullWidth
                 type="text"
                 label="Type de prestation"
                 value={inputPrestation.type}
@@ -224,12 +225,14 @@ export default function ListePrestations(props) {
                 icon="none"
             />
             <TextField
+            fullWidth
                 type="number"
                 label="Nombre d'actes"
                 value={inputPrestation.tauxRemboursement}
                 onChange={(e) => {setInputPrestation({...inputPrestation, tauxRemboursement: e.target.value})}}
             />
             <TextField
+            fullWidth
                 type="number"
                 label="Montant engage"
                 value={inputPrestation.tarif}
