@@ -1,7 +1,8 @@
 import api from '../environement/api';
+import { useState } from 'react';
 
 const CaisseMereService = {
-    getAll: function(nom) {
+    getAll: function() {
         return api.get("CaisseMere/listCaisseMere", {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
             if (res.ok) {
                 return res.json();
@@ -40,7 +41,25 @@ const CaisseMereService = {
                 return res.text();
             }
         });
-    }
+    },
+    getFiltredCaisse: (filtre,data) => {
+  
+        return new Promise((resolve, reject) => {
+         
+            let filteredCaisse =data.filter((caisse) => {
+                let match = true;
+                for (let attribute in caisse) {
+                    if (filtre[attribute])
+                        match = match && (filtre[attribute] === caisse[attribute]);
+                }
+                return match;
+            })
+            setTimeout(() => {
+                resolve(filteredCaisse );
+            }, 1500);
+        });
+    },
+
 }
 
 export default CaisseMereService;

@@ -22,6 +22,7 @@ export default function TextInputselect(props) {
                 // eslint-disable-next-line react/jsx-sort-props
                 value={props.value}
               >
+                  <option  selected disabled hidden>{props.currentValue||props.label}</option>
                     {props.options.map(option => {
                      
                      return <option key={option.value} value={option.value}>{option.label}</option>
