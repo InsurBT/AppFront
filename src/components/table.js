@@ -92,14 +92,14 @@ export default function CustomTable(props) {
         const newData = props.data.filter((element) => {
             let match = false;
             props.columns.forEach(column => {
-                let sTableRowingValue = element[column.property].toString();
-                match = match || (sTableRowingValue.toLowerCase().search(filter.toLowerCase()) !== -1);
+                let stringValue = element[column.property].toString();
+                match = match || (stringValue.toLowerCase().search(filter.toLowerCase()) !== -1);
             });
             return match;
         });
 
         setDisplayedData(newData);
-    }, [filter, props.data]);
+    }, [filter]);
 
     function tableRows(size) {
         let rows = [];

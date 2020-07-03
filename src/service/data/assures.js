@@ -1,18 +1,4 @@
-function randomDate(minYear, maxYear) {
-    let randomYear = Math.ceil(Math.random() * (maxYear - minYear) + minYear);
-    let randmomMonth = Math.ceil(Math.random() * 11 + 1);
-    let randomDay = Math.ceil(Math.random() * 27 + 1);
-
-    if (randmomMonth < 10) {
-        randmomMonth = "0" + randmomMonth;
-    }
-
-    if (randomDay < 10) {
-        randomDay = "0" + randomDay;
-    }
-
-    return randomYear + "-" + randmomMonth + "-" + randomDay;
-}
+import { randomDate } from './util';
 
 const assures = [
     {
@@ -40,7 +26,7 @@ const assures = [
         ayantsDroit: Math.ceil(Math.random() * 6),
     },
     {
-        imme: 13342,
+        imme: 13662,
         lienParente: "5666-2020-04-100",
         nom: "El Bouhali",
         prenom: "Naima",
