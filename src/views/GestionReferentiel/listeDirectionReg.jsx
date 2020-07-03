@@ -11,6 +11,8 @@ import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
 import swal from 'sweetalert';
+import villeService from '../../service/ville-service';
+import TextInputselect from '../../components/text-input-select';
 
 
 
@@ -38,11 +40,13 @@ export default function DirectionReg (props) {
         code: "",
         designation: "",
         ville: "",
+        idVille: "",
         adresse: ""
         });
 
         // l'etat du mode du formulaire
         const [formMode, setFormMode] = useState("FERMER");
+        const [options,setOptions]= useState([]);
 
         // parametre du formulair
     const [formParams, setFormParams] = useState({
@@ -69,6 +73,16 @@ export default function DirectionReg (props) {
             setDirectionReg(res);
             setLoading(false);
         });
+       
+            villeService.getAll(1).then(res => {
+                if (typeof res === "string") {
+                    console.log(res);
+                } else {
+                    setOptions(res);
+                    console.log(res);
+                    setLoading(false);
+                }
+            })
     }, []);
 
 
@@ -250,10 +264,11 @@ export default function DirectionReg (props) {
         {/* Formulaire d'ajout ou de modification */}
         <FormPopup
             {...formParams}
+            direction="column"
             onClose={closeForm}
         >
             <TextField
-                
+                fullWidth
                 type="number"
                 label="Code"
                 value={inputDirectionReg.code}
@@ -261,20 +276,33 @@ export default function DirectionReg (props) {
                 icon="none"
             />
             <TextField
+            fullWidth
                 type="text"
                 label="Designation"
                 value={inputDirectionReg.designation}
                 onChange={(e) => {setInputDirectionReg({...inputDirectionReg, designation: e.target.value})}}
                 icon="none"
             />
-            <TextField
+           {/*<TextField
                 type="text"
                 label="Ville"
                 value={inputDirectionReg.ville}
                 onChange={(e) => {setInputDirectionReg({...inputDirectionReg, ville: e.target.value})}}
                 icon="none"
+            /> */} 
+            <TextInputselect
+                type="select"
+                options={options.map(option => ({value:option.id, label:option.nom}))}
+                label="Ville"
+                value={inputDirectionReg.ville}
+                onChange={(e) => {setInputDirectionReg({
+                    ...inputDirectionReg,
+                    idVille: e.target.value,
+                    ville: options.find(options => options.id === parseInt(e.target.value)).nom})}}
+                icon="none"
             />
             <TextField
+            fullWidth
                 type="text"
                 label="Adresse"
                 value={inputDirectionReg.adresse}

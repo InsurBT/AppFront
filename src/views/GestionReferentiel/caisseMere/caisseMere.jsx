@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-
+import { CardContent, CircularProgress,Grid} from '@material-ui/core';
 import Table from '../../../components/table';
 import { makeStyles } from '@material-ui/core/styles';
 import SmallHeader from '../../../components/small-header';
@@ -30,7 +30,10 @@ export default function ListeCaisseMeres(props) {
     const classes = useStyles();
     
     const [data, setData] = useState([]);
-
+    
+    //chargement des donnees du filtre
+    const [dataFiltre, setDataFiltre] = useState([]);
+     //chargement des options de pays
     const [options,setOptions] = useState([]);
 
     // l'etat de chargement des donnees
@@ -38,6 +41,14 @@ export default function ListeCaisseMeres(props) {
     
     // l'etat des valeur de l'input
     const [input, setInput] = useState({
+        code: NaN,
+        nom: "",
+        adresse: "",
+        id: "",
+        pays:""
+    });
+    //l'etat de valeur de l'input filtre
+    const [inputFiltre, setInputFiltre] = useState({
         code: NaN,
         nom: "",
         adresse: "",
@@ -72,6 +83,7 @@ export default function ListeCaisseMeres(props) {
     useEffect(() => {
         CaisseMereService.getAll().then(res => {
             setData(res);
+            setDataFiltre(res);
             setLoading(false);
         });
         paysService.getAll().then(res => {
@@ -83,6 +95,18 @@ export default function ListeCaisseMeres(props) {
             }
         })
     }, []);
+    
+    /*********************Filtre caisse mere*********************** */
+
+    function filtrer() {
+        setLoading(true);
+        CaisseMereService.getFiltredCaisse(inputFiltre,dataFiltre).then(res => {
+            setData(res);
+            console.log("filtre",res);
+            setLoading(false);
+            clearInputFiltre();
+        })
+    };
 
     useEffect(() => {
         switch (formMode) {
@@ -212,6 +236,16 @@ export default function ListeCaisseMeres(props) {
             pays:""
         })
     }
+    
+    function clearInputFiltre() {
+        setInputFiltre({
+            code: NaN,
+            nom: "",
+            adresse: "",
+            id: "",
+            pays:""
+        })
+    }
 
     function closeForm() {
         clearInput();
@@ -226,12 +260,22 @@ export default function ListeCaisseMeres(props) {
             <Button variant="contained" className={classes.button} onClick={() => {setFormMode("AJOUTER")}}>Ajouter </Button>
            
         </SmallHeader>
-        <FiltreCaisseM options={options}/>
+
+        {/*Filtre caisse mere */}
+
+        <FiltreCaisseM dataFiltre={dataFiltre} setDataFiltre={setDataFiltre} 
+        inputFiltre={inputFiltre} setInputFiltre={setInputFiltre}
+        filtrer={filtrer}
+        options={options} setOptions={setOptions}
+        />
+
 
         {/* Tableau des donnees */}
         {
             loading ?
-                <div>Chargement...</div> :
+                <div style={{alignContent: 'center'}}>Chargement...
+                      <CircularProgress disableShrink />
+                </div> :
                 <Table
                     columns={columns}
                     data={data}
@@ -246,6 +290,7 @@ export default function ListeCaisseMeres(props) {
             onClose={closeForm}
         >
             <TextField
+            fullWidth
                 type="text"
                 label="Nom"
                 value={input.nom}
@@ -253,6 +298,7 @@ export default function ListeCaisseMeres(props) {
                 icon="none"
             />
             <TextField
+            fullWidth
                 type="text"
                 label="Adresse"
                 value={input.adresse}

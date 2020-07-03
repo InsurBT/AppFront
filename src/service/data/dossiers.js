@@ -90,7 +90,7 @@ const dossiers = [
     {
         imme: 12821,
         NumDossier: "5666-2020-02-100",
-        categorie: "valide",
+        categorie: "retourne",
         dateReception: randomDate(2020, 2021),
         debutSoin: "05/02/2020",
         finSoin: "",
@@ -126,7 +126,7 @@ const dossiers = [
     {
         imme: 13333,
         NumDossier: "5666-2020-02-100",
-        categorie: "valide",
+        categorie: "retourne",
         dateReception: randomDate(2020, 2021),
         debutSoin: "05/02/2020",
         finSoin: "",

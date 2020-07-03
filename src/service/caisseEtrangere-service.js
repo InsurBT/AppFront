@@ -40,7 +40,24 @@ const CaisseEtrangereService = {
                 return res.text();
             }
         });
-    }
+    },
+    getFiltredCaisse: (filtre,data) => {
+  
+        return new Promise((resolve, reject) => {
+         
+            let filteredCaisse =data.filter((caisse) => {
+                let match = true;
+                for (let attribute in caisse) {
+                    if (filtre[attribute])
+                        match = match && (filtre[attribute] === caisse[attribute]);
+                }
+                return match;
+            })
+            setTimeout(() => {
+                resolve(filteredCaisse );
+            }, 1500);
+        });
+    },
 }
 
 export default CaisseEtrangereService;

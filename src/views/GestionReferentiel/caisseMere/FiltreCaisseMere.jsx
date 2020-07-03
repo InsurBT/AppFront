@@ -20,61 +20,55 @@ export default function FiltreCaisseM(props) {
         
     const classes = useStyles();
     
-    const [input, setInput] = useState({
-        code: NaN,
-        nom: "",
-        adresse: "",
-        id: "",
-        pays:""
-    });
-
+    const {inputFiltre, setInputFiltre}=props;
+    const {options,setOptions} = props;
+   
+ 
 return(
     <CardContent >
     <Grid container  spacing={10}>         
     <Grid item xs={5} >
     <TextField
-               fullWidth
-               margin="dense"
-               type="text"
-               label="Nom"
-               value={input.nom}
-               onChange={(e) => {setInput({...input, nom: e.target.value})}}
-               icon="none"
-               />
+            fullWidth
+            margin="dense"
+            type="text"
+            label="Nom"
+            value={inputFiltre.nom}
+            onChange={(e) => {setInputFiltre({...inputFiltre, nom: e.target.value})}}
+            icon="none"
+            />
     
-           <TextField
-               fullWidth
-               margin="dense"
-               type="text"
-               label="Adresse"
-               value={input.adresse}
-               onChange={(e) => {setInput({...input, adresse: e.target.value})}}
-               icon="none"
-               />
-         </Grid>
-         <Grid item xs={5} >
-       <TextInputselect
-           type="select"
-           options={props.options.map(option => ({value:option.id, label:option.label}))}
-           label="Pays"
-           onChange={(e) => {setInput({
-               ...input,
-               idpays: e.target.value,
-               pays: props.options.find(options => options.id === parseInt(e.target.value)).nom})}
-           
-           }
-               
-           icon="none"
-       />
-      
-   </Grid>
-   <CardActions>
-       <Grid item xs={5}  justify="center" >
-           <Grid item xs={5}  justify="center" >
-           <Button  variant="contained" className={classes.button} >Filtrer</Button>  
-           </Grid>
-       </Grid>
-   </CardActions>
+        <TextField
+            fullWidth
+            margin="dense"
+            type="text"
+            label="Adresse"
+            value={inputFiltre.adresse}
+            onChange={(e) => {setInputFiltre({...inputFiltre, adresse: e.target.value})}}
+            icon="none"
+            />
+        </Grid>
+        <Grid item xs={5} >
+        <TextInputselect
+            type="select"
+            options={options.map(option => ({value:option.id, label:option.label}))}
+            label="Pays"
+            onChange={(e) => {setInputFiltre({
+                ...inputFiltre,
+                id: e.target.value,
+                pays: options.find(options => options.id === parseInt(e.target.value)).nom})}
+            
+            }
+                
+            icon="none"
+    />
+    
+</Grid>
+<Grid item container justify="center" xs="12">
+    <Grid item style={{margin: "10px"}}>
+        <Button onClick={props.filtrer} variant="outlined" >Filtrer</Button>
+    </Grid>
+</Grid>
 
 </Grid>
 </CardContent>

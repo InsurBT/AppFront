@@ -63,6 +63,9 @@ const sidebarStyle = theme => ({
     }
   },
   logo: {
+    color :"white",
+    fontSize: "20px",
+    fontWeight:" normal",
     position: "relative",
     padding: "15px 15px",
     zIndex: "4",
@@ -97,7 +100,9 @@ const sidebarStyle = theme => ({
     textAlign: "right"
   },
   logoImage: {
+    marginBottom:"30px",
     width: "30px",
+    marginBottom:"30px",
     display: "inline-block",
     maxHeight: "30px",
     marginLeft: "10px",
@@ -133,7 +138,7 @@ const sidebarStyle = theme => ({
       content: '""',
       display: "block",
       background: blackColor,
-      opacity: ".5",
+      opacity: ".3",
       
     }
   },
