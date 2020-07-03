@@ -21,7 +21,7 @@ import img from "../assets/img/faces/assurance.png";
 import logo from "../assets/img/faces/soinsante.png";
 
 import utilisateurService from '../service/utilisateur-service';
-import dossierService from '../service/dossier-service';
+import dossierService from '../service/dossier/dossier-service';
 
 import ConnectedUserContext from '../context/connected-user.context';
 import { whiteColor } from '../assets/jss/material-dashboard-react.js';

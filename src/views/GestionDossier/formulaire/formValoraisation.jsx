@@ -18,28 +18,20 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
-export default function FormValoraisation() {
+export default function FormValoraisation(props) {
+
+  const { dossier } = props;
     
   const classes = useStyles();
-    return (
-        <div>
-
-            <form  noValidate autoComplete="off">
-
-                <div className={classes.root}>
-                    <TextField id="standard-basic" label="Montant engagé" />
-                    <TextField id="standard-basic" label="Montant à rembourser" />
-                </div>
-
-                <div className={classes.buttonStyle}>
-                    <Button variant="contained">Valider</Button>
-                    <Button variant="contained">Quitter</Button>
-                </div>
-
-
-             
-            </form>
-            
-        </div>
-    )
+  
+  return (
+      <div>
+        <form  noValidate autoComplete="off">
+          <div className={classes.root}>
+              <TextField id="standard-basic" value={dossier.montantEngage} label="Montant engagé" />
+              <TextField id="standard-basic" value={dossier.montantRembourse} label="Montant à rembourser" />
+          </div>
+        </form>   
+      </div>
+  )
 }
