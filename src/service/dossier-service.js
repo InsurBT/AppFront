@@ -6,13 +6,13 @@ const dossierSevice = {
 
         switch (categorie) {
             case "en_instance":
-                actions = ["nouveau", "valider", "retourner"];
+                actions = ["valider", "retourner"];
                 break;
             case "valide":
-                actions = ["nouveau", "remettre en instance", "retourner"];
+                actions = ["remettre en instance", "retourner"];
                 break;
             case "retourne":
-                actions = ["nouveau", "remettre en instance", "valider"];
+                actions = ["remettre en instance", "valider"];
                 break;
             default:
                 actions = ["aucune action pour cette categorie"]

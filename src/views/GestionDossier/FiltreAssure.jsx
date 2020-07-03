@@ -53,7 +53,7 @@ export default function FiltreinputAssure(props) {
     return (<Grid container >
         <Grid item container xs="6">
             <Grid item xs="12">
-                <InputLabel>N# immatriculation</InputLabel>
+                <InputLabel>N° immatriculation</InputLabel>
                 <TextField
                     type="text"
                     value={inputAssure.imme}
@@ -82,7 +82,7 @@ export default function FiltreinputAssure(props) {
                         onChange={(e) => {setInputAssure({...inputAssure, code_agence: e.target.value})}}
                     >
                         <MenuItem value=""></MenuItem>
-                        <MenuItem value="1">Agence 1</MenuItem>
+                        <MenuItem value="1">Maarif</MenuItem>
                         <MenuItem value="2">Agence 2</MenuItem>
                         <MenuItem value="3">Agence 3</MenuItem>
                     </Select>
