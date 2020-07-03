@@ -30,16 +30,24 @@ export default function ListeCaisseEtrangeres(props) {
     }));
         
     const classes = useStyles();
+    
+    //chargement des données
     const [data, setData] = useState([]);
 
+    //chargement des options des pays
     const [options,setOptions] = useState([]);
-
+     
+    //chargement des options des villes
     const [optionsVille,setOptionsVille] = useState([]);
+
+    //chargement des options des villes
+    const [optionsVilleFiltre,setOptionsVilleFiltre] = useState([]);
+
 
     // l'etat de chargement des donnees
     const [loading, setLoading] = useState(true);
     
-    // l'etat des valeur de l'input
+    // l'etat des valeur de l'input formulaire
     const [input, setInput] = useState({
         code: NaN,
         nom: "",
@@ -52,6 +60,19 @@ export default function ListeCaisseEtrangeres(props) {
         fax:"",
         email:""
     });
+    
+    //l'etat des valeurs de l'input filtre
+    const [inputFiltre, setInputFiltre] = useState({
+        code: "",
+        nom: "",
+        idpays: "",
+        pays:"",
+        ville:"",
+        id:""
+    });
+
+    //L'etat de chargement du resultats de filtre
+    const [dataFiltre,setDataFiltre] = useState([])
 
     // l'etat du mode du formulaire
     const [formMode, setFormMode] = useState("FERMER");
@@ -81,6 +102,7 @@ export default function ListeCaisseEtrangeres(props) {
     useEffect(() => {
         CaisseEtrangereService.getAll().then(res => {
             setData(res);
+            setDataFiltre(res);
             setLoading(false);
             console.log('caisse',res);
         });
@@ -98,12 +120,21 @@ export default function ListeCaisseEtrangeres(props) {
     /***********************************************************************************/
     useEffect(() => {
         console.log("le code est",input.idpays);
-        villeService.getAll().then(res => {
+        villeService.getAll(input.idpays).then(res => {
             setOptionsVille(res);
             console.log('les villes:',res);
     }
     ); 
     }, [input.idpays]); 
+
+    useEffect(() => {
+        console.log("le code est filtre",inputFiltre.idpays);
+        villeService.getAll(inputFiltre.idpays).then(res => {
+            setOptionsVilleFiltre(res);
+            console.log('les villes:',res);
+    }
+    ); 
+    }, [inputFiltre.idpays]); 
 
     /****************************************************************************/
 
@@ -155,6 +186,17 @@ export default function ListeCaisseEtrangeres(props) {
                 });
         }
     }, [formMode, input]);
+     /*******************Filtre Caisse Etrangere*********************************/
+    function filtrer() {
+        setLoading(true);
+        CaisseEtrangereService.getFiltredCaisse(inputFiltre,dataFiltre).then(res => {
+            setData(res);
+            console.log("filtre",res);
+            setLoading(false);
+            clearInputFiltre();
+        })
+    };
+
     
 
     function addCaisse() {
@@ -241,6 +283,18 @@ export default function ListeCaisseEtrangeres(props) {
         })
     }
 
+    function clearInputFiltre() {
+        setInputFiltre({
+            code: NaN,
+            nom: "",
+            idpays: "",
+            pays:"",
+            ville:"",
+            id:"",
+        
+        })
+    }
+
     function closeForm() {
         clearInput();
         setInvalidMessag("");
@@ -253,7 +307,15 @@ export default function ListeCaisseEtrangeres(props) {
             Liste des caisses étrangere
             <Button className={classes.button}  onClick={() => {setFormMode("AJOUTER")}}>Ajouter </Button>
         </SmallHeader>
-        <FiltreCaisseE />
+
+        {/*Filtre caisse etrangere */}
+
+
+        <FiltreCaisseE 
+        inputFiltre={inputFiltre} setInputFiltre={setInputFiltre}
+        filtrer={filtrer}
+        options={options} setOptions={setOptions}
+        optionsVille={optionsVilleFiltre} setOptionsVille={setOptionsVilleFiltre}/>
 
         {/* Tableau des donnees */}
         {

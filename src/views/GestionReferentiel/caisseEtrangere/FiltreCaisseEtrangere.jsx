@@ -1,13 +1,8 @@
-import React, { useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CardContent,Grid,CardActions,TextField} from '@material-ui/core';
+import { CardContent,Grid,TextField} from '@material-ui/core';
 import TextInputselect from '../../../components/text-input-select';
-import FormButton from '../../../components/form-button';
-import paysService from '../../../service/pays-service';
-
-import villeService from '../../../service/ville-service';
-import { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 
 
@@ -22,41 +17,16 @@ export default function FiltreCaisse(props) {
             }
         }
     }));
-        
-    const [input, setInput] = useState({
-        code: "",
-        nom: "",
-        idpays: "",
-        pays:"",
-        ville:"",
-        id:""
-    });
-    const [options,setOptions] = useState([]);
+         
     const classes = useStyles();
+    const {inputFiltre, setInputFiltre}=props;
+    const {options,setOptions} = props;
+    const {optionsVille,setOptionsVille} = props;
 
-    const [optionsVille,setOptionsVille] = useState([]);
-    useEffect(() => {
-        paysService.getAll().then(res => {
-            if (typeof res === "string") {
-                console.log(res);
-            } else {
-                setOptions(res);
-                console.log(res);
-                console.log('les options sont :',options);
-            }
-        })
-    }, []);
+    /****************************************************************/
 
-    /***********************************************************************************/
-    useEffect(() => {
-        console.log("le code est",input.idpays);
-        villeService.getAll(input.idpays).then(res => {
-            setOptionsVille(res);
-            console.log('les villes:',res);
-    }
-    ); 
-    }, [input.idpays]); 
-    
+    /************************************************************************************/
+
     return(
     <CardContent >
         <Grid container  spacing={10}>         
@@ -66,8 +36,8 @@ export default function FiltreCaisse(props) {
                     margin="dense"
                     type="number"
                     label="Code"
-                    value={input.code}
-                    onChange={(e) => {setInput({...input, code: e.target.value})}}
+                    value={inputFiltre.code}
+                    onChange={(e) => {setInputFiltre({...inputFiltre, code: e.target.value})}}
                     icon="none"
                 />
                 <TextField
@@ -75,8 +45,8 @@ export default function FiltreCaisse(props) {
                     margin="dense"
                     type="text"
                     label="Nom"
-                    value={input.nom}
-                    onChange={(e) => {setInput({...input, nom: e.target.value})}}
+                    value={inputFiltre.nom}
+                    onChange={(e) => {setInputFiltre({...inputFiltre, nom: e.target.value})}}
                     icon="none"
                 />
             </Grid>
@@ -85,8 +55,9 @@ export default function FiltreCaisse(props) {
                     type="select"
                     options={options.map(option => ({value:option.id, label:option.label}))}
                     label="Pays"
-                    onChange={(e) => {setInput({
-                        ...input,
+                    currentValue={inputFiltre.pays}
+                    onChange={(e) => {setInputFiltre({
+                        ...inputFiltre,
                         idpays: e.target.value,
                         pays: options.find(options => options.id === parseInt(e.target.value)).nom})}
                     
@@ -98,8 +69,9 @@ export default function FiltreCaisse(props) {
                     type="select"
                     options={optionsVille.map(option => ({value:option.id, label:option.nom}))}
                     label="Ville"
-                    onChange={(e) => {setInput({
-                        ...input,
+                    currentValue={inputFiltre.ville}
+                    onChange={(e) => {setInputFiltre({
+                        ...inputFiltre,
                         id: e.target.value,
                         ville: optionsVille.find(options => options.id === parseInt(e.target.value)).nom})}
                     }
@@ -107,15 +79,12 @@ export default function FiltreCaisse(props) {
                     icon="none"
                 />
             </Grid>
-            <CardActions>
-                <Grid item xs={5}  justify="center" >
-                    <Grid item xs={5}  justify="center" >
-                    
-                    <Button className={classes.button} >Filtrer </Button>
+            <Grid item container justify="center" xs="12">
+            <Grid item style={{margin: "10px"}}>
+                <Button onClick={props.filtrer} variant="outlined" >Filtrer</Button>
+            </Grid>
+        </Grid>
 
-                    </Grid>
-                </Grid>
-            </CardActions>
         </Grid>
     </CardContent>
     )
