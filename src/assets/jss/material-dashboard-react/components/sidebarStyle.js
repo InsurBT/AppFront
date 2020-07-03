@@ -63,6 +63,9 @@ const sidebarStyle = theme => ({
     }
   },
   logo: {
+    color :"white",
+    fontSize: "20px",
+    fontWeight:" normal",
     position: "relative",
     padding: "15px 15px",
     zIndex: "4",

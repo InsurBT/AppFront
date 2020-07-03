@@ -64,7 +64,7 @@ export default function DashboardRouter(props) {
 
   const {setConnectedUser} = useContext(ConnectedUserContext);
 
-  const  [hide , setHide]=useState(false);
+  const  [hide , setHide]=useState(true);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
