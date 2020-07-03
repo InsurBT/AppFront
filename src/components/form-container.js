@@ -29,7 +29,7 @@ export default function FormContainer(props) {
         />
         <CardContent>
             <form onSubmit={props.onSubmit}>
-                <Grid container direction="column">
+                <Grid container direction={props.direction}>
                     {props.children}
                 </Grid>
                 <div style={{textAlign: "right"}}>

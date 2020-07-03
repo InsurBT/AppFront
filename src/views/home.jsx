@@ -17,6 +17,9 @@ import ConnectedUserContext from '../context/connected-user.context';
 import utilisateurService from '../service/utilisateur-service';
 import { Card,  CardContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles'
+//react-spring animation for SideBar
+import { useSpring, animated as a } from 'react-spring'
+
 
 import '../home.css';
 
@@ -46,6 +49,8 @@ const styles = theme => ({
 
 
  function Home(props) {
+    const animation = useSpring({ from : {opacity: 0 , marginLeft : -800},to: {opacity: 1, marginLeft : 0} , config: { duration: 800,mass: 1, tension: 280, friction: 20 }})
+
     const {connectedUser, setConnectedUser} = useContext(ConnectedUserContext);
 
     const [loading, setLoading] = useState(connectedUser === null);
@@ -66,12 +71,10 @@ const styles = theme => ({
         }
     }, []);
 
-    console.log("mmouaad ana login" , connectedUser)
-
     const {classes} = props
 
     return (
-    <div>
+        <a.div style={animation}>
     {loading ? <div> chargement...... </div> : 
         <div >
         <head>
@@ -133,7 +136,7 @@ const styles = theme => ({
         </div>
     </div>
     }
-    </div>)
+    </a.div>)
         
 }
 

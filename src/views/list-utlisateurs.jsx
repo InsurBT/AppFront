@@ -16,6 +16,7 @@ export default function ListeUtilisateurs(props) {
 
     const useStyles = makeStyles((theme) => ({
         button : {
+            color : '#000',
             backgroundColor : '#B3D9FF',
             '&:hover' : {
               backgroundColor : "#1A8CFF"
@@ -219,6 +220,7 @@ export default function ListeUtilisateurs(props) {
         <FormPopup
             onClose={closeForm}
             {...formParams}
+            direction="column"
         >
             <TextField
                 type="text"
