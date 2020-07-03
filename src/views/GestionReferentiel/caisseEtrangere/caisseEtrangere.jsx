@@ -273,6 +273,7 @@ export default function ListeCaisseEtrangeres(props) {
             onClose={closeForm}
         >
             <TextField
+            fullWidth
                 type="text"
                 label="Nom"
                 value={input.nom}
@@ -280,6 +281,7 @@ export default function ListeCaisseEtrangeres(props) {
                 icon="none"
             />
             <TextField
+            fullWidth
                 type="text"
                 label="Adresse"
                 value={input.adresse}
@@ -316,6 +318,7 @@ export default function ListeCaisseEtrangeres(props) {
             />
     
             <TextField
+            fullWidth
                 type="text"
                 label="Téléphone"
                 value={input.telephone}
@@ -324,6 +327,7 @@ export default function ListeCaisseEtrangeres(props) {
             />
           
             <TextField
+            fullWidth
                 type="text"
                 label="Fax"
                 value={input.fax}
@@ -331,6 +335,7 @@ export default function ListeCaisseEtrangeres(props) {
                 icon="none"
             />
             <TextField
+            fullWidth
                 type="text"
                 label="E-mail"
                 value={input.email}

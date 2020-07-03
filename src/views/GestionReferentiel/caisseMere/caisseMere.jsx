@@ -246,6 +246,7 @@ export default function ListeCaisseMeres(props) {
             onClose={closeForm}
         >
             <TextField
+            fullWidth
                 type="text"
                 label="Nom"
                 value={input.nom}
@@ -253,6 +254,7 @@ export default function ListeCaisseMeres(props) {
                 icon="none"
             />
             <TextField
+            fullWidth
                 type="text"
                 label="Adresse"
                 value={input.adresse}
