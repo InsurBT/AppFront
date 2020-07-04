@@ -4,19 +4,20 @@ import {Timeline ,
         TimelineSeparator,
         TimelineConnector,
         TimelineContent,
-        TimelineOppositeContent,
         TimelineDot
     } from '@material-ui/lab';
+import {
+        Grid,
+        CircularProgress,
+        Paper,
+        Typography,
+        withStyles
+    } from '@material-ui/core';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import LocationOnRoundedIcon from '@material-ui/icons/LocationOnRounded';
 import AccessibilityNewRoundedIcon from '@material-ui/icons/AccessibilityNewRounded';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import {  CardHeader, Avatar } from '@material-ui/core';
 import ConnectedUserContext from '../context/connected-user.context';
 import utilisateurService from '../service/utilisateur-service';
-import { Card,  CardContent } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles'
 //react-spring animation for SideBar
 import { useSpring, animated as a } from 'react-spring'
 
@@ -75,7 +76,11 @@ const styles = theme => ({
 
     return (
         <a.div style={animation}>
-    {loading ? <div> chargement...... </div> : 
+    {loading ? <Grid item container justify="center" xs="12">
+                <Grid item style={{margin: "10px"}}>
+                    <CircularProgress />
+                </Grid>
+            </Grid> : 
         <div >
         <head>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
