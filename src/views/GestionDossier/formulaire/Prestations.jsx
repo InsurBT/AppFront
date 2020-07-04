@@ -113,5 +113,5 @@ export default function Prestations(props) {
                 />
             </FormPopup>
         </div>
-);
+    );
 }

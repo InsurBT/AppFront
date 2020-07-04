@@ -25,7 +25,8 @@ const routes = [
         path: "/accueil",
         component: Home,
         icon: Dashboard,
-        layout: "/home"
+        layout: "/home",
+        roles: ["Admin", "Agent"]
     },
 
     {
@@ -40,7 +41,8 @@ const routes = [
                 path: "/utilisateurs",
                 component: ListeUtilisateurs
             }
-        ]
+        ],
+        roles: ["Admin"]
     },
 
     {
@@ -70,7 +72,8 @@ const routes = [
                 path: "/caisses_etrangeres",
                 component: ListeCaisseEtrangeres
             }
-        ]
+        ],
+        roles: ["Admin"]
     }, 
 
     {
@@ -79,14 +82,16 @@ const routes = [
         component: DossiersRouter,
         icon: LibraryBooks,
         layout: "/home",
-        subRoutes: []
+        subRoutes: [],
+        roles: ["Admin", "Agent"]
     },
     {
         name:"Gestion des assurés",
         path: "/gestionAssure",
         component: AssureRouter,
         icon: LibraryBooks,
-        layout:"/home"
+        layout:"/home",
+        roles: ["Agent"]
     }
 ];
 
