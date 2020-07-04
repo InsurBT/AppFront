@@ -39,30 +39,15 @@ export default function DashboardRouter(props) {
 
   // etat de chargement des sous menu
   // cet etat garde la valeur 'true' tant que les sous menu ne sont pas encore charge
-  const [loading, setLoading] = useState(true);
+  const [ loading, setLoading ] = useState(true);
+
+  const [ userRoutes, setUserRoutes ] = useState(routes);
   
-  const switchViews = (
-      <Switch>
-        {
-            routes.map((route, key) => {
-              return (
-                  <Route
-                      path={route.layout + route.path}
-                      key={key}
-                  >
-                    <route.component subRoutes={route.subRoutes} history={props.history} />
-                  </Route>
-              )
-            })
-        }
-        
-        <Redirect from="/home" to="/home/accueil" />
-      </Switch>
-  )
+  const [ switchViews, setSwitchViews ] = useState([]);
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const {setConnectedUser} = useContext(ConnectedUserContext);
+  const { connectedUser, setConnectedUser } = useContext(ConnectedUserContext);
 
   const  [hide , setHide]=useState(true);
 
@@ -105,6 +90,36 @@ export default function DashboardRouter(props) {
     };
   }, [mainPanel]);
 
+  useEffect(() => {
+    utilisateurService.getLoggedUser().then( res => {
+      setConnectedUser(res);
+
+      setUserRoutes(routes.filter(route => route.roles.includes(res.role)));
+    })
+  }, []);
+
+  useEffect(() => {
+    setSwitchViews(
+      <Switch>
+        {
+            userRoutes.map((route, key) => {
+              return (
+                  <Route
+                      path={route.layout + route.path}
+                      key={key}
+                  >
+                    <route.component subRoutes={route.subRoutes} history={props.history} />
+                  </Route>
+              )
+            })
+        }
+        
+        <Redirect from="/home" to="/home/accueil" />
+      </Switch>
+    )
+
+  }, [connectedUser])
+
   function deconnexion() {
       utilisateurService.disconnect().then(res => {
           if (res.ok) {
@@ -123,7 +138,7 @@ export default function DashboardRouter(props) {
 
 
    { hide ? <Sidebar
-      routes={routes}
+      routes={userRoutes}
       logoText={"Soin de santé"}
       logo={logo}
       image={img}
@@ -136,7 +151,7 @@ export default function DashboardRouter(props) {
     <div className={classes.mainPanel} ref={mainPanel}>
       <Navbar
         click={hideSideBar}
-        routes={routes}
+        routes={userRoutes}
         handleDrawerToggle={handleDrawerToggle}
       />
       {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
