@@ -5,8 +5,7 @@ import SmallHeader from '../../components/small-header';
 import FormPopup from '../../components/form-popup';
 import TextInput from '../../components/text-input';
 import DirectionRegService from '../../service/directionReg-service';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import {Button , CircularProgress ,Grid , TextField} from '@material-ui/core';
 import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
@@ -249,7 +248,11 @@ export default function DirectionReg (props) {
         {/* Tableau des donnees */}
         {
             loading ?
-                <div>Chargement...</div> :
+            <Grid item container justify="center" xs="12">
+                <Grid item style={{margin: "10px"}}>
+                    <CircularProgress />
+                </Grid>
+            </Grid> :
                 <Table
                     columns={columns}
                     data={directionReg}

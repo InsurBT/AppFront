@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import assureService from '../../service/assure-service' ;
-import Button from '@material-ui/core/Button';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import AddIcon from '@material-ui/icons/Add'
 import FiltreAssure from './filtreAssure';
 import { Link } from 'react-router-dom';
-import { ButtonGroup, Icon } from '@material-ui/core';
+import { ButtonGroup,Button, Icon , Grid , CircularProgress} from '@material-ui/core';
 import Person from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
@@ -90,7 +89,11 @@ export default function ListeAssure(props) {
             </ButtonGroup>
             {
                 loading ?
-                    <div>Chargement...</div> :
+                <Grid item container justify="center" xs="12">
+                    <Grid item style={{margin: "10px"}}>
+                        <CircularProgress />
+                    </Grid>
+                </Grid> :
                     <Table
                         data={data}
                         pageSize={5}

@@ -141,7 +141,11 @@ export default function Login(props) {
               value={credentials.password}
               onChange={(e) => {setCredentials({...credentials, password: e.target.value})}}
             />
-            {loading? <CircularProgress style={{margin: "auto"}} /> : ""}
+            {loading? <Grid item container justify="center" xs="12">
+                <Grid item style={{margin: "10px"}}>
+                    <CircularProgress />
+                </Grid>
+            </Grid> : ""}
             <span style={{color: 'red'}}>{invalidMessage}</span>
         
             <Button

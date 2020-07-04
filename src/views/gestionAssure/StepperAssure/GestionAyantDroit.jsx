@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AyantDroitService from '../../../service/ayantDroit-service' ;
-import Button from '@material-ui/core/Button';
 import Table from '../../../components/table';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import AddIcon from '@material-ui/icons/Add'
-import { ButtonGroup, Icon } from '@material-ui/core';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import { CircularProgress, Grid } from '@material-ui/core';
 
 export default function ListeAyantDroit(props) {
 
@@ -53,7 +49,11 @@ export default function ListeAyantDroit(props) {
            
             {
                 loading ?
-                    <div>Chargement...</div> :
+                <Grid item container justify="center" xs="12">
+                    <Grid item style={{margin: "10px"}}>
+                        <CircularProgress />
+                    </Grid>
+                </Grid> :
                     <Table
                         data={data}
                         pageSize={5}

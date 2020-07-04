@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ayantDroitService from '../../../../service/ayants-droit' ;
-import Button from '@material-ui/core/Button';
+import {CircularProgress , Grid} from '@material-ui/core';
 import Table from '../../../../components/table';
 
 import { useParams } from 'react-router-dom';
-import { ButtonGroup } from '@material-ui/core';
 
 export default function ListeAyantDroit(props) {
     // categorie d'assuré chosie selon l'url
@@ -69,7 +68,11 @@ export default function ListeAyantDroit(props) {
             
             {
                 loading ?
-                    <div>Chargement...</div> :
+                <Grid item container justify="center" xs="12">
+                    <Grid item style={{margin: "10px"}}>
+                        <CircularProgress />
+                    </Grid>
+                </Grid> :
                     <Table
                         data={data}
                         pageSize={3}

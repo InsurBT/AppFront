@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import FormInfoAssure from './formulaire/formInfoAssure';
 import FormDossier from './formulaire/formDossier';
 import FormValoraisation from './formulaire/formValoraisation';
@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Prestation from './formulaire/Prestations'
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 import assureService from '../../service/assure-service';
 

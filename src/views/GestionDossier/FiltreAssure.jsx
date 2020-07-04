@@ -9,12 +9,24 @@ import {
     Button,
     CircularProgress,
 } from '@material-ui/core';
-
+import { withStyles } from '@material-ui/core/styles'
 import Table from '../../components/table';
-
 import assureService from '../../service/assure-service';
 
-export default function FiltreinputAssure(props) {
+
+const styles = theme => ({
+    button : {
+        backgroundColor : '#b3d9ff',
+            '&:hover' : {
+        backgroundColor : "#1A8CFF"
+      }
+    },
+    label : {
+        color : '#008AE6'
+    }
+})
+
+ function FiltreinputAssure(props) {
 
     const [inputAssure, setInputAssure] = useState({
         imme: "",
@@ -50,19 +62,24 @@ export default function FiltreinputAssure(props) {
         })
     };
 
+    const { classes } = props
+
     return (<Grid container >
         <Grid item container xs="6">
             <Grid item xs="12">
-                <InputLabel>N° immatriculation</InputLabel>
+                <InputLabel className={classes.label}>N° immatriculation</InputLabel>
                 <TextField
+                    fullWidth
+                    margin="dense"
+                    variant="outlined"
                     type="text"
                     value={inputAssure.imme}
                     onChange={ (e) => { setInputAssure({ ...inputAssure, imme: e.target.value }); } }
                 />
             </Grid>
             <Grid item xs="6">
-                <FormControl style={{width: "100%", padding: "2px"}}>
-                    <InputLabel>DR Régionale</InputLabel>
+                <FormControl style={{width: "100%"}}>
+                    <InputLabel className={classes.label}>DR Régionale</InputLabel>
                     <Select
                         value={inputAssure.code_dr}
                         onChange={ (e) => { setInputAssure({...inputAssure, code_dr: e.target.value}); } }
@@ -75,8 +92,8 @@ export default function FiltreinputAssure(props) {
                 </FormControl>
             </Grid>
             <Grid item xs="6">
-                <FormControl style={{width: "100%", padding: "2px"}}>
-                    <InputLabel>Agence</InputLabel>
+                <FormControl style={{width: "100%"}}>
+                    <InputLabel className={classes.label}>Agence</InputLabel>
                     <Select
                         value={inputAssure.code_agence}
                         onChange={(e) => {setInputAssure({...inputAssure, code_agence: e.target.value})}}
@@ -91,16 +108,24 @@ export default function FiltreinputAssure(props) {
         </Grid>
         <Grid item container xs="6">
             <Grid item xs="12" direction="column">
+            <InputLabel className={classes.label}>Nom et Prenom </InputLabel>
                 <Grid item container justify="space-between">
-                    <InputLabel style={{marginTop: "10px"}}>Nom</InputLabel>
+                    
                     <TextField
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="text"
+                        label="Nom"
                         value={inputAssure.nom}
                         onChange={ (e) => { setInputAssure({ ...inputAssure, nom: e.target.value }) } }
                     />
-                </Grid>
-                <Grid item container justify="space-between">
-                    <InputLabel style={{marginTop: "10px"}}>Prenom</InputLabel>
                     <TextField
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        type="text"
+                        label="Prénom"
                         value={inputAssure.prenom}
                         onChange={ (e) => { setInputAssure({ ...inputAssure, prenom: e.target.value }) } }
                     />
@@ -110,7 +135,7 @@ export default function FiltreinputAssure(props) {
 
         <Grid item container justify="center" xs="12">
             <Grid item style={{margin: "10px"}}>
-                <Button onClick={filtrer} variant="outlined" disabled={loading}>Filtrer</Button>
+                <Button className={classes.button} onClick={filtrer} disabled={loading}>Filtrer</Button>
             </Grid>
         </Grid>
 
@@ -133,10 +158,12 @@ export default function FiltreinputAssure(props) {
                 pageSize={3}
             />
         </Grid>
-        <Grid item container xs="12" direction="row-reverse">
+        {/* <Grid item container xs="12" direction="row-reverse">
             <Grid item style={{margin: "10px"}}>
-                <Button variant="outlined" onClick={ () => { props.handleAjouter(selectedAssure) } }>Ajouter Dossier</Button>
+                <Button className={classes.button} onClick={ () => { props.handleAjouter(selectedAssure) } }>Ajouter Dossier</Button>
             </Grid>
-        </Grid>
+        </Grid> */}
     </Grid>)
 }
+
+export default withStyles(styles)(FiltreinputAssure)

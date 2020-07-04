@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Table from '../../../components/table';
 import SmallHeader from '../../../components/small-header';
 import FormPopup from '../../../components/form-popup';
-import { TextField } from '@material-ui/core';
+import { TextField , CircularProgress , Grid} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
@@ -200,7 +200,11 @@ export default function ListePrestations(props) {
         {/* Tableau des donnees */}
         {
             loading ?
-                <div>Chargement...</div> :
+            <Grid item container justify="center" xs="12">
+                <Grid item style={{margin: "10px"}}>
+                    <CircularProgress />
+                </Grid>
+            </Grid>  :
                 <Table
                     columns={columns}
                     data={prestations}

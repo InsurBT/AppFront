@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import dossierService from '../../service/dossier-service';
 import AddIcon from '@material-ui/icons/Add'
-import Button from '@material-ui/core/Button';
+import {Button , CircularProgress , Grid} from '@material-ui/core';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
 import FiltreDossier from './FiltreDossier';
 import FiltreAssure from './FiltreAssure';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useParams } from 'react-router-dom';
-import Popup from 'reactjs-popup';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function DossierSoins(props) {
 
@@ -102,7 +102,11 @@ export default function DossierSoins(props) {
            
             {
                 loading ?
-                    <div>Chargement...</div> :
+                <Grid item container justify="center" xs="12">
+                    <Grid item style={{margin: "10px"}}>
+                        <CircularProgress />
+                    </Grid>
+                </Grid> :
                     <Table
                         data={data}
                         pageSize={5}
@@ -120,19 +124,19 @@ export default function DossierSoins(props) {
                     open={formOpen}
                     onClose={closeForm}
                     button='Filtrer'
-
                     icon = {<FilterListIcon/>}
                 >
                     <FiltreDossier />
                 </FormPopup>
-                <Popup
+                <FormPopup
                     open={openFiltreAssure}
                     onClose={() => {setOpenFiltreAssure(false)}}
-                    closeOnDocumentClick
+                    button="Ajouter Dossier"
+                    icon = {<AddCircleIcon/>}
                 >
                     <div style={{margin: "10px"}}>
                         <FiltreAssure handleAjouter={ ({imme}) => { props.history.push("/home/dossiers/ajouter/" + imme) } } />
                     </div>
-                </Popup>
+                </FormPopup>
         </div>)
 }
