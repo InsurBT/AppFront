@@ -1,4 +1,8 @@
-import dossiers from "./data/dossiers";
+import dossiers from "../data/dossiers";
+import prestations from "../data/prestation";
+import { store } from '../../index'
+import * as ACTIONS from '../../redux/action/actions'
+
 
 const dossierSevice = {
     getDossiersEnInstance: function (categorie) {
@@ -25,6 +29,13 @@ const dossierSevice = {
                 });
             }, 1500);
         })
+    },
+    ajouterDossier: function (dossier, prests) {
+        console.log("ajouter dossier")
+        let action = ACTIONS.ajouterPrestation(dossier)
+        store.dispatch(action);
+        prestations.push(prests)
+        
     },
 
     getMenu: function () {

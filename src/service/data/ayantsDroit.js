@@ -1,8 +1,4 @@
-const ayantDroitSevice = {
-
-    
-
-    ayantDroit : [
+const ayantDroit = [
     
         {
     
@@ -469,8 +465,7 @@ const ayantDroitSevice = {
             agence: "Derb ghalef",
     
         },
-       
-    
-    ]}
-    
+    ]
+
+export default ayantDroit
      

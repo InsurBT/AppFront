@@ -267,6 +267,7 @@ export default function DirectionReg (props) {
         {/* Formulaire d'ajout ou de modification */}
         <FormPopup
             {...formParams}
+            direction="column"
             onClose={closeForm}
         >
             <TextField

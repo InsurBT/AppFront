@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import dossierService from '../../service/dossier-service';
+import dossierService from '../../service/dossier/dossier-service';
 import AddIcon from '@material-ui/icons/Add'
 import {Button , CircularProgress , Grid} from '@material-ui/core';
 import Table from '../../components/table';
@@ -10,6 +10,7 @@ import FiltreAssure from './FiltreAssure';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useParams } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Popup from 'reactjs-popup';
 
 export default function DossierSoins(props) {
 
@@ -128,15 +129,15 @@ export default function DossierSoins(props) {
                 >
                     <FiltreDossier />
                 </FormPopup>
-                <FormPopup
+                <Popup
                     open={openFiltreAssure}
+                    closeOnDocumentClick
                     onClose={() => {setOpenFiltreAssure(false)}}
-                    button="Ajouter Dossier"
                     icon = {<AddCircleIcon/>}
                 >
                     <div style={{margin: "10px"}}>
                         <FiltreAssure handleAjouter={ ({imme}) => { props.history.push("/home/dossiers/ajouter/" + imme) } } />
                     </div>
-                </FormPopup>
+                </Popup>
         </div>)
 }

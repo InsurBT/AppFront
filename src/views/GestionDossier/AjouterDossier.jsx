@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormInfoAssure from './formulaire/formInfoAssure';
 import FormDossier from './formulaire/formDossier';
 import FormValoraisation from './formulaire/formValoraisation';
@@ -14,6 +14,8 @@ import Prestation from './formulaire/Prestations'
 import { useParams } from 'react-router-dom';
 
 import assureService from '../../service/assure-service';
+import dossierService from '../../service/dossier/dossier-service';
+import prestationService from '../../service/dossier/prestation-service';
 
 function todaysDate() {
   const today = new Date();
@@ -87,7 +89,7 @@ const AjouterDossier = (props) => {
   const { idAssure } = useParams();
 
   // etat de l'etape actuelle
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const steps = getSteps();
 
@@ -117,7 +119,9 @@ const AjouterDossier = (props) => {
     formulair: "",
     convention: "",
     Agence: "",
-    Direction: ""
+    Direction: "",
+    montantEngage: "",
+    montantRembourse: ""
   });
 
   //etat des prestations
@@ -129,9 +133,22 @@ const AjouterDossier = (props) => {
     assureService.getAssureById(parseInt(idAssure)).then((res) => {
       if (res) {
         setAssure(res);
+        setDossier({...dossier, imme: res.imme});
       }
     })
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    let montantEngage = 0;
+    let montantRembourse = 0;
+
+    prestations.forEach(prest => {
+      montantEngage += parseFloat(prest.montantEngage);
+      montantRembourse += parseFloat(prest.montantRembourse)
+    });
+
+    setDossier({...dossier, montantEngage, montantRembourse});
+  }, [prestations])
 
   function getStepContent(step) {
     switch (step) {
@@ -140,15 +157,19 @@ const AjouterDossier = (props) => {
       case 1:
         return <FormDossier dossier={dossier} setDossier={setDossier} classes={classes} />;
       case 2:
-        return <Prestation prestations={prestations} setPrestations={setPrestations} classes={classes} />;
+        return <Prestation prestations={prestations} setPrestations={setPrestations} classes={classes} numDossier={dossier.numDossier} />;
       case 3:
-        return <FormValoraisation/>;
+        return <FormValoraisation dossier={dossier} />;
       default:
         return 'Unknown step';
     }
   }
 
   const handleNext = () => {
+    if (activeStep === steps.length - 1) {
+      dossierService.ajouterDossier(dossier, prestations);
+    }
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 

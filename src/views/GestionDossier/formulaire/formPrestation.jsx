@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 
-import prestationService from '../../../service/prestation-service';
+import prestationService from '../../../service/referentiel/prestation-service';
 
 const useStyles = makeStyles(theme => ({          
     all: {
@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: theme.spacing(2), 
         color: theme.palette.text.secondary,
-      
+        display: "flex",
+        justifyContent: "space-between"
       }, 
     text:{
         color:'#42a5f5',
@@ -52,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 export default function FormPrestation(props) {
   const classes = useStyles();
 
-  const {prestation, setPrestation} = props;
+  const { prestation, setPrestation, valider, fermer } = props;
 
   const [choixPrestations, setChoixPrestations] = useState([]);
 
@@ -64,7 +65,22 @@ export default function FormPrestation(props) {
         setChoixPrestations(res);
       }
     })).catch(error => { console.log(error); });
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    setPrestation({...prestation, montantRembourse: getMontantRembourse(
+      parseFloat(prestation.prestation.tarif),
+      parseFloat(prestation.montantEngage),
+      parseFloat(prestation.nbrActes),
+      parseFloat(prestation.prestation.tauxRemboursement)
+    )});
+  }, [prestation.prestation, prestation.nbrActes, prestation.montantEngage])
+
+  function getMontantRembourse(tarif, montantEngage, nbrActes, tauxRemboursement) {
+    let prix = (tarif > montantEngage) ? montantEngage : tarif;
+
+    return prix * nbrActes * tauxRemboursement / 100;
+  }
 
   return (
     <div className={classes.all} >
@@ -73,36 +89,34 @@ export default function FormPrestation(props) {
           <Grid item>
             <FormControl className={classes.root}>
                 <InputLabel id="demo-simple-select-label">Prestation</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={prestation.prestation}
-                    onChange={(e) => {setPrestation({...prestation, prestation: e.target.value})}}
-                  >
-                    <MenuItem value=""></MenuItem>
-                    {
-                      choixPrestations.map(choix => <MenuItem value={choix.type} >{choix.type}</MenuItem>)
-                    }
-                  </Select>
-            </FormControl>
-            <FormControl className={classes.root}>
-              <InputLabel id="demo-simple-select-label">Cotation</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={""}
-                    onChange={() => {}}
-                    >
-                    <MenuItem value={10}>10%</MenuItem>
-                    <MenuItem value={20}>20%</MenuItem>
-                    <MenuItem value={30}>30%</MenuItem>
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={prestation.prestation.type}
+                  onChange={
+                    (e) => {
+                      if (e.target.value !== "") {
+                        setPrestation({
+                          ...prestation,
+                          prestation: choixPrestations.find((choix) => {
+                            return choix.type === e.target.value;
+                          })
+                        });
+                      }
+                    }
+                  }
+                >
+                  <MenuItem value=""></MenuItem>
+                  {
+                    choixPrestations.map(choix => <MenuItem value={choix.type} >{choix.type}</MenuItem>)
+                  }
                 </Select>
             </FormControl>
           </Grid>
                   
           <Grid item>
-            <TextField className={classes.root} label="Tarif" />
-            <TextField className={classes.root} label="Taux remboursement" />
+            <TextField className={classes.root} value={prestation.prestation.tarif} label="Tarif" />
+            <TextField className={classes.root} value={prestation.prestation.tauxRemboursement} label="Taux remboursement" />
           </Grid>
 
       </Grid>
@@ -111,18 +125,29 @@ export default function FormPrestation(props) {
           <p className={classes.text}>Decision sur prestation</p>
             <Paper className={classes.paper}>
                     <FormControlLabel
-                            value="start"
-                            control={<Switch color="primary" minWidth= "300" />}
-                            label="Non remboursable"
-                            labelPlacement="start"
+                      value="start"
+                      control={
+                        <Switch
+                          color="primary"
+                          minWidth="300"
+                          checked={!prestation.remboursable}
+                          onChange={(e) => { setPrestation({...prestation, remboursable: !e.target.checked, motif: ""})}}
+                        />
+                      }
+                      label="Non remboursable"
+                      labelPlacement="start"
                     />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Input placeholder="Motif" inputProps={{ 'aria-label': 'description' }} className={classes.input} />
-
+                    <TextField
+                      label="Motif"
+                      className={classes.input}
+                      disabled={prestation.remboursable}
+                      value={prestation.motif}
+                      onChange={(e) => {setPrestation({...prestation, motif: e.target.value})}}
+                    />
             </Paper>     
       </Grid>
 
-      <TextField 
+      <TextField
         className={classes.root}
         label="Frais engagés"
         value={prestation.montantEngage}
@@ -134,14 +159,21 @@ export default function FormPrestation(props) {
         value={prestation.nbrActes}
         onChange={(e) => {setPrestation({...prestation, nbrActes: e.target.value})}}
       />
-      <TextField className={classes.root} label="Mt à rembourser" />
-
-                  
+      <TextField
+        className={classes.root}
+        value={prestation.montantRembourse}
+        label="Mt à rembourser"
+        disabled
+      />
+      
       <Box >
-          <Button className={classes.Button} variant="contained">Valider</Button> 
-          <Button className={classes.Button} variant="contained">Quiter</Button>
+          <Button
+            className={classes.Button}
+            variant="contained"
+            onClick={() => {valider(prestation)}}
+          >Valider</Button> 
+          <Button className={classes.Button} onclick={fermer} variant="contained">Fermer</Button>
       </Box>
-          
     </div>
   )
 }

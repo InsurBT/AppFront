@@ -1,6 +1,6 @@
-import api from '../environement/api';
+import api from '../../environement/api';
 
-import prestations from './data/referentielPrestation';
+import prestations from '../data/referentielPrestation';
 
 const prestationService = {
     getAll: function() {

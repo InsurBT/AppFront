@@ -17,7 +17,10 @@ function App(props) {
   const value = {connectedUser, setConnectedUser};
 
   useEffect(()=>{
-    props.ajouterDossier('mouaadouk')
+    props.ajouterDossier('ajouter dossier')
+    props.ajouterPrestation('ajouter prestation')
+    props.ajouterAssures('ajouter assures')
+    props.ajouterAyantsDroit('ajouter ayant droit')
   },[])
 
   console.log('reduuuux stooore' , props.state)
@@ -52,7 +55,20 @@ const mapDispatchToProps = (dispatch) => {
     ajouterDossier: (data) => {
           var action = ACTIONS.ajouterDossier(data)
           dispatch(action)
-      }
+      },
+    ajouterPrestation : (data) => {
+        var action = ACTIONS.ajouterPrestation(data)
+        dispatch(action)
+    },
+    ajouterAssures : (data) => {
+      var action = ACTIONS.ajouterAssures(data)
+      dispatch(action)
+    },
+    ajouterAyantsDroit : (data) => {
+      var action = ACTIONS.ajouterAyantsDroit(data)
+      dispatch(action)
+    },
+  
   }
 }
 

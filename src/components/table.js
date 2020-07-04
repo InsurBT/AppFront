@@ -25,7 +25,7 @@ import Back from "@material-ui/icons/NavigateBefore";
 import Next from "@material-ui/icons/NavigateNext";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
-
+import PersonIcon from '@material-ui/icons/Person';
 import styles from "../assets/jss/material-dashboard-react/components/tableStyle.js";
 
 const useStyle = makeStyles(styles);
@@ -130,6 +130,7 @@ export default function CustomTable(props) {
                     props.buttons && element ? <TableCell className={classes.tableCell} key="table-buttons" >
                         {props.edit ? <IconButton onClick={() => {props.edit(element)}}><Edit /></IconButton> : ""}
                         {props.delete ? <IconButton onClick={() => { props.delete(element)}}><Delete /></IconButton> : ""}
+                        {props.maryem ? <IconButton onClick={() => { props.maryem(element)}}><PersonIcon /></IconButton> : ""}
                     </TableCell> : (element ? "" : <TableCell className={classes.tableCell} style={{ color: "white"}}>-</TableCell>)
                 }
                 {
@@ -137,9 +138,7 @@ export default function CustomTable(props) {
                         return element ?
                                 <TableCell className={classes.tableCell} key={"TableCell" + index} >
                                     {
-                                        React.isValidElement(element[column.property]) ?
-                                            element[column.property] :
-                                            element[column.property].toString()
+                                        element[column.property]
                                     }
                                 </TableCell> :
                                 <TableCell className={classes.tableCell} style={{ color: "white"}}>-</TableCell>

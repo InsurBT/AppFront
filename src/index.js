@@ -4,16 +4,25 @@ import { Router } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 //REDUUX
-import { createStore } from 'redux'
+import { createStore , combineReducers } from 'redux'
 import {Provider} from 'react-redux'
-import reducer from './redux/reducer/reducer'
+// Les reducers
+import dossierReducer from './redux/reducer/dossierReducer'
+import assuresReducers from './redux/reducer/assuresReducer'
+import prestationReducer from './redux/reducer/prestationReducer'
+import ayantsDroitReducer from './redux/reducer/ayantsDroitReducer'
 /************************************************* */
 import createBrowserHistory from 'history/createBrowserHistory';
 import './index.css'
 import "./assets/css/material-dashboard-react.css?v=1.9.0";
 
 // REDUX STORE
-const store = createStore(reducer)
+export const store = createStore(combineReducers({dossierReducer,
+                                            assuresReducers,
+                                            prestationReducer , 
+                                            ayantsDroitReducer}
+                                        ))
+
 store.subscribe(()=> console.log(store.getState()))
 const customHistory = createBrowserHistory();
 

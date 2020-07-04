@@ -17,18 +17,12 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 // core components
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.js";
 import RTLNavbarLinks from "../Navbars/RTLNavbarLinks.js";
-//react-spring animation for SideBar
-import { useSpring, animated as a } from 'react-spring'
 
 import styles from "../../assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
 const useStyles = makeStyles(styles);
 
-const Sidebar = (props)=> {
-  
-  //Animation 
-  const animation = useSpring({ from : {opacity: 0 },to: {opacity: 1} , config: { duration: 2000,mass: 1, tension: 280, friction: 150 }})
-
+export default function Sidebar(props) {
   const classes = useStyles();
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
@@ -147,7 +141,8 @@ const Sidebar = (props)=> {
     </List>
   );
   var brand = (
-    <div className={classes.logo}>  
+    <div className={classes.logo}>
+     
         <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
         </div>
@@ -155,7 +150,7 @@ const Sidebar = (props)=> {
     </div>
   );
   return (
-    <a.div style={animation}>
+    <div>
       <Hidden mdUp implementation="css">
         <Drawer
           variant="temporary"
@@ -205,7 +200,7 @@ const Sidebar = (props)=> {
           ) : null}
         </Drawer>
       </Hidden>
-    </a.div>
+    </div>
   );
 }
 
@@ -219,5 +214,3 @@ Sidebar.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object),
   open: PropTypes.bool
 };
-
-export default Sidebar;

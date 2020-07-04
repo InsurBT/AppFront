@@ -13,13 +13,23 @@ import Menu from "@material-ui/icons/Menu";
 import AdminNavbarLinks from "./AdminNavbarLinks.js";
 import RTLNavbarLinks from "./RTLNavbarLinks.js";
 import Button from "../CustomButtons/Button.js";
-
+import FormatAlignJustifyIcon from '@material-ui/icons/FormatAlignJustify';
 import styles from "../../assets/jss/material-dashboard-react/components/headerStyle.js";
 
 const useStyles = makeStyles(styles);
 
+const useStyle = makeStyles( (theme) => ({
+ button: {
+          float: 'right',
+          marginTop: '13px'
+        }
+      })
+      );
+
 export default function Header(props) {
   const classes = useStyles();
+  const classeButton = useStyle ();
+  const {click} =props
   function makeBrand() {
     var name;
     props.routes.map(route => {
@@ -34,14 +44,20 @@ export default function Header(props) {
   const appBarClasses = classNames({
     [" " + classes[color]]: color
   });
-  return (
-    <AppBar className={classes.appBar + appBarClasses}>
+  return ( 
+    <AppBar className={classes.appBar + appBarClasses} >
+
+      <FormatAlignJustifyIcon className={classeButton.button} onClick = {click}> </FormatAlignJustifyIcon>
+
+
       <Toolbar className={classes.container}>
+      
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
           <Button color="transparent" href="#" className={classes.title}>
             {makeBrand()}
           </Button>
+          
         </div>
         <Hidden smDown implementation="css">
           {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}

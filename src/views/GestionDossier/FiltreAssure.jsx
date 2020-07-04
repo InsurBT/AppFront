@@ -158,11 +158,11 @@ const styles = theme => ({
                 pageSize={3}
             />
         </Grid>
-        {/* <Grid item container xs="12" direction="row-reverse">
+        <Grid item container xs="12" direction="row-reverse">
             <Grid item style={{margin: "10px"}}>
                 <Button className={classes.button} onClick={ () => { props.handleAjouter(selectedAssure) } }>Ajouter Dossier</Button>
             </Grid>
-        </Grid> */}
+        </Grid>
     </Grid>)
 }
 

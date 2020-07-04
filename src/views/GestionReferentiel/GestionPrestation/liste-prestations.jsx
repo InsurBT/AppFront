@@ -9,7 +9,7 @@ import Add from '@material-ui/icons/Add';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
 
-import prestationService from '../../../service/prestation-service';
+import prestationService from '../../../service/referentiel/prestation-service';
 
 import styles from '../../../assets/jss/material-dashboard-react/components/buttonStyle';
 
