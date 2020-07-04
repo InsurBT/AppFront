@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CardContent,Grid,TextField} from '@material-ui/core';
+import { CardContent,Grid,CardActions,TextField} from '@material-ui/core';
 import TextInputselect from '../../../components/text-input-select';
 import Button from '@material-ui/core/Button';
 
@@ -79,11 +79,15 @@ export default function FiltreCaisse(props) {
                     icon="none"
                 />
             </Grid>
-            <Grid item container justify="center" xs="12">
-            <Grid item style={{margin: "10px"}}>
-                <Button onClick={props.filtrer} variant="outlined" >Filtrer</Button>
+
+            <CardActions>
+            <Grid item xs={5}  justify="center" >
+                <Grid item xs={5}  justify="center" >
+                <Button onClick={props.filtrer} variant="outlined"  >Filtrer</Button>  
+                </Grid>
             </Grid>
-        </Grid>
+            </CardActions>
+     
 
         </Grid>
     </CardContent>

@@ -210,7 +210,7 @@ export default function ListeUtilisateurs(props) {
                     data={utilisateurs}
                     buttons
                     edit={openEditForm}
-                    maryem={() => {}}
+                    
                     pageSize="5"
                     searchBar
                 />

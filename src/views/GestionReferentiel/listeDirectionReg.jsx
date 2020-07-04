@@ -294,7 +294,7 @@ export default function DirectionReg (props) {
                 type="select"
                 options={options.map(option => ({value:option.id, label:option.nom}))}
                 label="Ville"
-                value={inputDirectionReg.ville}
+                currentValue={inputDirectionReg.ville}
                 onChange={(e) => {setInputDirectionReg({
                     ...inputDirectionReg,
                     idVille: e.target.value,

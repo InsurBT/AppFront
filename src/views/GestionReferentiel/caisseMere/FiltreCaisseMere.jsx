@@ -64,11 +64,13 @@ return(
     />
     
 </Grid>
-<Grid item container justify="center" xs="12">
-    <Grid item style={{margin: "10px"}}>
-        <Button onClick={props.filtrer} variant="outlined" >Filtrer</Button>
-    </Grid>
-</Grid>
+        <CardActions>
+                    <Grid item xs={5}  justify="center" >
+                        <Grid item xs={5}  justify="center" >
+                        <Button onClick={props.filtrer} variant="outlined"  >Filtrer</Button>  
+                        </Grid>
+                    </Grid>
+        </CardActions>
 
 </Grid>
 </CardContent>

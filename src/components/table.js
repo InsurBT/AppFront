@@ -130,7 +130,6 @@ export default function CustomTable(props) {
                     props.buttons && element ? <TableCell className={classes.tableCell} key="table-buttons" >
                         {props.edit ? <IconButton onClick={() => {props.edit(element)}}><Edit /></IconButton> : ""}
                         {props.delete ? <IconButton onClick={() => { props.delete(element)}}><Delete /></IconButton> : ""}
-                        {props.maryem ? <IconButton onClick={() => { props.maryem(element)}}><PersonIcon /></IconButton> : ""}
                     </TableCell> : (element ? "" : <TableCell className={classes.tableCell} style={{ color: "white"}}>-</TableCell>)
                 }
                 {
