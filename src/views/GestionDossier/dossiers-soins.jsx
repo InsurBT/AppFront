@@ -10,6 +10,8 @@ import FiltreAssure from './FiltreAssure';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useParams } from 'react-router-dom';
 import Popup from 'reactjs-popup';
+import { Typography } from '@material-ui/core';
+import swal from 'sweetalert';
 
 export default function DossierSoins(props) {
 
@@ -33,7 +35,7 @@ export default function DossierSoins(props) {
 
     // L'etat des colonne a afficher dans le tableau
     const columns = [
-        { title: "Numero", property: "NumDossier" },
+        { title: "Numero", property: "numDossier" },
         { title: "Id assuré", property: "imme" },
         { title: "Debut de soin", property: "debutSoin" },
         { title: "Fin de soin", property: "finSoin" },
@@ -95,6 +97,14 @@ export default function DossierSoins(props) {
         setFormOpen(false);
     }
 
+    function handlerAjouter(assure) {
+        if ( assure.imme ) {
+            props.history.push("/home/dossiers/ajouter/" + assure.imme);
+        } else {
+            swal("Vous devez selectioner un assuré");
+        }
+    }
+
     return (<div>
           
                 <Button variant="outlined" color="primary" onClick={() => { setOpenFiltreAssure(true) } }><AddIcon/></Button>
@@ -130,8 +140,9 @@ export default function DossierSoins(props) {
                     onClose={() => {setOpenFiltreAssure(false)}}
                     closeOnDocumentClick
                 >
+                    <Typography>Filtrer pour selectioner un assuré</Typography>
                     <div style={{margin: "10px"}}>
-                        <FiltreAssure handleAjouter={ ({imme}) => { props.history.push("/home/dossiers/ajouter/" + imme) } } />
+                        <FiltreAssure handleAjouter={handlerAjouter} />
                     </div>
                 </Popup>
         </div>)

@@ -166,7 +166,7 @@ const AjouterDossier = (props) => {
   }
 
   const handleNext = () => {
-    if (activeStep === steps.length) {
+    if (activeStep === steps.length - 1) {
       dossierService.ajouterDossier(dossier, prestations);
     }
 
