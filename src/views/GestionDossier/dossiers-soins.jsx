@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import dossierService from '../../service/dossier-service';
+import dossierService from '../../service/dossier/dossier-service';
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button';
 import Table from '../../components/table';

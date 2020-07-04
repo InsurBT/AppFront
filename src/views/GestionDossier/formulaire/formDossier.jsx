@@ -43,22 +43,21 @@ export default function FormFiltre(props) {
         setAgences(res);
       }
     })
-  })
-
-  const handleChange = (event) => {
-    setMedecin(event.target.value);
-  };
+  }, []);
 
   return (
       
     <form className={classes.root} noValidate autoComplete="off">
              
-      <TextField label="N°Dossier" />
+      <TextField
+        label="N° Dossier"
+        value={dossier.numDossier}
+        onChange={(e) => {setDossier({...dossier, numDossier: e.target.value})}}
+      />
       
       <TextField
         type="date"
         label="Date reception"
-        format="MM/dd/yyyy"
         value={dossier.dateReception}
         onChange={(e) => {setDossier({...dossier, dateReception: e.target.value})}}
       />
@@ -66,7 +65,6 @@ export default function FormFiltre(props) {
       <TextField
         type="date"
         label="Date debut de soins"
-        format="MM/dd/yyyy"
         value={dossier.debutSoin}
         onChange={(e) => {setDossier({...dossier, debutSoin: e.target.value})}}
       />
@@ -74,7 +72,6 @@ export default function FormFiltre(props) {
       <TextField
         type="date"
         label="Date fin de soins"
-        format="MM/dd/yyyy"
         value={dossier.finSoin}
         onChange={(e) => {setDossier({...dossier, finSoin: e.target.value})}}
       />
