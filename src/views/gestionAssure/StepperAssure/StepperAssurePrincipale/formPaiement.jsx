@@ -40,8 +40,8 @@ export default function FormPaiement() {
                             value={modeRemboursement}
                             onChange={handleChangeModeRemboursement}
                             >
-                            <MenuItem value={10}>1</MenuItem>
-                            <MenuItem value={20}>2</MenuItem>
+                            <MenuItem value={10}>Virement</MenuItem>
+                            <MenuItem value={20}>Par chèque</MenuItem>
                             
                         </Select>
                 </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

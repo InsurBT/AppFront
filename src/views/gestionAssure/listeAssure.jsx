@@ -47,10 +47,9 @@ export default function ListeAssure(props) {
             let assures = res.assures.map(assure => ({
                 ...assure,
                 ayantsDroit: <Link to="/home/gestionAssure/gererAyantDroit" >
-                    {assure.ayantsDroit}
-                    
-                    <Icon>
-                       &nbsp; 
+                    {assure.ayantsDroit}                   
+                       <Icon>
+                     &nbsp; 
                         <SupervisorAccountIcon />
                     </Icon>
                 </Link>

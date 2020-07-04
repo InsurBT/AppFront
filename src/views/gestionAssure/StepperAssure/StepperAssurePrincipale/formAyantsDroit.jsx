@@ -40,8 +40,9 @@ export default function FormAyantsDroit() {
                             value={sitFamiliale}
                             onChange={handleChangeSitFamiliale}
                             >
-                            <MenuItem value={10}>1</MenuItem>
-                            <MenuItem value={20}>2</MenuItem>
+                            <MenuItem value={10}>Marié(e)</MenuItem>
+                            <MenuItem value={20}>Célibataire</MenuItem>
+                            <MenuItem value={30}>divorcé(e)</MenuItem>
                             
                         </Select>
                 </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

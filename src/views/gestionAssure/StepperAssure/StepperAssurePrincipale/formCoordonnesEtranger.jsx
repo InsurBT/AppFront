@@ -80,14 +80,7 @@ export default function FormCoordonnesEtranger() {
     /********************************************************************************************************* */
 
     useEffect(() => {
-        CaisseEtrangereService.getAll().then(res => {
-            setCaisseEtrangere(res);
-            console.log('caisse',res);
-        });
-        CaisseMereService.getAll().then(res => {
-            setCaisses(res);
-         
-        });
+     
         paysService.getAll().then(res => {
             if (typeof res === "string") {
                 console.log(res);
@@ -98,6 +91,18 @@ export default function FormCoordonnesEtranger() {
             }
         })
     }, []);
+    useEffect(() => {
+    
+        CaisseEtrangereService.getAllByVille(input.id).then(res => {
+            if (typeof res === "string") {
+                console.log(res);
+            } else {
+                setCaisseEtrangere(res)
+                console.log(res);
+                console.log('les options de caisse etrangere  sont :',options);
+            }
+        })
+    }, [input.id,input.idpays]);
 
     /***********************************************************************************/
     useEffect(() => {
@@ -107,7 +112,15 @@ export default function FormCoordonnesEtranger() {
             console.log('les villes:',res);
     }
     ); 
+    console.log("le code est",input.idpays);
+    CaisseMereService.getAllBypays(input.idpays).then(res => {
+        setCaisses(res);
+        console.log('les caisse meres:',res);
+}
+); 
     }, [input.idpays]); 
+    /*****************************************************************************************/
+ 
     return (
         <div>
             <form className={classes.root} noValidate autoComplete="off">

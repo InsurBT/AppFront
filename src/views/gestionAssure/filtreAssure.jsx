@@ -287,9 +287,9 @@ function FiltreAssure(props) {
                                 onChange={handleChangeModePaiment}
                                 placeholder="Mode de paiement"
                                 >
-                                <MenuItem value={10}>Mode1</MenuItem>
-                                <MenuItem value={20}>Mode2</MenuItem>
-                                <MenuItem value={30}>Mode3</MenuItem>
+                                <MenuItem value={10}>Virement</MenuItem>
+                                <MenuItem value={20}>Par chèque</MenuItem>
+                                
                             </Select>
 
                 </Grid>

@@ -41,6 +41,15 @@ const CaisseEtrangereService = {
             }
         });
     },
+    getAllByVille: (id) => {
+        return api.post("CaisseEtrangere/getAll", id, {"Authorization": sessionStorage.getItem("authToken")}).then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                return res.text();
+            }
+        });
+    },
     getFiltredCaisse: (filtre,data) => {
   
         return new Promise((resolve, reject) => {
