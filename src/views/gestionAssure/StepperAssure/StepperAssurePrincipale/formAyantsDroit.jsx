@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,13 +21,29 @@ const useStyles = makeStyles((theme) => ({
     },  
   }));
 
-export default function FormAyantsDroit() {
+export default function FormAyantsDroit(props) {
     const classes = useStyles();
     const [sitFamiliale, setSitFamiliale] = React.useState('');
+    const [ayantDroit,setAyanyDroit]=useState({
+        nbrConjoint : 0,
+        nbrEnfant : 0,
+        nbrayantDroit :""
+     })
+    
+    
+  useEffect(() => {
+    setAyanyDroit({...ayantDroit, nbrayantDroit: getNomberAyantDroit(
+      parseFloat(ayantDroit.nbrConjoint),
+      parseFloat(ayantDroit.nbrEnfant),
+ 
+    )});
+  }, [ayantDroit.nbrConjoint, ayantDroit.nbrEnfant])
 
-    const handleChangeSitFamiliale = (event) => {
-        setSitFamiliale(event.target.value);
-    };
+  function getNomberAyantDroit(nbrEnfant,nbrConjoint) {
+    return nbrEnfant + nbrConjoint;
+  }
+
+  
 
     return (
         <div>
@@ -37,8 +54,9 @@ export default function FormAyantsDroit() {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={sitFamiliale}
-                            onChange={handleChangeSitFamiliale}
+                            value={ayantDroit.sitFamiliale}
+                            onChange={(e) => {setAyanyDroit({...ayantDroit, sitFamiliale: e.target.value})}}
+
                             >
                             <MenuItem value={10}>Marié(e)</MenuItem>
                             <MenuItem value={20}>Célibataire</MenuItem>
@@ -46,9 +64,21 @@ export default function FormAyantsDroit() {
                             
                         </Select>
                 </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField className={classes.textField} id="standard-basic" label="Nbr Conjoint" />
-                <TextField className={classes.textField}  id="standard-basic" label="Nbr Enfant" />
-                <TextField className={classes.textField}  id="standard-basic" label="Nbr Ayant Droit" />
+                <TextField className={classes.textField } 
+                 value={ayantDroit.nbrConjoint}
+                 onChange={(e) => {setAyanyDroit({...ayantDroit, nbrConjoint: e.target.value})}} 
+                 id="standard-basic" 
+                 label="Nbr Conjoint" />
+                <TextField className={classes.textField}  
+                id="standard-basic"
+                 label="Nbr Enfant"
+                 value={ayantDroit.nbrEnfant}
+                 onChange={(e) => {setAyanyDroit({...ayantDroit, nbrEnfant: e.target.value})}}  />
+                <TextField className={classes.textField} 
+                 id="standard-basic"
+                label="Nbr Ayant Droit"
+                value={ayantDroit.nbrayantDroit}
+                disabled  />
             </form>  
         </div>
     )

@@ -25,8 +25,20 @@ const useStyles = makeStyles((theme) => ({
 export default function FormPaiement() {
     const classes = useStyles();
     const [modeRemboursement, setModeRemboursement] = useState('');
+    const [choix,setChoix]=useState(true);
+    
     const handleChangeModeRemboursement = (event) => {
         setModeRemboursement(event.target.value);
+        console.log("mode de remboursement",modeRemboursement)
+
+        if(modeRemboursement=="Virement")
+        {
+            console.log("mode de remboursement2",modeRemboursement)
+            setChoix(true);
+            console.log(choix)
+        }else{
+             setChoix(false);
+        }
     };
     return (
         <div>
@@ -40,12 +52,12 @@ export default function FormPaiement() {
                             value={modeRemboursement}
                             onChange={handleChangeModeRemboursement}
                             >
-                            <MenuItem value={10}>Virement</MenuItem>
-                            <MenuItem value={20}>Par chèque</MenuItem>
+                            <MenuItem value="Virement">Virement</MenuItem>
+                            <MenuItem value="cheque">Par chèque</MenuItem>
                             
                         </Select>
                 </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField className={classes.textField} id="standard-basic" label="RIB" />
+                <TextField className={classes.textField} id="standard-basic" label="RIB" disabled={choix} />
             </form>  
             
         </div>

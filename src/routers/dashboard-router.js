@@ -41,7 +41,7 @@ export default function DashboardRouter(props) {
   // cet etat garde la valeur 'true' tant que les sous menu ne sont pas encore charge
   const [ loading, setLoading ] = useState(true);
 
-  const [ userRoutes, setUserRoutes ] = useState(routes);
+  const [ userRoutes, setUserRoutes ] = useState([]);
   
   const [ switchViews, setSwitchViews ] = useState([]);
 
@@ -118,7 +118,7 @@ export default function DashboardRouter(props) {
       </Switch>
     )
 
-  }, [connectedUser])
+  }, [userRoutes])
 
   function deconnexion() {
       utilisateurService.disconnect().then(res => {

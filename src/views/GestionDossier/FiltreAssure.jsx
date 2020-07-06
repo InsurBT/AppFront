@@ -70,8 +70,7 @@ const styles = theme => ({
                 <InputLabel className={classes.label}>N° immatriculation</InputLabel>
                 <TextField
                     fullWidth
-                    margin="dense"
-                    variant="outlined"
+                  
                     type="text"
                     value={inputAssure.imme}
                     onChange={ (e) => { setInputAssure({ ...inputAssure, imme: e.target.value }); } }
@@ -95,6 +94,7 @@ const styles = theme => ({
                 <FormControl style={{width: "100%"}}>
                     <InputLabel className={classes.label}>Agence</InputLabel>
                     <Select
+                       
                         value={inputAssure.code_agence}
                         onChange={(e) => {setInputAssure({...inputAssure, code_agence: e.target.value})}}
                     >
@@ -113,8 +113,7 @@ const styles = theme => ({
                     
                     <TextField
                         fullWidth
-                        margin="dense"
-                        variant="outlined"
+                       
                         type="text"
                         label="Nom"
                         value={inputAssure.nom}
@@ -122,8 +121,7 @@ const styles = theme => ({
                     />
                     <TextField
                         fullWidth
-                        margin="dense"
-                        variant="outlined"
+                    
                         type="text"
                         label="Prénom"
                         value={inputAssure.prenom}
