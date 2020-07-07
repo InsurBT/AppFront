@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react';
-
 import {formContainerStyle, smallFormContainerStyle} from '../CSS/form-container.css';
-
-import FormHeader from './form-header';
-import FormButton from './form-button';
 import { Card, CardContent, CardHeader, Avatar, Button, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles'
 
-export default function FormContainer(props) {
+const styles = theme => ({
+    avatar : {
+        backgroundColor : "#b3d9ff",
+        color : 'white'
+    },
+    button : {
+        backgroundColor : '#b3d9ff',
+            '&:hover' : {
+        backgroundColor : "#33cccc"
+      }
+    }
+})
+
+ function FormContainer(props) {
+    
+    const {classes} = props
 
     const [style, setStyle] = useState(window.innerWidth >= 475 ? formContainerStyle : smallFormContainerStyle);
 
@@ -23,7 +35,7 @@ export default function FormContainer(props) {
     return (<Card style={{...style, ...props.style}}>
         <CardHeader
             title={props.title}
-            avatar={<Avatar>
+            avatar={<Avatar className={classes.avatar}>
                 {props.icon}
             </Avatar>}
         />
@@ -42,3 +54,5 @@ export default function FormContainer(props) {
     </Card>
     )
 }
+
+export default withStyles(styles)(FormContainer)

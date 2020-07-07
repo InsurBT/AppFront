@@ -273,9 +273,11 @@ export default function ListeCaisseMeres(props) {
         {/* Tableau des donnees */}
         {
             loading ?
-                <div style={{alignContent: 'center'}}>Chargement...
-                      <CircularProgress disableShrink />
-                </div> :
+            <Grid item container justify="center" xs="12">
+                <Grid item style={{margin: "10px"}}>
+                    <CircularProgress />
+                </Grid>
+            </Grid> :
                 <Table
                     columns={columns}
                     data={data}

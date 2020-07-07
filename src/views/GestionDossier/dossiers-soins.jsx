@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import dossierService from '../../service/dossier/dossier-service';
 import AddIcon from '@material-ui/icons/Add'
-import Button from '@material-ui/core/Button';
+import {Button , CircularProgress , Grid} from '@material-ui/core';
 import Table from '../../components/table';
 import FormPopup from '../../components/form-popup';
 import FiltreDossier from './FiltreDossier';
 import FiltreAssure from './FiltreAssure';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useParams } from 'react-router-dom';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Popup from 'reactjs-popup';
 import { Typography } from '@material-ui/core';
 import swal from 'sweetalert';
@@ -112,7 +113,11 @@ export default function DossierSoins(props) {
            
             {
                 loading ?
-                    <div>Chargement...</div> :
+                <Grid item container justify="center" xs="12">
+                    <Grid item style={{margin: "10px"}}>
+                        <CircularProgress />
+                    </Grid>
+                </Grid> :
                     <Table
                         data={data}
                         pageSize={5}
@@ -130,15 +135,15 @@ export default function DossierSoins(props) {
                     open={formOpen}
                     onClose={closeForm}
                     button='Filtrer'
-
                     icon = {<FilterListIcon/>}
                 >
                     <FiltreDossier />
                 </FormPopup>
                 <Popup
                     open={openFiltreAssure}
-                    onClose={() => {setOpenFiltreAssure(false)}}
                     closeOnDocumentClick
+                    onClose={() => {setOpenFiltreAssure(false)}}
+                    icon = {<AddCircleIcon/>}
                 >
                     <Typography>Filtrer pour selectioner un assuré</Typography>
                     <div style={{margin: "10px"}}>

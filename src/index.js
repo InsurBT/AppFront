@@ -10,7 +10,13 @@ import "./assets/css/material-dashboard-react.css?v=1.9.0";
 
 const customHistory = createBrowserHistory();
 
-ReactDOM.render(<Router history={customHistory}><App history={customHistory}/></Router>, document.getElementById('root'));
+ReactDOM.render(    
+                        <Router history={customHistory}>
+                            <App history={customHistory}/>
+                        </Router>
+                    
+                    ,
+                 document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

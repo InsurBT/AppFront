@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
-
 import ConnectedUserContext from './context/connected-user.context';
 
 import Login from './views/login.jsx';
 import DashboardRouter from './routers/dashboard-router';
 
 function App(props) {
+
+
   const [connectedUser, setConnectedUser] = useState(null);
 
   const value = {connectedUser, setConnectedUser};
@@ -36,5 +37,6 @@ function App(props) {
     </ConnectedUserContext.Provider>
   );
 }
+
 
 export default App;

@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+    Grid,
+    CircularProgress,
+    MenuItem, 
+    FormControl, 
+    InputLabel,
+    Select,
+    Button,
+    TextField,
+    makeStyles
+} from '@material-ui/core';
 import Table from '../components/table';
 import SmallHeader from '../components/small-header';
 import FormPopup from '../components/form-popup';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import Add from '@material-ui/icons/Add';
-import Edit from '@material-ui/icons/Edit';
+
+import {Add,Edit} from '@material-ui/icons'
 import utilisateurService from '../service/utilisateur-service';
 import agenceService from '../service/agence-service';
-import { MenuItem, FormControl, InputLabel } from '@material-ui/core';
-
 export default function ListeUtilisateurs(props) {
 
     const useStyles = makeStyles((theme) => ({
@@ -204,7 +209,11 @@ export default function ListeUtilisateurs(props) {
         {/* Tableau des donnees */}
         {
             loading ?
-                <div>Chargement...</div> :
+            <Grid item container justify="center" xs="12">
+                <Grid item style={{margin: "10px"}}>
+                    <CircularProgress />
+                </Grid>
+            </Grid> :
                 <Table
                     columns={columns}
                     data={utilisateurs}

@@ -1,6 +1,5 @@
 import dossiers from "../data/dossiers";
 import prestations from "../data/prestation";
-
 const dossierSevice = {
     getDossiersEnInstance: function (categorie) {
         let actions = [];
@@ -27,10 +26,11 @@ const dossierSevice = {
             }, 1500);
         })
     },
-
+    
     ajouterDossier: function (dossier, prests) {
         dossiers.push(dossier);
         prestations.push(prests)
+        
     },
 
     getMenu: function () {
