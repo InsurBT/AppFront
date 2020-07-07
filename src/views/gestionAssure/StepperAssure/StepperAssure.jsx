@@ -145,7 +145,7 @@ function getStepContent(stepIndex) {
           {activeStep === steps.length ? (
             <div>
               <Typography className={classes.instructions}>L'assuré a été ajouté avec succès </Typography>
-              <Link color="inherit" href="http://localhost:3000/home/liste_assure">
+              <Link color="inherit" href="http://localhost:3000/home/gestionAssure">
                   <Button className={classes.buttonRetour}>Terminer</Button>
               </Link>
              

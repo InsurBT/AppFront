@@ -44,9 +44,11 @@ const styles = theme => ({
                 <Grid container direction={props.direction}>
                     {props.children}
                 </Grid>
-                <div style={{textAlign: "right"}}>
-                    <Button type="submit" className={classes.button}>{props.button}</Button>
-                </div>
+                {
+                    props.button ? <div style={{textAlign: "right"}}>
+                        <Button type="submit">{props.button}</Button>
+                    </div> : null
+                }
             </form>
         </CardContent>
     </Card>

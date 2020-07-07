@@ -17,24 +17,22 @@ export default function AyantDroits(props) {
     const [optionsVille,setOptionsVille]=useState([]);
     const today = todaysDate();
     const [inputAyantDroit, setInputAyantDroit] = useState({
-        ayantDroit: {
-            nom: "",
-            prenom: "",
-            nomJeuneFille: "",
-            lienDeparente:"",
-            CIN:"",
-            age:"",
-            sexe:"",
-            status:"",
-            DateNaissance: today,
-            DateInscription:today,
-            ImmCNSS:"",
-            rang:"",
-            pays:"",
-            idpays:"",
-            ville:"",
-            idville:""
-        },
+        nom: "",
+        prenom: "",
+        nomJeuneFille: "",
+        lienDeparente:"",
+        CIN:"",
+        age:"",
+        sexe:"",
+        status:"",
+        DateNaissance: today,
+        DateInscription:today,
+        ImmCNSS:"",
+        rang:"",
+        pays:"",
+        idpays:"",
+        ville:"",
+        idville:"",
         idAssure: props.idAssure
     });
     useEffect(() => {
@@ -88,16 +86,27 @@ export default function AyantDroits(props) {
         { title: "Rang", property: "rang" },
         { title: "Pays", property: "pays" },
         { title: "Ville", property: "ville" }
-
-
-
     ];
+
+    useEffect(() => {
+        setShownAyantDroit(ayantDroits.map((prest) => {
+            return {
+                ...prest,
+        
+                buttons: [
+                    <IconButton>
+                        <Edit />
+                    </IconButton>
+                ]
+            }
+        }))
+    }, [ayantDroits]);
 
     function todaysDate() {
         const today = new Date();
 
         let day = ("0" + today.getDate()).slice(-2);
-        let month = ("0" + today.getMonth()+1).slice(-2);
+        let month = ("0" + (today.getMonth() + 1)).slice(-2);
         let year = today.getFullYear();
 
         return [year, month, day].join('-');
@@ -107,6 +116,7 @@ export default function AyantDroits(props) {
     function valider (ayantDroit) {
        
             setAyantDroits([...ayantDroits, ayantDroit]);
+            console.log(ayantDroits);
             setOpenForm(false);
         
     }

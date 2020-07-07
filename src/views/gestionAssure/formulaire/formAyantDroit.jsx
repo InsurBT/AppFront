@@ -5,18 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import { Box, Typography, CardActions } from '@material-ui/core';
-import paysService from "../../../service/pays-service";
-import Input from '@material-ui/core/Input';
-import TextInputselect from '../../../components/text-input-select';
+
 import 'date-fns';
 
-import prestationService from '../../../service/referentiel/prestation-service';
 
 const useStyles = makeStyles(theme => ({          
     all: {
@@ -58,30 +52,8 @@ export default function FormAyantDroit(props) {
 
   const { ayantDroit, setAyantDroit, valider, fermer ,options ,setOptions,optionsVille,setOptionsVille} = props;
 
-  const [choixPays, setChoixPays] = useState([]);
 
-  useEffect(() => {
-    paysService.getAll().then((res => {
-      if (typeof res === "string") {
-        console.log(res);
-      } else {
-        setChoixPays(res);
-      }
-    })).catch(error => { console.log(error); });
-  }, []);
 
-  /*useEffect(() => {
-    setAyantDroit({...ayantDroit, age: getage(
-      parseFloat(ayantDroit.DateNaissance),
-    )});
-  }, [ayantDroit.ayantDroit])
-
-  function getage(date) {
-        let diff = Date.now() - date.getTime();
-        let age = new Date(diff); 
-        return Math.abs(age.getUTCFullYear() - 1970);
-  }
-*/
   return (
     <div className={classes.all} >
       
@@ -149,7 +121,7 @@ export default function FormAyantDroit(props) {
      
             <TextField
                 className={classes.root}
-                value={ayantDroit.sexe}
+                value={ayantDroit.age}
                 label="Age"
                 onChange={(e) => {setAyantDroit({...ayantDroit, age: e.target.value})}}
 

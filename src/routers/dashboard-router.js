@@ -95,12 +95,17 @@ export default function DashboardRouter(props) {
       setConnectedUser(res);
 
       setUserRoutes(routes.filter(route => route.roles.includes(res.role)));
+    }).catch( err => {
+      setConnectedUser(null);
+      sessionStorage.removeItem("authToken");
+      props.history.push("/login");
     })
   }, []);
 
   useEffect(() => {
     setSwitchViews(
       <Switch>
+        <Redirect from="/home" exact to="/home/accueil" />
         {
             userRoutes.map((route, key) => {
               return (
@@ -114,15 +119,15 @@ export default function DashboardRouter(props) {
             })
         }
         
-        <Redirect from="/home" to="/home/accueil" />
+        
       </Switch>
     )
 
-  }, [userRoutes])
+  }, [userRoutes]);
 
   function deconnexion() {
       utilisateurService.disconnect().then(res => {
-          if (res.ok) {
+          if (res) {
               setConnectedUser(null);
               sessionStorage.removeItem("authToken");
               props.history.push("/login");
@@ -153,6 +158,7 @@ export default function DashboardRouter(props) {
         click={hideSideBar}
         routes={userRoutes}
         handleDrawerToggle={handleDrawerToggle}
+        logout={deconnexion}
       />
       {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
       {getRoute() ? (
