@@ -1,6 +1,7 @@
 import React from 'react';
 import SteppreAssurePrincipale from './StepperAssurePrincipale/StepperAssurePrincipale';
 import ListeAssure from './AyantsDroit/listeAyantsDroit';
+import AyantDroits from '../formulaire/AyantDroit';
 import ListeMondataire from './Mondataire/listeMondataire'    
 import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper';
@@ -9,6 +10,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { useState } from 'react';
+
 
 
   const styles = theme => ({
@@ -63,32 +66,32 @@ import Link from '@material-ui/core/Link';
 function getSteps() {
 return ['Assuré principale', 'Ayants droit', 'Mandataire'];
 }  
+const StepperAssure= (props)=> {
+  
+  const {classes} = props
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
+  const [ayantDroits,setAyantDroits]=useState([]);
+
+
 
 function getStepContent(stepIndex) {
-   
-    switch (stepIndex) {
-      case 0:
-        return (
-            <div >
-              
-                <SteppreAssurePrincipale/>
-              
-            </div>)
-        
-      case 1:
-        return <ListeAssure/>
-      case 2:
-        return <ListeMondataire/>
-      default:
-        return 'Unknown stepIndex'
-    }
+  switch (stepIndex) {
+    case 0:
+      return (
+          <div>
+              <SteppreAssurePrincipale/>
+          </div>)
+    case 1:
+      return <AyantDroits ayantDroits={ayantDroits} setAyantDroits={setAyantDroits}  classes={classes}/>
+    case 2:
+      return <ListeMondataire/>
+    default:
+      return 'Unknown stepIndex'
   }
+}
 
-const StepperAssure= (props)=> {
-    const {classes} = props
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
-  
+
     const handleNext = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };

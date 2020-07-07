@@ -64,7 +64,7 @@ const styles = theme => ({
 
     const { classes } = props
 
-    return (<Grid container >
+    return (<Grid container spacing={2}>
         <Grid item container xs="6">
             <Grid item xs="12">
                 <InputLabel className={classes.label}>N° immatriculation</InputLabel>
@@ -90,7 +90,7 @@ const styles = theme => ({
                     </Select>
                 </FormControl>
             </Grid>
-            <Grid item xs="6">
+            <Grid item xs="6" spacing={2}>
                 <FormControl style={{width: "100%"}}>
                     <InputLabel className={classes.label}>Agence</InputLabel>
                     <Select
