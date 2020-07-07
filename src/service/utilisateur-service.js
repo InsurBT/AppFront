@@ -14,7 +14,10 @@ const utilisateurService = {
     },
 
     disconnect: function() {
-        return api.post("logout", null, {"Authorization": sessionStorage.getItem("authToken")});
+        // return api.post("logout", null, {"Authorization": sessionStorage.getItem("authToken")});
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {resolve(true)}, 200);
+        })
     },
 
     getAll: function() {

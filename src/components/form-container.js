@@ -32,9 +32,11 @@ export default function FormContainer(props) {
                 <Grid container direction={props.direction}>
                     {props.children}
                 </Grid>
-                <div style={{textAlign: "right"}}>
-                    <Button type="submit">{props.button}</Button>
-                </div>
+                {
+                    props.button ? <div style={{textAlign: "right"}}>
+                        <Button type="submit">{props.button}</Button>
+                    </div> : null
+                }
             </form>
         </CardContent>
     </Card>

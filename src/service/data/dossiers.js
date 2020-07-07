@@ -4,7 +4,7 @@ const dossiers = [
     {
         imme: 13342,
         beneficiaire: "Mohammed El Madani",
-        numDossier: "5666-2020-02-100",
+        numDossier: "5666-2020-02-456",
         categorie: "valide",
         dateReception: randomDate(2020, 2021),
         debutSoin: "2020-02-05",
@@ -29,7 +29,7 @@ const dossiers = [
     },
     {
         imme: 13662,
-        numDossier: "5666-2020-02-100",
+        numDossier: "5666-2020-09-362",
         categorie: "valide",
         dateReception: randomDate(2020, 2021),
         debutSoin: "2020-01-12",
@@ -41,7 +41,7 @@ const dossiers = [
     },
     {
         imme: 13232,
-        numDossier: "5666-2020-02-100",
+        numDossier: "5666-2020-10-635",
         categorie: "valide",
         dateReception: randomDate(2020, 2021),
         debutSoin: "2020-01-30",
@@ -53,7 +53,7 @@ const dossiers = [
     },
     {
         imme: 12932,
-        numDossier: "5666-2020-02-100",
+        numDossier: "5666-2020-02-467",
         categorie: "valide",
         dateReception: randomDate(2020, 2021),
         debutSoin: "2020-03-12",

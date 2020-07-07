@@ -57,7 +57,7 @@ const styles = theme => ({
 
     useEffect(() => {
         
-        if (!connectedUser) {
+        if (connectedUser === null) {
             utilisateurService.getLoggedUser().then((res) => {
                 if (typeof res === "string") {
                     props.history.push("/login");
@@ -66,7 +66,8 @@ const styles = theme => ({
                     setLoading(false);
                 }
             }).catch((err) => {
-
+                sessionStorage.removeItem("authToken")
+                props.history.push("/login");
             })
         }
     }, []);
@@ -77,9 +78,6 @@ const styles = theme => ({
         <a.div style={animation}>
     {loading ? <div> chargement...... </div> : 
         <div >
-        <head>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
-        </head>
            <div class="cardgeneral">
            <div class="card profile-sidebar">
             <img src="/CNSS.png" alt="" class="profile-image"/>
