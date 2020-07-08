@@ -133,7 +133,7 @@ export default function AyantDroits(props) {
             />
             <FormPopup
                 open={openForm}
-                title={"Ajouter ayant droit"}
+                title={"Ajouter mandataire"}
                 onClose={fermer}
             >
                 <FormMandataire
