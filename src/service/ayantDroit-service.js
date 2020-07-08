@@ -5,7 +5,7 @@ const ayantDroitSevice = {
                 resolve({
                     ayantDroit: [
                         {
-                            immatriculation: 13342,
+                            immatriculation: 13341,
                             rang:1,
                             lien:"conjoint",
                             nom: "El Madani",
@@ -27,7 +27,7 @@ const ayantDroitSevice = {
                             dateNaissance: "1999/03/13",
                             sexe:"féminin",
                             CIN:"B128833",
-                            formulaireDroit: "NM121",
+                            formulaireDroit: "NM122",
                             debutCouverture: "2020-02-25",
                             finCouverture: "2020-06-05",
                             agence: "Maarif"
