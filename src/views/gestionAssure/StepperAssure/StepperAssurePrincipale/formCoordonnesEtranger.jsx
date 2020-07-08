@@ -33,52 +33,16 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function FormCoordonnesEtranger() {
+export default function FormCoordonnesEtranger(props) {
     const classes = useStyles();
-    const [ville, setVille] = React.useState('');
-
-    const [input, setInput] = useState({
-      
-        idpays: "",
-        pays:"",
-        ville:"",
-        id:"",
-      
-    });
-
-
-    const handleChangeVille = (event) => {
-        setVille(event.target.value);
-    };
-/************************************************************************** */
-    const [pays, setPays] = React.useState('');
-
     const [options,setOptions] = useState([]);
-
     const [optionsVille,setOptionsVille] = useState([]);
-    
     const [caisseEtrangere,setCaisseEtrangere] = useState([]);
-
     const [caisses,setCaisses] = useState([]);
-
-    /******************************************************************************** */
-
-    const handleChangePays = (event) => {
-        setPays(event.target.value);
-    };
-    const [caisse, setCaisse] = React.useState('');
-
-    const handleChangeCaisse = (event) => {
-        setCaisse(event.target.value);
-    };
-    const [caisseMere, setCaisseMere] = React.useState('');
-
-    const handleChangeCaisseMere = (event) => {
-        setCaisseMere(event.target.value);
-    };
-
-    /********************************************************************************************************* */
-
+    const {coordonneeEtrangere, setCoordonneeEtrangere} =props;
+      
+    
+/************************************************************************** */
     useEffect(() => {
      
         paysService.getAll().then(res => {
@@ -93,7 +57,7 @@ export default function FormCoordonnesEtranger() {
     }, []);
     useEffect(() => {
     
-        CaisseEtrangereService.getAllByVille(input.id).then(res => {
+        CaisseEtrangereService.getAllByVille(coordonneeEtrangere.idEtrangere).then(res => {
             if (typeof res === "string") {
                 console.log(res);
             } else {
@@ -102,23 +66,23 @@ export default function FormCoordonnesEtranger() {
                 console.log('les options de caisse etrangere  sont :',options);
             }
         })
-    }, [input.id,input.idpays]);
+    }, [coordonneeEtrangere.idEtrangere,coordonneeEtrangere.idpaysEtrangere]);
 
-    /***********************************************************************************/
+/***********************************************************************************/
     useEffect(() => {
-        console.log("le code est",input.idpays);
-        villeService.getAll(input.idpays).then(res => {
+        console.log("le code est",coordonneeEtrangere.idpaysEtrangere);
+        villeService.getAll(coordonneeEtrangere.idpaysEtrangere).then(res => {
             setOptionsVille(res);
             console.log('les villes:',res);
     }
     ); 
-    console.log("le code est",input.idpays);
-    CaisseMereService.getAllBypays(input.idpays).then(res => {
+    console.log("le code est",coordonneeEtrangere.idpaysEtrangere);
+    CaisseMereService.getAllBypays(coordonneeEtrangere.idpaysEtrangere).then(res => {
         setCaisses(res);
         console.log('les caisse meres:',res);
 }
 ); 
-    }, [input.idpays]); 
+    }, [coordonneeEtrangere.idpaysEtrangere]); 
     /*****************************************************************************************/
  
     return (
@@ -126,84 +90,152 @@ export default function FormCoordonnesEtranger() {
             <form className={classes.root} noValidate autoComplete="off">
                
                 <FormControl className={classes.formControl}>
-                    
-                <TextInputselect
-                        type="select"
-                        options={options.map(option => ({value:option.id, label:option.label}))}
-                        label="Pays"
-                        currentValue={input.pays}
-                        onChange={(e) => {setInput({
-                            ...input,
-                            idpays: e.target.value,
-                            pays: options.find(options => options.id === parseInt(e.target.value)).nom})}
-                        
-                        }
-                        icon="none"
-                    />
-                </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField className={classes.textField} id="standard-basic" label="Imm CE" />
-                <TextField className={classes.textField} id="standard-basic" label="Imm CE Tierce" />
-                
-                <FormControl className={classes.formControl}>
-                        <TextInputselect
-                        type="select"
-                        options={optionsVille.map(option => ({value:option.id, label:option.nom}))}
-                        label="Ville"
-                        currentValue={input.ville}
-                        onChange={(e) => {setInput({
-                            ...input,
-                            id: e.target.value,
-                            ville: optionsVille.find(options => options.id === parseInt(e.target.value)).nom})}
-                        
-                        }
+                    <InputLabel id="demo-simple-select-label">Pays</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={coordonneeEtrangere.paysEtrangere}
+                            onChange={(e) => {setCoordonneeEtrangere({
+                                ...coordonneeEtrangere,
+                                idpaysEtrangere: e.target.value})}}
+                            >
+                              {
+                                    options.map(payss => {
+                                        return <MenuItem value={payss.id} selected={payss.label === coordonneeEtrangere.paysEtrangere}>
+                                            {payss.label}
+                                        </MenuItem>
+                                    })
+                               }
                             
-                        icon="none"
-                    />
-                </FormControl>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </Select>
                 
-                <TextField className={classes.textField2}  id="standard-basic" label="Adresse" />
+                </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <TextField 
+                className={classes.textField} 
+                id="standard-basic"
+                label="Imm CE"
+                value={coordonneeEtrangere.ImmCE}
+                onChange={(e) => {setCoordonneeEtrangere({
+                    ...coordonneeEtrangere,
+                    ImmCE: e.target.value})}}
+                />
+
+                <TextField 
+                className={classes.textField}
+                id="standard-basic"
+                label="Imm CE Tierce" 
+                value={coordonneeEtrangere.ImmCETierce}
+                onChange={(e) => {setCoordonneeEtrangere({
+                    ...coordonneeEtrangere,
+                    ImmCETierce: e.target.value})}}
+                />
+            
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Ville</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={coordonneeEtrangere.villeEtrangere}
+                            onChange={(e) => {setCoordonneeEtrangere({
+                                ...coordonneeEtrangere,
+                                idEtrangere: e.target.value})}}
+                            >
+                              {
+                                    optionsVille.map(villes => {
+                                        return <MenuItem value={villes.id} selected={villes.nom === coordonneeEtrangere.villeEtrangere}>
+                                            {villes.nom}
+                                        </MenuItem>
+                                    })
+                               }
+                            
+                        </Select>
+                
+                </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
+                <TextField 
+                className={classes.textField2}  
+                id="standard-basic" 
+                label="Adresse"
+                value={coordonneeEtrangere.adresseEtrangere}
+                onChange={(e) => {setCoordonneeEtrangere({
+                    ...coordonneeEtrangere,
+                    adresseEtrangere: e.target.value})}} 
+                />
                  
-                <TextField className={classes.textField}  id="standard-basic" label="Code Postal" />
+                <TextField 
+                className={classes.textField}  
+                id="standard-basic" 
+                label="Code Postal"
+                value={coordonneeEtrangere.codPostalEtrangere}
+                onChange={(e) => {setCoordonneeEtrangere({
+                    ...coordonneeEtrangere,
+                    codPostalEtrangere: e.target.value})}} 
+                />
+
                 <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">Caisse</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={caisse}
-                            onChange={handleChangeCaisse}
+                            value={coordonneeEtrangere.idCaisse}
+                            onChange={(e) => {setCoordonneeEtrangere({
+                                ...coordonneeEtrangere,
+                                idCaisse: e.target.value})}}
                             >
                              {
                                     caisseEtrangere.map(caisses => {
-                                        return <MenuItem value={caisses.code} selected={caisses.nom === caisse}>
+                                        return <MenuItem value={caisses.code} selected={caisses.nom === coordonneeEtrangere.caisse}>
                                             {caisses.nom}
                                         </MenuItem>
                                     })
                             }
                         </Select>
                 </FormControl>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField className={classes.textField}  id="standard-basic" label="Mobile" />
+
+                <TextField 
+                className={classes.textField} 
+                id="standard-basic" 
+                label="Mobile" 
+                value={coordonneeEtrangere.mobileEtrangere}
+                onChange={(e) => {setCoordonneeEtrangere({
+                    ...coordonneeEtrangere,
+                    mobileEtrangere: e.target.value})}}
+                />
+
                 <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">Caisse mère</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={caisseMere}
-                            onChange={handleChangeCaisseMere}
+                            value={coordonneeEtrangere.idCaisseMere}
+                            onChange={(e) => {setCoordonneeEtrangere({
+                                ...coordonneeEtrangere,
+                                idCaisseMere: e.target.value})}}
                             >
                               {
                                     caisses.map(caissesMere => {
-                                        return <MenuItem value={caissesMere.code} selected={caissesMere.nom === caisseMere}>
+                                        return <MenuItem value={caissesMere.code} selected={caissesMere.nom === coordonneeEtrangere.caisseMere}>
                                             {caissesMere.nom}
                                         </MenuItem>
                                     })
                                }
-                            
                         </Select>
                 </FormControl>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField className={classes.textField2}  id="standard-basic" label="Tel" />
+
+                <TextField 
+                className={classes.textField2}  
+                id="standard-basic" 
+                label="Tel" 
+                value={coordonneeEtrangere.tel}
+                onChange={(e) => {setCoordonneeEtrangere({
+                    ...coordonneeEtrangere,
+                    tel: e.target.value})}}
+                />
 
             </form>
             
         </div>
     )
 }
+

@@ -29,23 +29,9 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function FormIdentification() {
+export default function FormIdentification(props) {
     const classes = useStyles();
-    const [sexe, setSexe] = React.useState('');
-
-    const handleChangeSexe = (event) => {
-        setSexe(event.target.value);
-    };
-    const [nationalite, setNationalite] = React.useState('');
-
-    const handleChangeNationalite = (event) => {
-        setNationalite(event.target.value);
-    };
-    const [selectedDate, setSelectedDate] = useState(new Date('2020-06-18T21:11:54'));
-
-    const handleDateChangeDate = (date) => {
-      setSelectedDate(date);
-    };
+    const {identification,setIdentification}=props;
 
 
     return (
@@ -55,25 +41,57 @@ export default function FormIdentification() {
                     
                    <Grid item container justify="space-between" xs="9">
                         <Grid  item >
-                            <TextField  id="standard-basic" label="Nom" />
+                            <TextField 
+                             id="standard-basic" 
+                             label="Nom" 
+                             value={identification.nom}
+                             onChange={(e) => {setIdentification({...identification, nom: e.target.value})}}
+                             />
                         </Grid>
+
                         <Grid  item  >
-                            <TextField  className={classes.textField1} id="standard-basic" label="Nom de jeune fille" />
+                            <TextField 
+                             className={classes.textField1} 
+                             id="standard-basic" 
+                             label="Nom de jeune fille" 
+                             value={identification.jeunefille}
+                             onChange={(e) => {setIdentification({...identification, jeunefille: e.target.value})}}
+                             />
                         </Grid>
+
                         <Grid  item >
-                            <TextField   id="standard-basic" label="Prénom" />
+                            <TextField 
+                            id="standard-basic"
+                            label="Prénom" 
+                            value={identification.prenom}
+                            onChange={(e) => {setIdentification({...identification, prenom: e.target.value})}}/>
                         </Grid>
-                   </Grid>
+
+                      </Grid>
 
                    <Grid item container justify="space-between" xs="9">
                         <Grid  item  >
-                            <TextField  id="standard-basic" label="Age" /> 
+                            <TextField
+                            id="standard-basic"
+                            label="Age"
+                            value={identification.age}
+                            onChange={(e) => {setIdentification({...identification, age: e.target.value})}}
+                            /> 
                         </Grid>
                         <Grid  itemProp >
-                            <TextField  id="standard-basic" label="CIN" />
+                            <TextField  
+                            id="standard-basic"
+                            label="CIN" 
+                            value={identification.CIN}
+                            onChange={(e) => {setIdentification({...identification, CIN: e.target.value})}}
+                            />
                         </Grid>
                         <Grid  item className={classes.textField} >
-                            <TextField  id="standard-basic" label="Passeport N°" />
+                            <TextField 
+                            id="standard-basic"
+                            label="Passeport N°"
+                            value={identification.passeport}
+                            onChange={(e) => {setIdentification({...identification, passeport: e.target.value})}} />
                         </Grid>
                    </Grid>
 
@@ -85,11 +103,11 @@ export default function FormIdentification() {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={sexe}
-                                    onChange={handleChangeSexe}
+                                    value={identification.sexe}
+                                    onChange={(e) => {setIdentification({...identification, sexe: e.target.value})}}
                                     >
-                                    <MenuItem value={10}>Homme</MenuItem>
-                                    <MenuItem value={20}>Femme</MenuItem>
+                                    <MenuItem value="homme">Homme</MenuItem>
+                                    <MenuItem value="femme">Femme</MenuItem>
                                     
                                 </Select>
                             </FormControl>
@@ -100,8 +118,8 @@ export default function FormIdentification() {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={nationalite}
-                                        onChange={handleChangeNationalite}
+                                        value={identification.nationnalite}
+                                        onChange={(e) => {setIdentification({...identification, nationnalite: e.target.value})}} 
                                         >
                                         <MenuItem value={10}>Maroccaine</MenuItem>
                                         <MenuItem value={20}>Française</MenuItem>
@@ -110,20 +128,13 @@ export default function FormIdentification() {
                             </FormControl>    
                         </Grid>
                         <Grid item>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <KeyboardDatePicker
-                                    
-                                    disableToolbar
-                                    variant="inline"
-                                    format="MM/dd/yyyy"
-                                    margin="normal"
-                                    id="date-picker-inline"
-                                    label="Date de naissance"
-                                    value={selectedDate}
-                                    onChange={handleDateChangeDate}
-                                    KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-                                />
-                            </MuiPickersUtilsProvider>
+                        <TextField 
+                            type="date"
+                            id="standard-basic"
+                            label="Date de naissance"
+                            value={identification.dateNaissance}
+                            onChange={(e) => {setIdentification({...identification, dateNaissance: e.target.value})}} 
+                        />
 
                         </Grid>
                     </Grid>
@@ -143,3 +154,4 @@ export default function FormIdentification() {
         </div>
     )
 }
+

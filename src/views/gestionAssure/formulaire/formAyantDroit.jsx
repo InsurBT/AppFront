@@ -146,7 +146,7 @@ export default function FormAyantDroit(props) {
                 className={classes.root}
                 value={ayantDroit.rang}
                 label="Rang"
-                onChange={(e) => {setAyantDroit({...ayantDroit, ImmCNSS: e.target.value})}}
+                onChange={(e) => {setAyantDroit({...ayantDroit, rang: e.target.value})}}
 
             />
 
@@ -155,10 +155,12 @@ export default function FormAyantDroit(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             label="Pays"
-                            value={ayantDroit.pays}
+                            value={ayantDroit.idpays}
                             onChange={(e) => {setAyantDroit({
                                 ...ayantDroit,
-                                idpays: e.target.value})}
+                                idpays: e.target.value,
+                                pays: options.find(pays => pays.id === e.target.value).label
+                              })}
                             }
                             select
                             >
@@ -175,10 +177,12 @@ export default function FormAyantDroit(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             label="Ville"
-                            value={ayantDroit.ville}
+                            value={ayantDroit.id}
                             onChange={(e) => {setAyantDroit({
                                 ...ayantDroit,
-                                id: e.target.value})}
+                                id: e.target.value,
+                                ville: optionsVille.find(ville => ville.id === e.target.value).nom
+                              })}
                             }
                             select
                             >

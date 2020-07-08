@@ -22,18 +22,22 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
-export default function FormPaiement() {
+export default function FormPaiement(props) {
     const classes = useStyles();
-    const [modeRemboursement, setModeRemboursement] = useState('');
     const [choix,setChoix]=useState(true);
-    
-    const handleChangeModeRemboursement = (event) => {
-        setModeRemboursement(event.target.value);
-        console.log("mode de remboursement",modeRemboursement)
+    const {paiement,setPaiement}=props;
 
-        if(modeRemboursement=="Virement")
+    const handleChangeModeRemboursement = (event) => {
+       
+        setPaiement({
+            ...paiement,
+            modeRemboursement: event.target.value});
+
+        console.log("mode de remboursement",paiement.modeRemboursement)
+
+        if(paiement.modeRemboursement=="Virement")
         {
-            console.log("mode de remboursement2",modeRemboursement)
+            console.log("mode de remboursement2",paiement.modeRemboursement)
             setChoix(true);
             console.log(choix)
         }else{
@@ -49,7 +53,7 @@ export default function FormPaiement() {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={modeRemboursement}
+                            value={paiement.modeRemboursement}
                             onChange={handleChangeModeRemboursement}
                             >
                             <MenuItem value="Virement">Virement</MenuItem>
@@ -57,7 +61,17 @@ export default function FormPaiement() {
                             
                         </Select>
                 </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField className={classes.textField} id="standard-basic" label="RIB" disabled={choix} />
+                <TextField 
+                className={classes.textField} 
+                id="standard-basic" 
+                label="RIB"
+                 disabled={choix} 
+                value={paiement.RIB}  
+                onChange={(e) => {setPaiement({
+                    ...paiement,
+                    RIB: e.target.value})}}
+                />
+
             </form>  
             
         </div>

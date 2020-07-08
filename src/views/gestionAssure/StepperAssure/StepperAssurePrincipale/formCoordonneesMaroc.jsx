@@ -29,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function FormCoordonneesMaroc() {
+export default function FormCoordonneesMaroc(props) {
 
+    const {coordonneesMaroc,setCoodonnesMaroc}=props;
     const classes = useStyles();
-    const [ville, setVille] = React.useState('');
     const [agences, setAgences] = useState([]);
     const [optionsVille,setOptionsVille] = useState([]);
 
@@ -51,7 +51,7 @@ export default function FormCoordonneesMaroc() {
             }
         })
     }, []);
-
+/*
     const handleChangeVille = (event) => {
         setVille(event.target.value);
     };
@@ -61,43 +61,71 @@ export default function FormCoordonneesMaroc() {
     const handleChangeAgence = (event) => {
         setAgence(event.target.value);
     };
-
+*/
     return (
         <div>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField className={classes.textField} id="standard-basic" label="Imm CNSS" />
-                <TextField className={classes.textField2}  id="standard-basic" label="Adresse" />
-                <TextField className={classes.textField}  id="standard-basic" label="Code Postal" />
+                <TextField 
+                className={classes.textField} 
+                id="standard-basic" 
+                label="Imm CNSS" 
+                value={coordonneesMaroc.ImmCNSS}
+                onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, ImmCNSS: e.target.value})}}
+                />
+
+                <TextField 
+                className={classes.textField2}  
+                id="standard-basic"
+                label="Adresse" 
+                value={coordonneesMaroc.adresse}
+                onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, adresse: e.target.value})}}
+                />
+
+                <TextField className={classes.textField} 
+                 id="standard-basic" 
+                 label="Code Postal"
+                 value={coordonneesMaroc.codPostal}
+                 onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, codPostal: e.target.value})}}
+                 />
+
                 <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">Ville</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={ville}
-                            onChange={handleChangeVille}
+                            value={coordonneesMaroc.id}
+                            onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, id: e.target.value})}}
                             >
-                            {
+                               {
                                     optionsVille.map(villes => {
-                                        return <MenuItem value={villes.id} selected={villes.nom === ville}>
+                                        return <MenuItem value={villes.id} selected={villes.nom === coordonneesMaroc.ville}>
                                             {villes.nom}
                                         </MenuItem>
                                     })
                             }
                         </Select>
                 </FormControl> 
+
                 <pre></pre>
-                <TextField className={classes.textField}  id="standard-basic" label="Tel" />
+
+                <TextField className={classes.textField}  
+                id="standard-basic" 
+                label="Tel" 
+                value={coordonneesMaroc.tel}
+                onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, tel: e.target.value})}}
+                />
+
                 <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">Agence</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={agence}
-                            onChange={handleChangeAgence}
+                            value={coordonneesMaroc.idAgence}
+                            onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, idAgence: e.target.value})}}
                             >
                                    {
                                     agences.map(agence => {
-                                        return <MenuItem value={agence.code} selected={agence.label === agence}>
+                                        return <MenuItem value={agence.code} selected={agence.label === coordonneesMaroc.agence}>
                                             {agence.label}
                                         </MenuItem>
                                     })
@@ -105,8 +133,19 @@ export default function FormCoordonneesMaroc() {
                             
                         </Select>
                 </FormControl>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <TextField className={classes.textField2}  id="standard-basic" label="E-Mail" />
-                <TextField className={classes.textField}  id="standard-basic" label="Mobile" />
+
+                <TextField className={classes.textField2}
+                id="standard-basic"
+                label="E-Mail"
+                value={coordonneesMaroc.email}
+                onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, email: e.target.value})}}
+                />
+
+                <TextField className={classes.textField} 
+                 id="standard-basic" 
+                 label="Mobile"
+                 value={coordonneesMaroc.mobile}
+                 onChange={(e) => {setCoodonnesMaroc({...coordonneesMaroc, mobile: e.target.value})}} />
             </form>
             
         </div>

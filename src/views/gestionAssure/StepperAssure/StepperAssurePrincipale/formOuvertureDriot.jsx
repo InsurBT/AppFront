@@ -22,19 +22,10 @@ const useStyles = makeStyles(theme => ({
     }));
   
 
-export default function FormOuvertureDriot() {
+export default function FormOuvertureDriot(props) {
     const classes = useStyles();
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2020-06-18T21:11:54'));
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-      };
-
-    const [formulaire, setFormulaire] = React.useState('');
-
-    const handleChangeFormulaire = (event) => {
-        setFormulaire(event.target.value);
-    };
-  
+    const {ouverture,setOuverture}=props;
+   
    
     return (
         <div>
@@ -45,82 +36,54 @@ export default function FormOuvertureDriot() {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={formulaire}
-                            onChange={handleChangeFormulaire}
+                            value={ouverture.formulaire}
+                            onChange={(e) => {setOuverture({...ouverture, formulaire: e.target.value})}} 
                             >
-                            <MenuItem value={10}>1</MenuItem>
-                            <MenuItem value={20}>2</MenuItem>
-                            <MenuItem value={20}>3</MenuItem>
+                            <MenuItem value={10}>Congé</MenuItem>
+                            <MenuItem value={20}>Travail</MenuItem>
+                            <MenuItem value={20}>Mission</MenuItem>
                             
                         </Select>    
                 </FormControl> 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
-                <TextField className={classes.TextField} id="standard-basic" label="Désignation"  > </TextField>
+                <TextField
+                className={classes.TextField}
+                id="standard-basic" 
+                label="Désignation"
+                value={ouverture.designation}
+                onChange={(e) => {setOuverture({...ouverture, designation: e.target.value})}} 
+                />
             
-                <pre></pre>
-
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                
-                    <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Date inscription"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-                    /> 
-                </MuiPickersUtilsProvider>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <TextField 
+                            type="date"
+                            id="standard-basic"
+                            label="Date de réception"
+                            value={ouverture.dateReception}
+                            onChange={(e) => {setOuverture({...ouverture, dateReception: e.target.value})}} 
+                />
             
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                
-                    <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Date de reception"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-                    /> 
-                </MuiPickersUtilsProvider>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <TextField 
+                            type="date"
+                            id="standard-basic"
+                            label="Debut couverture"
+                            value={ouverture.debutCouverture}
+                            onChange={(e) => {setOuverture({...ouverture, debutCouverture: e.target.value})}} 
+                         
+                />
             
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                
-                    <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Debut couverture"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-                    /> 
-                </MuiPickersUtilsProvider>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                
-
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                
-                    <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Fin couverture"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{ 'aria-label': 'change date',}}  
-                    /> 
-                </MuiPickersUtilsProvider>
-        
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <TextField 
+                            type="date"
+                            id="standard-basic"
+                            label="Fin couverture"
+                            value={ouverture.finCouverture}
+                            onChange={(e) => {setOuverture({...ouverture, finCouverture: e.target.value})}} 
+                />
+            
             </form>    
             
         </div>

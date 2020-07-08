@@ -1,4 +1,4 @@
-import React  from 'react';
+import React,{useState} from 'react';
 import FormIdentification from './formIdentification';
 import FormAyantDroit from './formAyantsDroit';
 import FormCoordonneesMaroc from './formCoordonneesMaroc';
@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles'
+import { CardActions } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -57,31 +58,35 @@ const styles = theme => ({
 function getSteps() {
   return ['Identification', 'Ayants Droits', 'Coordonnée au Maroc', `Coordonnées à l'étranger`, 'Paiement','Ouverture de droit'];
 }
-function getStepContent(step) {
+
+
+ const  StepperAssurePrincipale =(props)=> {
+
+    const { classes } = props;
+    //const classes = useStyles();
+    const [activeStep, setActiveStep] = useState(0);
+    const steps = getSteps();
+    const {formAssure,setFormAssure}=props;
+   
+
+   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <FormIdentification/>
+        return <FormIdentification identification={formAssure} setIdentification={setFormAssure} />
       case 1:
-        return <FormAyantDroit/>
+        return <FormAyantDroit ayantDroit={formAssure} setAyantDroit={setFormAssure}/>
       case 2:
-        return <FormCoordonneesMaroc/>
+        return <FormCoordonneesMaroc coordonneesMaroc={formAssure} setCoodonnesMaroc={setFormAssure}/>
       case 3:
-        return <FormCoordonneesEtranger/>
+        return <FormCoordonneesEtranger coordonneeEtrangere={formAssure} setCoordonneeEtrangere={setFormAssure}/>
       case 4:
-        return <FormPaiement/>
+        return <FormPaiement paiement={formAssure} setPaiement={setFormAssure}/>
       case 5:
-        return <FormOuvertureDroit/>
+        return <FormOuvertureDroit ouverture={formAssure} setOuverture={setFormAssure} />
       default:
         return 'Unknown step';
     }
   }
-
- const  StepperAssurePrincipale =(props)=> {
-
-    const { classes } = props
-    //const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
   
     const handleNext = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -94,6 +99,7 @@ function getStepContent(step) {
     const handleReset = () => {
       setActiveStep(0);
     };
+    
     
     return (
       <div className={classes.root}>
@@ -131,7 +137,9 @@ function getStepContent(step) {
               <StepContent>
                 <Typography>{getStepContent(index)}</Typography>
                 <div className={classes.actionsContainer}>
+                <CardActions>
                   <div>
+                   
                     <Button
                       className={classes.buttonRetour}
                       disabled={activeStep === 0}
@@ -146,7 +154,9 @@ function getStepContent(step) {
                     >
                       {activeStep === steps.length - 1 ? 'Terminer' : 'Suivant'}
                     </Button>
+                   
                   </div>
+                  </CardActions>
                 </div>
               </StepContent>
             </Step>

@@ -11,8 +11,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { useState } from 'react';
+import Mandataire from '../formulaire/Mandataire';
 
-
+import assureService from '../../../service/assure-service';
 
   const styles = theme => ({
     root: {
@@ -68,24 +69,85 @@ return ['Assuré principale', 'Ayants droit', 'Mandataire'];
 }  
 const StepperAssure= (props)=> {
   
-  const {classes} = props
+  const {classes} = props;
+  const today = todaysDate();
+
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const [ayantDroits,setAyantDroits]=useState([]);
+  const [mandataires,setMandataires]=useState([]);
+
+  const[formAssure,setFormAssure]=useState({
+    ImmCNSS: "",
+    adresse : "",
+    codPostal : "",
+    ville:"",
+    id:"",
+    tel:"",
+    agence :"",
+    idAgence :"",
+    email:"",
+    mobile:"",
+    sitFamiliale :"",
+    nbrConjoint : 0,
+    nbrEnfant : 0,
+    nbrayantDroit :"",
+    nom:"",
+    jeunefille :"",
+    prenom:"",
+    age:"",
+    CIN:"",
+    passeport:"",
+    sexe:"",
+    nationnalite:"",
+    dateNaissance:today,
+    pays:"",
+    idpays:"",
+    ImmCE:"",
+    ImmCETierce:"",
+    ville:"",
+    id:"",
+    adresse:"",
+    codPostal:"",
+    caisse:"",
+    idCaisse:"",
+    mobile:"",
+    caisseMere:"",
+    idCaisseMere:"",
+    tel:"",
+    modeRemboursement:"",
+    RIB:"",
+    formulaire:"",
+    designation:"",
+    dateReception:today,
+    debutCouverture:today,
+    finCouverture:today
+    
+  });
 
 
+  function todaysDate() {
+    const today = new Date();
+
+    let day = ("0" + today.getDate()).slice(-2);
+    let month = ("0" + (today.getMonth() + 1)).slice(-2);
+    let year = today.getFullYear();
+
+    return [year, month, day].join('-');
+   }
+  
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
       return (
-          <div>
-              <SteppreAssurePrincipale/>
-          </div>)
+      <div>
+            <SteppreAssurePrincipale formAssure={formAssure} setFormAssure={setFormAssure}/>
+      </div>)
     case 1:
       return <AyantDroits ayantDroits={ayantDroits} setAyantDroits={setAyantDroits}  classes={classes}/>
     case 2:
-      return <ListeMondataire/>
+      return <Mandataire mandataires={mandataires} setMandataires={setMandataires}/>
     default:
       return 'Unknown stepIndex'
   }
@@ -93,6 +155,11 @@ function getStepContent(stepIndex) {
 
 
     const handleNext = () => {
+      if (activeStep === steps.length - 1) {
+        assureService.ajouterAssure(formAssure);
+        console.log(formAssure)
+      }
+
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
   

@@ -23,16 +23,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormAyantsDroit(props) {
     const classes = useStyles();
-    const [sitFamiliale, setSitFamiliale] = React.useState('');
-    const [ayantDroit,setAyanyDroit]=useState({
+ 
+    /*const [ayantDroit,setAyanyDroit]=useState({
+        sitFamiliale :"",
         nbrConjoint : 0,
         nbrEnfant : 0,
         nbrayantDroit :""
      })
-    
-    
+*/
+   const {ayantDroit,setAyantDroit}=props;
   useEffect(() => {
-    setAyanyDroit({...ayantDroit, nbrayantDroit: getNomberAyantDroit(
+    setAyantDroit({...ayantDroit, nbrayantDroit: getNomberAyantDroit(
       parseFloat(ayantDroit.nbrConjoint),
       parseFloat(ayantDroit.nbrEnfant),
  
@@ -44,7 +45,6 @@ export default function FormAyantsDroit(props) {
   }
 
   
-
     return (
         <div>
             <form className={classes.root} noValidate autoComplete="off">
@@ -55,30 +55,37 @@ export default function FormAyantsDroit(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={ayantDroit.sitFamiliale}
-                            onChange={(e) => {setAyanyDroit({...ayantDroit, sitFamiliale: e.target.value})}}
+                            onChange={(e) => {setAyantDroit({...ayantDroit, sitFamiliale: e.target.value})}}
 
                             >
-                            <MenuItem value={10}>Marié(e)</MenuItem>
-                            <MenuItem value={20}>Célibataire</MenuItem>
-                            <MenuItem value={30}>divorcé(e)</MenuItem>
+                            <MenuItem value="marie">Marié(e)</MenuItem>
+                            <MenuItem value="celebataire">Célibataire</MenuItem>
+                            <MenuItem value="divorce">divorcé(e)</MenuItem>
                             
                         </Select>
                 </FormControl> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                 <TextField className={classes.textField } 
                  value={ayantDroit.nbrConjoint}
-                 onChange={(e) => {setAyanyDroit({...ayantDroit, nbrConjoint: e.target.value})}} 
+                 onChange={(e) => {setAyantDroit({...ayantDroit, nbrConjoint: e.target.value})}} 
                  id="standard-basic" 
-                 label="Nbr Conjoint" />
+                 label="Nbr Conjoint" 
+                 />
+
                 <TextField className={classes.textField}  
                 id="standard-basic"
                  label="Nbr Enfant"
                  value={ayantDroit.nbrEnfant}
-                 onChange={(e) => {setAyanyDroit({...ayantDroit, nbrEnfant: e.target.value})}}  />
+                 onChange={(e) => {setAyantDroit({...ayantDroit, nbrEnfant: e.target.value})}} 
+                />
+
                 <TextField className={classes.textField} 
                  id="standard-basic"
                 label="Nbr Ayant Droit"
                 value={ayantDroit.nbrayantDroit}
-                disabled  />
+                disabled  
+                />
+
             </form>  
         </div>
     )

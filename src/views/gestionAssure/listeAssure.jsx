@@ -13,7 +13,19 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 export default function ListeAssure(props) {
 
     // L'etat des colonne a afficher dans le tableau
-    const [columns, setColumns] = useState([]);
+    const columns = [
+        { title: "ImmCNSS", property: "ImmCNSS" },
+        { title: "Nom", property: "nom" },
+        { title: "Prénom", property: "prenom" },
+        { title: "CIN", property: "CIN" },
+        { title: "ImmCE", property: "ImmCE" },
+        { title: "Adresse", property: "adresse" },
+        { title: "RIB", property: "RIB" },
+        { title: "Date réception", property: "dateReception" },
+        { title: "Debut couverture", property: "debutCouverture" },
+        { title: "Fin couverture", property: "finCouverture" },
+        { title: "Ayants droits", property: "nbrayantDroit" }
+    ]
 
     // Etat des donnees affichees dans le taleau
     const [data, setData] = useState([]);
@@ -35,18 +47,11 @@ export default function ListeAssure(props) {
         
         setLoading(true);
         assureService.getAll().then(res => {
-            let newColumns = [];
-            for (var attribute in res.assures[0]) {
-                newColumns.push({
-                    title: attribute,
-                    property: attribute
-                });
-            }
 
             let assures = res.assures.map(assure => ({
                 ...assure,
-                ayantsDroit: <Link to="/home/gestionAssure/gererAyantDroit" >
-                    {assure.ayantsDroit}                   
+                nbrayantDroit: <Link to="/home/gestionAssure/gererAyantDroit" >
+                    {assure.nbrayantDroit}                   
                        <Icon>
                      &nbsp; 
                         <SupervisorAccountIcon />
@@ -54,7 +59,6 @@ export default function ListeAssure(props) {
                 </Link>
             }))
             setData(assures);
-            setColumns(newColumns);
             setActoins(res.actions);
             setLoading(false);
         }).catch((err) => {

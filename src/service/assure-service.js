@@ -37,6 +37,10 @@ const assureSevice = {
                 resolve(assures.find((assure) => assure.imme === id));
             }, 500);
         });
+    },
+
+    ajouterAssure: function (assure) {
+        assures.push(assure);
     }
 }
 
